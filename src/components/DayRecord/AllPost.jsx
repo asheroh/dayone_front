@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 import requests from '../../api/requests';
+import './PostItem.css';
 
 const AllPost = () => {
   const [posts, setPosts] = useState([]);
@@ -31,6 +32,7 @@ export default AllPost;
 const PostItem = ({ post }) => {
   return (
     <div>
+      <img src={post.image_url} alt="logo" className="profile_image"></img>
       <h3>
         {post.bookname} / {post.count_day} 일차
       </h3>
@@ -39,6 +41,7 @@ const PostItem = ({ post }) => {
       <p>{post.comment}</p>
       <p>공감수: {post.sympathy_count}</p>
       <p>{post.created}</p>
+      <br />
     </div>
   );
 };
