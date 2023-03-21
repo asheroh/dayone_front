@@ -6,6 +6,9 @@ import Mypage from './pages/Mypage';
 import NotFound from './pages/NotFound';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import MyRecord from './pages/MyRecord.jsx';
+import DemoDay from './pages/DemoDay';
+import PostForm from './pages/PostForm';
 
 const Router = () => {
   return (
@@ -18,6 +21,9 @@ const Router = () => {
           <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/mypage/:userId" element={<Mypage />}></Route>
+          <Route path="/myrecord" element={<MyRecord />}></Route>
+          <Route path="/demoday" element={<DemoDay />}></Route>
+          <Route path="/postform" element={<PostForm />}></Route>
         </Routes>
       </BrowserRouter>
     </>
