@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 import requests from '../../api/requests';
 import './PostItem.css';
+import PostModal from './PostModal';
 
 const AllPost = () => {
   const [posts, setPosts] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [movieSelected, setMovieSelected] = useState({});
 
   useEffect(() => {
     fetchData();
@@ -16,13 +19,25 @@ const AllPost = () => {
     console.log(request.data.items);
   };
 
+  const handleClick = (movie) => {
+    setModalOpen(true);
+    setMovieSelected(movie);
+  };
+
   return (
     <div>
       <h1>모든 comment</h1>
       <br />
       {posts.map((post) => {
-        return <PostItem key={post.id} post={post} />;
+        return (
+          <div onClick={() => handleClick(post)}>
+            <PostItem key={post.id} post={post} />
+          </div>
+        );
       })}
+      {modalOpen && (
+        <PostModal {...movieSelected} setModalOpen={setModalOpen} />
+      )}
     </div>
   );
 };

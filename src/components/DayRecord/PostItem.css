@@ -3,3 +3,9 @@
     height: 30px;
     object-fit: cover;
   }
+
+  .book_image{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
