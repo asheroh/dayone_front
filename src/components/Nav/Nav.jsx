@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
   return (
     <nav className="nav">
       <h1>DAYONE</h1>
       <div className="nav_tap">
-        <a href="/">데이기록</a> &nbsp;
-        <a href="/demoday">데모데이</a> &nbsp;
-        <a href="/myrecord">나의기록</a>
+        <Link to="/">데이기록</Link> &nbsp;
+        <Link to="/demoday">데모데이</Link> &nbsp;
+        <Link to="/myrecord">나의기록</Link> &nbsp;
       </div>
     </nav>
   );

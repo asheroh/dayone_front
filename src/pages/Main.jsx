@@ -2,6 +2,7 @@ import React from 'react';
 import AllPost from '../components/DayRecord/AllPost';
 import Nav from '../components/Nav/Nav';
 import BestPost from '../components/DayRecord/BestPost';
+import { Link } from 'react-router-dom';
 
 const Main = () => {
   return (
@@ -13,6 +14,10 @@ const Main = () => {
       <BestPost />
       <br />
       <AllPost />
+      <br />
+      <Link to="/postform">
+        <button>기록하기</button>
+      </Link>
     </>
   );
 };
