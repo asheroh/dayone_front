@@ -9,6 +9,8 @@ import SignUp from './pages/SignUp';
 import MyRecord from './pages/MyRecord.jsx';
 import DemoDay from './pages/DemoDay';
 import PostForm from './pages/PostForm';
+import LoginTest from './pages/LoginTest';
+import KaKaoCallBack from './components/Login/KaKaoCallBack';
 
 const Router = () => {
   return (
@@ -24,6 +26,11 @@ const Router = () => {
           <Route path="/myrecord" element={<MyRecord />}></Route>
           <Route path="/demoday" element={<DemoDay />}></Route>
           <Route path="/postform" element={<PostForm />}></Route>
+          <Route path="/logintest" element={<LoginTest />}></Route>
+          <Route
+            path="/auth/kakao/callback"
+            element={<KaKaoCallBack />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>
