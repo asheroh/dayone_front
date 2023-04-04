@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 /**
  * 로그인 페이지 레이아웃
@@ -31,9 +30,14 @@ const WhiteBox = styled.div`
   color: white;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
   padding: 2rem;
+  height: 100%;
   width: 360px;
   background: black;
   border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const AuthTemplete = ({ children }) => {

@@ -1,10 +1,10 @@
 import React from 'react';
-import Nav from '../components/Nav/Nav';
+import HeaderContainer from '../components/common/HeaderContainer';
 
 const DemoDay = () => {
   return (
     <>
-      <Nav />
+      <HeaderContainer />
       <p>DemoDay 페이지</p>
     </>
   );

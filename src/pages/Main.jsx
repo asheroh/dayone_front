@@ -1,16 +1,14 @@
 import React from 'react';
 import AllPost from '../components/DayRecord/AllPost';
-import Nav from '../components/Nav/Nav';
 import BestPost from '../components/DayRecord/BestPost';
 import { Link } from 'react-router-dom';
+import HeaderContainer from '../components/common/HeaderContainer';
 
 const Main = () => {
   return (
     <>
-      <Nav />
-      <br />
-      {/* <p>Main 페이지</p> */}
-      <br />
+      <HeaderContainer />
+      <br /> <br /> <br /> <br /> <br /> <br />
       <BestPost />
       <br />
       <AllPost />
