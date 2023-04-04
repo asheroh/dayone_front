@@ -1,56 +1,76 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { check } from '../../modules/user';
+import { login } from '../../modules/auth';
+
+/**
+ * 카카오 auth 서버와 유저간의 인증 -> 리다이렉트 page에서 처리
+ *
+ * TO DO
+ * 1. token 만료시 logic
+ */
+//
 
 const KaKaoCallBack = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { auth, authError, user } = useSelector(({ auth, user }) => ({
+    auth: auth.auth,
+    authError: auth.authError,
+    user: user.user,
+  }));
 
   useEffect(() => {
-    const params = new URL(document.location.toString()).searchParams;
-    const CODE = params.get('code');
-    const GRANT_TYPE = 'authorization_code';
-    const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
-    const REDIRECT_URI = process.env.REACT_APP_KAKAO_LOGIN_REDIRECT_URI;
+    // const params = new URL(document.location.toString()).searchParams;
+    // const code = params.get('code');
+    // const redirectUri = process.env.REACT_APP_KAKAO_LOGIN_REDIRECT_URI;
+    // const GRANT_TYPE = 'authorization_code';
+    // const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
 
-    axios
-      .post(
-        `https://kauth.kakao.com/oauth/token?grant_type=${GRANT_TYPE}&client_id=${REST_API_KEY}&redirect_url=${REDIRECT_URI}&code=${CODE}`,
-        {},
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        const { data } = res;
-        const { access_token } = data;
-        if (access_token) {
-          console.log(access_token);
-          axios
-            .post(
-              'http://ec2-52-79-40-57.ap-northeast-2.compute.amazonaws.com:3001/api/v1/auth/login',
-              {
-                body: JSON.stringify({
-                  access_token,
-                }),
-              },
-              {
-                headers: { 'Content-Type': 'application/json' },
-              }
-            )
-            .then((res) => {
-              //성준이가 보낸 데이터 출력 확인
-              console.log(res);
-            });
-        }
-        // 액세스 토큰 받아오는 것까지 오케이
-        // 이 이후 성준이가 만든 백엔드에 토큰을 날려주고 세션처리해서 값을 던지면 나는 로그인 완료만 처리하면 된다!
-        // 전역 변수로써 쓸 스토리지가 있어야함.
-        // -> 리덕스 공부? 고려
-      });
-  }, []);
+    /**
+     * redirect_url: 인가코드 검증용 프론트엔드에서 사용한 redirect_uri
+     * code: 카카오 서버로 부터 받은 인가코드
+     */
+    // axios
+    //   .get(
+    //     `http://ec2-52-79-40-57.ap-northeast-2.compute.amazonaws.com/api/v1/auth/login?code=${CODE}&redirect_url=${REDIRECT_URI}`,
+    //     {}
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //     const { data } = res;
+    //     const { access_token } = data;
+    //     if (access_token) {
+    //     }
+    //   });
+
+    const code = 'n24ehneb7f5j9gi';
+
+    dispatch(login({ code }));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (authError) {
+      console.log('오류발생');
+      console.log(authError);
+      alert('인증 오류! 다시 로그인 해주세요.');
+      navigate('/login');
+      return;
+    }
+    if (auth) {
+      console.log('로그인 성공');
+      dispatch(check());
+    }
+  }, [auth, authError, dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [navigate, user]);
 
   return <></>;
 };
