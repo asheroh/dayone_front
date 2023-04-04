@@ -10,6 +10,7 @@ import MyRecord from './pages/MyRecord.jsx';
 import DemoDay from './pages/DemoDay';
 import PostForm from './pages/PostForm';
 import LoginTest from './pages/LoginTest';
+import Login from './pages/Login';
 import KaKaoCallBack from './components/Login/KaKaoCallBack';
 
 const Router = () => {
@@ -26,6 +27,7 @@ const Router = () => {
           <Route path="/myrecord" element={<MyRecord />}></Route>
           <Route path="/demoday" element={<DemoDay />}></Route>
           <Route path="/postform" element={<PostForm />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/logintest" element={<LoginTest />}></Route>
           <Route
             path="/auth/kakao/callback"

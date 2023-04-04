@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../../api/axios';
-import requests from '../../api/requests';
+import axios from '../../lib/api/testClient';
+import requests from '../../lib/api/requests';
 import './PostItem.css';
 import PostModal from './PostModal';
 
