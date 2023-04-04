@@ -1,10 +1,10 @@
 import React from 'react';
-import Nav from '../components/Nav/Nav';
+import HeaderContainer from '../components/common/HeaderContainer';
 
 const MyRecord = () => {
   return (
     <>
-      <Nav />
+      <HeaderContainer />
       <p>MyRecord 페이지</p>
     </>
   );

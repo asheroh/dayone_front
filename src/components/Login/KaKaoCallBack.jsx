@@ -69,6 +69,11 @@ const KaKaoCallBack = () => {
   useEffect(() => {
     if (user) {
       navigate('/');
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (e) {
+        console.log('로컬 스토리지가 작동하지 않습니다.');
+      }
     }
   }, [navigate, user]);
 
