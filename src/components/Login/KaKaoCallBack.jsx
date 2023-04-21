@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { check } from '../../modules/user';
 import { login } from '../../modules/auth';
+import client from '../../lib/api/client';
 
 /**
  * 카카오 auth 서버와 유저간의 인증 -> 리다이렉트 page에서 처리
@@ -36,47 +37,51 @@ const KaKaoCallBack = () => {
      */
 
     console.log(code);
-    axios
-      .get(`https://api.dayone.kr/api/v1/auth/login?code=${code}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log(res);
-        // const { data } = res;
-        // const { access_token } = data;
-        // if (access_token) {
-        // }
-      });
+    // axios
+    //   .get(`https://api.dayone.kr/v1/auth/login?code=${code}`, {
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     console.log(res.document);
+
+    //     // navigate('/login');
+
+    //     // const { data } = res;
+    //     // const { access_token } = data;
+    //     // if (access_token) {
+    //     // }
+    //   });
 
     // const code = 'n24ehneb7f5j9gi';
 
-    // dispatch(login({ code }));
+    dispatch(login({ code }));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (authError) {
-  //     console.log('오류발생');
-  //     console.log(authError);
-  //     alert('인증 오류! 다시 로그인 해주세요.');
-  //     navigate('/login');
-  //     return;
-  //   }
-  //   if (auth) {
-  //     console.log('로그인 성공');
-  //     dispatch(check());
-  //   }
-  // }, [auth, authError, dispatch]);
+  useEffect(() => {
+    if (authError) {
+      console.log('오류발생');
+      console.log(authError);
+      alert('인증 오류! 다시 로그인 해주세요.');
+      navigate('/login');
+      return;
+    }
+    if (auth) {
+      console.log('로그인 성공');
+      dispatch(check());
+    }
+  }, [auth, authError, dispatch]);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate('/');
-  //     try {
-  //       localStorage.setItem('user', JSON.stringify(user));
-  //     } catch (e) {
-  //       console.log('로컬 스토리지가 작동하지 않습니다.');
-  //     }
-  //   }
-  // }, [navigate, user]);
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (e) {
+        console.log('로컬 스토리지가 작동하지 않습니다.');
+      }
+    }
+  }, [navigate, user]);
 
   return <></>;
 };
