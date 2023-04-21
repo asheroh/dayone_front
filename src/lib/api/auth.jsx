@@ -1,9 +1,7 @@
 import client from './client';
 
 // login
-export const login = ({ code }) => {
-  client.get(`/api/v1/auth/login?code=${code}`);
-};
+export const login = ({ code }) => client.get(`/v1/auth/login?code=${code}`);
 
 // login
 // export const login = ({ code, redirectUri }) => {
@@ -11,4 +9,8 @@ export const login = ({ code }) => {
 // };
 
 // login status check
-export const check = () => client.get('/api/v1/auth/check');
+export const check = () => client.get('/v1/auth/check');
+
+// logout
+export const logout = () => client.get('/v1/auth/logout');
+// client.get(`/api/v1/auth/login?code=${code}`);

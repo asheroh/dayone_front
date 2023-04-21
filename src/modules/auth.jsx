@@ -14,7 +14,7 @@ export const login = createAction(LOGIN, ({ code }) => ({
 }));
 
 // 사가 생성
-const loginSaga = createRequestSaga(LOGIN, testAuthAPI.login);
+const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga() {
   yield takeLatest(LOGIN, loginSaga);
 }

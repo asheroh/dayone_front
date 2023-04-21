@@ -17,7 +17,7 @@ export const tempSetUser = createAction(TEMP_SET_USER, (user) => user);
 export const check = createAction(CHECK);
 export const logout = createAction(LOGOUT);
 
-const checkSaga = createRequestSaga(CHECK, testAuthAPI.check);
+const checkSaga = createRequestSaga(CHECK, authAPI.check);
 
 /**
  * 토큰 만료 등 로그인 정보가 만료되었을 때 로컬 스토리지 초기화
@@ -32,7 +32,7 @@ function checkFailureSaga() {
 
 function* logoutSaga() {
   try {
-    yield call(testAuthAPI.logout);
+    yield call(authAPI.logout);
     localStorage.removeItem('user'); // 로컬 스토리지에서 user 제거
   } catch (e) {
     console.log('로컬 스토리지가 작동하지 않습니다.');
