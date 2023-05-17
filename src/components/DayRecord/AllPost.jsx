@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../lib/api/testClient';
 import requests from '../../lib/api/requests';
-import './PostItem.css';
+import { useCookies } from 'react-cookie';
+import * as authAPI from '../../lib/api/auth';
 import PostModal from './PostModal';
+import { redirect, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import PostItem from './PostItem';
 
 const AllPost = () => {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [movieSelected, setMovieSelected] = useState({});
+  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const request = await axios.get(requests.fetchAllPost);
-    setPosts(request.data.items);
-    console.log(request.data.items);
+    console.log('ㄹㅇㄴㅁㄹ', cookies.access_token);
+
+    const request = await authAPI.allPost(cookies.access_token).then((r) => {
+      setPosts(r.data.data);
+    });
   };
 
   const handleClick = (movie) => {
@@ -30,7 +38,7 @@ const AllPost = () => {
       <br />
       {posts.map((post) => {
         return (
-          <div onClick={() => handleClick(post)}>
+          <div key={post.id} onClick={() => handleClick(post)}>
             <PostItem key={post.id} post={post} />
           </div>
         );
@@ -43,20 +51,3 @@ const AllPost = () => {
 };
 
 export default AllPost;
-
-const PostItem = ({ post }) => {
-  return (
-    <div>
-      <img src={post.image_url} alt="logo" className="profile_image"></img>
-      <h3>
-        {post.bookname} / {post.count_day} 일차
-      </h3>
-      <p>{post.username}</p>
-      <p>{post.passage}</p>
-      <p>{post.comment}</p>
-      <p>공감수: {post.sympathy_count}</p>
-      <p>{post.created}</p>
-      <br />
-    </div>
-  );
-};

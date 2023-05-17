@@ -1,47 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../lib/api/testClient';
 import requests from '../../lib/api/requests';
-import './PostItem.css';
+import * as authAPI from '../../lib/api/auth';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+import PostModal from './PostModal';
+import PostItem from './PostItem';
 
 const BestPost = () => {
   const [posts, setPosts] = useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [movieSelected, setMovieSelected] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const request = await axios.get(requests.fetchAllPost);
-    setPosts(request.data.items);
-    console.log(request.data.items);
+    const request = await authAPI
+      .bestPost(cookies.access_token)
+      .then((r) => {
+        setPosts(r.data.data);
+      })
+      .catch((error) => {
+        alert('토큰이 만료되었습니다.');
+        localStorage.removeItem('user');
+        navigate('/login');
+      });
   };
-
+  const handleClick = (movie) => {
+    setModalOpen(true);
+    setMovieSelected(movie);
+  };
   return (
     <div>
       <h1>Best comment</h1>
       <br />
-      {posts.map((post) => {
-        return <PostItem key={post.id} post={post} />;
-      })}
+      {posts.length === 0 ? (
+        <p>이번주 주간 베스트 기록이 없습니다!!!</p>
+      ) : (
+        <div>
+          {posts.map((post) => {
+            return (
+              <div key={post.id} onClick={() => handleClick(post)}>
+                <PostItem key={post.id} post={post} />
+              </div>
+            );
+          })}
+          {modalOpen && (
+            <PostModal {...movieSelected} setModalOpen={setModalOpen} />
+          )}
+        </div>
+      )}
     </div>
   );
 };
 
 export default BestPost;
-
-const PostItem = ({ post }) => {
-  return (
-    <div>
-      <img src={post.image_url} alt="logo" className="profile_image"></img>
-      <h3>
-        {post.bookname} / {post.count_day} 일차
-      </h3>
-      <p>{post.username}</p>
-      <p>{post.passage}</p>
-      <p>{post.comment}</p>
-      <p>공감수: {post.sympathy_count}</p>
-      <p>{post.created}</p>
-      <br />
-    </div>
-  );
-};

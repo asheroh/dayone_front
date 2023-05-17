@@ -5,33 +5,41 @@ import './PostModal.css';
 const PostModal = ({
   image_url,
   book_image_url,
-  bookname,
-  count_day,
+  title,
+  day_count,
   username,
   passage,
   comment,
   sympathy_count,
-  created,
+  created_at,
 }) => {
   return (
     <div className="modal">
       <div className="wrapper-modal">
         <div>
-          <img src={image_url} alt="logo" className="profile_image"></img>
+          <img
+            src={image_url}
+            alt="user image_url"
+            className="profile_image"
+          ></img>
           <p>
-            {username} / {count_day} 일차
+            {username} / {day_count} 일차
           </p>
-          <p>{created}</p>
+          <p>{created_at}</p>
         </div>
         <div>
-          <img src={book_image_url} alt="logo" className="book_image"></img>
-          <p>{bookname}</p>
+          <img
+            src={book_image_url}
+            alt="book_image_url"
+            className="book_image"
+          ></img>
+          <p>bookname: {title}</p>
           <br />
-          <p>{passage}</p>
+          <p>passage: {passage}</p>
           <br />
-          <p>{comment}</p>
+          <p>comment: {comment}</p>
           <br />
-          <p>{sympathy_count}</p>
+          <p>sympathy_count: {sympathy_count}</p>
         </div>
       </div>
     </div>
