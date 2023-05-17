@@ -1,11 +1,13 @@
 import React from 'react';
+import DemodayList from '../components/Demoday/DemodayList';
 import HeaderContainer from '../components/common/HeaderContainer';
 
 const DemoDay = () => {
   return (
     <>
       <HeaderContainer />
-      <p>DemoDay 페이지</p>
+      <br /> <br /> <br /> <br /> <br /> <br />
+      <DemodayList />
     </>
   );
 };

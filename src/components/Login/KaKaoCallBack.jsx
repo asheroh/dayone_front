@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
 import { check } from '../../modules/user';
 import { login } from '../../modules/auth';
 import client from '../../lib/api/client';
@@ -14,15 +15,25 @@ import client from '../../lib/api/client';
  */
 //
 
-const KaKaoCallBack = () => {
+const KaKaoCallBack = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
 
   const { auth, authError, user } = useSelector(({ auth, user }) => ({
     auth: auth.auth,
     authError: auth.authError,
     user: user.user,
   }));
+
+  const handleCookie = (access_token) => {
+    const expireDate = new Date();
+    expireDate.setMinutes(expireDate.getMinutes() + 60 * 24 * 30); // 일주일 유지 쿠키
+    setCookie('access_token', access_token, {
+      path: '/',
+      expires: expireDate,
+    });
+  };
 
   useEffect(() => {
     const params = new URL(document.location.toString()).searchParams;
@@ -37,24 +48,6 @@ const KaKaoCallBack = () => {
      */
 
     console.log(code);
-    // axios
-    //   .get(`https://api.dayone.kr/v1/auth/login?code=${code}`, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     console.log(res.document);
-
-    //     // navigate('/login');
-
-    //     // const { data } = res;
-    //     // const { access_token } = data;
-    //     // if (access_token) {
-    //     // }
-    //   });
-
-    // const code = 'n24ehneb7f5j9gi';
-
     dispatch(login({ code }));
   }, [dispatch]);
 
@@ -68,18 +61,23 @@ const KaKaoCallBack = () => {
     }
     if (auth) {
       console.log('로그인 성공');
-      // dispatch(check());
+      handleCookie(auth.accessToken);
+      console.log(auth.accessToken);
+      dispatch(check({ access_token: auth.accessToken }));
     }
   }, [auth, authError, dispatch]);
 
   useEffect(() => {
     if (user) {
-      navigate('/');
       try {
         localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {
         console.log('로컬 스토리지가 작동하지 않습니다.');
       }
+      console.log('kakao call back user ok3');
+      setIsLoggedIn(true);
+      navigate('/');
+      console.log('kakao call back user ok4');
     }
   }, [navigate, user]);
 

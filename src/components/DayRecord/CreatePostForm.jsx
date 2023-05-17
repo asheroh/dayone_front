@@ -3,12 +3,19 @@ import Router from '../../Router';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDebounce } from '../../hooks/useDebounce';
+import { useCookies } from 'react-cookie';
+import * as authAPI from '../../lib/api/auth';
 import './CreatePostForm.css';
 
 const CreatePostForm = () => {
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const [bookname, setBookname] = useState('');
   const [bookImageUrl, setBookImageUrl] = useState('img/book_default.png');
+  const [author, setAuthor] = useState('');
+  const [publisher, setPublisher] = useState('');
+  const [pubdate, setPubdate] = useState('');
+  const [isbn, setIsbn] = useState('');
   const [passage, setPassage] = useState('');
   const [comment, setComment] = useState('');
 
@@ -44,27 +51,28 @@ const CreatePostForm = () => {
   }, [debouncedSearchTerm]);
 
   // 책 API search 함수
-  const searchCharacters = (search) => {
-    return axios
-      .get(
-        `http://ec2-52-79-40-57.ap-northeast-2.compute.amazonaws.com:3001/posts?query=${search}&display=10&start=1`,
-        {
-          headers: {
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjcxOTI0MjczMCwiaWF0IjoxNjgwMzUwNjg3LCJleHAiOjE2ODA0ODUwODcsImlzcyI6Iu2GoO2BsOuwnOq4ieyekCJ9.XflYnXW-V9Q_sxdZS7jjYYjMC3orwJQpU0fFpRGK21U',
-          },
-        }
-      )
-      .then((r) => r.data)
+  const searchCharacters = async (search) => {
+    return await authAPI
+      .searchBook(search, cookies.access_token)
+      .then((r) => r.data.data)
       .catch((error) => {
         console.error(error);
         return [];
       });
   };
 
+  // "author": "리처드 도킨스",
+  // "publisher": "을유문화사",
+  // "pubdate": "20230130",
+  // "isbn": "9788932473901"
+
   const handleBookSelect = (item) => {
     setBookname(item.title);
     setBookImageUrl(item.image);
+    setAuthor(item.author);
+    setPublisher(item.publisher);
+    setPubdate(item.pubdate);
+    setIsbn(item.isbn);
     setIsSelected(true);
     setSearchResults([]);
   };
@@ -73,21 +81,30 @@ const CreatePostForm = () => {
     setBookImageUrl(image);
   };
 
-  const handleSubmit = async () => {
-    await fetch('http://127.0.0.1:8090/api/collections/post/records', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        count_day: countDay,
-        bookname,
-        username,
-        passage,
-        comment,
-        sympathy_count: sympathyCount,
-        book_image_url: bookImageUrl,
-        image_url: imageUrl,
-      }),
-    }).then(navigate('/'));
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // 페이지 이동을 저지
+    const PostData = {
+      passage,
+      comment,
+      bookdata: {
+        title: bookname,
+        image: bookImageUrl,
+        author,
+        publisher,
+        pubdate,
+        isbn,
+      },
+    };
+
+    await authAPI
+      .addPost(cookies.access_token, PostData)
+      .then((r) => {
+        console.log(231);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
