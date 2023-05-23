@@ -24,6 +24,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import createSagaMiddleware from 'redux-saga';
 import user, { tempSetUser, check } from './modules/user';
+import DemodayForm from './pages/DemodayForm';
+import DemodayOne from './pages/DemodayOne';
 
 const ProtectedRoute = ({
   isLoggedIn,
@@ -136,6 +138,18 @@ const Router = () => {
             }
           />
           <Route
+            path="/demoday/:demodayId"
+            element={
+              <ProtectedRoute
+                redirectPath="/login"
+                currentPath="/demoday/:demodayId"
+                isLoggedIn={isLoggedIn}
+              >
+                <DemodayOne />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/demoday"
             element={
               <ProtectedRoute
@@ -156,6 +170,18 @@ const Router = () => {
                 isLoggedIn={isLoggedIn}
               >
                 <PostForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/demodayform"
+            element={
+              <ProtectedRoute
+                redirectPath="/login"
+                currentPath="/demodayform"
+                isLoggedIn={isLoggedIn}
+              >
+                <DemodayForm />
               </ProtectedRoute>
             }
           />
