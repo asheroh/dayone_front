@@ -1,7 +1,12 @@
 import client from './client';
+import AuthForm from '../../components/auth/AuthForm';
 
 // 로그인
-export const login = ({ code }) => client.get(`/v1/auth/login?code=${code}`);
+export const healthCheck = () => client.get(`/ping`);
+
+// 로그인
+export const login = ({ code }) =>
+  client.get(`/v1/auth/login/front?code=${code}`);
 
 // login
 // export const login = ({ code, redirectUri }) => {
@@ -62,9 +67,48 @@ export const searchBook = (search, access_token) => {
   );
 };
 
-// 전체 데모데이 조회
+// 데모데이 전체 조회
 export const demoday = (access_token) => {
   return client.get('/v1/demodays', {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};
+
+// 데모데이 단건 조회
+export const demodayOne = (access_token, demoday_id) => {
+  return client.get(`/v1/demodays/${demoday_id}`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};
+
+// 데모데이 참가신청
+export const joinDemoday = (access_token, demoday_id) => {
+  console.log('joinDemoday api', access_token);
+
+  return client.post(`/v1/demodays/${demoday_id}/join`, null, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};
+
+// 데모데이 이미지 업로드 추가
+export const addDemodayImage = (access_token, imageData) => {
+  return client.post('/v1/demodays/img', imageData, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+
+// 데모데이 추가
+export const addDemoday = (access_token, demodayData) => {
+  return client.post('/v1/demodays', demodayData, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },

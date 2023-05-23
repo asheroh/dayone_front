@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import * as authAPI from '../../lib/api/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const DemodayList = () => {
   const navigate = useNavigate();
@@ -34,11 +34,11 @@ const DemodayList = () => {
       <br />
       {demoday.map((demodayItem) => {
         return (
-          <div onClick={() => handleClick(demodayItem)}>
-            <DemodayItem
-              key={demodayItem.demoday_id}
-              demodayItem={demodayItem}
-            />
+          <div
+            key={demodayItem.demoday_id}
+            onClick={() => handleClick(demodayItem)}
+          >
+            <DemodayItem demodayItem={demodayItem} />
           </div>
         );
       })}
@@ -48,26 +48,40 @@ const DemodayList = () => {
 
 export default DemodayList;
 
-// "demoday_id": "2",
-// "title": "강동구 데모",
-// "location": "강일역",
-// "demoday_image_url": "https://example.com/image.jpg",
-// "event_date": "2023-05-03T15:00:00.000Z",
-// "meeting_time": "13:00:00",
-// "total_capacity": "2",
-// "current_capacity": "1"
 const DemodayItem = ({ demodayItem }) => {
   return (
-    <div>
+    <Link to={`/demoday/${demodayItem.demoday_id}`}>
       <img
         src={demodayItem.demoday_image_url}
         alt="demoday_image_url"
         className="profile_image"
+        style={{
+          width: '200px',
+          height: 'auto',
+          objectFit: 'cover',
+          aspectRatio: '16/9',
+        }}
       ></img>
       <h3>데모명: {demodayItem.title}</h3>
-      <p>일시: {demodayItem.event_date}</p>
-
+      <p>일시: {formatDate(demodayItem.event_date)}</p>
       <br />
-    </div>
+    </Link>
   );
+};
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+
+  const formattedDate = date
+    .toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    })
+    .replace(/. /g, '.')
+    .slice(0, -1);
+
+  const weekDay = date.toLocaleDateString('ko-KR', { weekday: 'short' });
+
+  return `${formattedDate} (${weekDay})`;
 };
