@@ -26,6 +26,7 @@ import createSagaMiddleware from 'redux-saga';
 import user, { tempSetUser, check } from './modules/user';
 import DemodayForm from './pages/DemodayForm';
 import DemodayOne from './pages/DemodayOne';
+import MybooksRecord from './pages/MybooksRecord';
 
 const ProtectedRoute = ({
   isLoggedIn,
@@ -114,11 +115,11 @@ const Router = () => {
             }
           />
           <Route
-            path="/mypage/:userId"
+            path="/mypage"
             element={
               <ProtectedRoute
                 redirectPath="/login"
-                currentPath="/mypage/:userId"
+                currentPath="/mypage"
                 isLoggedIn={isLoggedIn}
               >
                 <Mypage />
@@ -126,14 +127,14 @@ const Router = () => {
             }
           />
           <Route
-            path="/myrecord"
+            path="/mypage/mybooks/:bookId/records"
             element={
               <ProtectedRoute
                 redirectPath="/login"
-                currentPath="/myrecord"
+                currentPath="/mypage/books/:bookId/records"
                 isLoggedIn={isLoggedIn}
               >
-                <MyRecord />
+                <MybooksRecord />
               </ProtectedRoute>
             }
           />
