@@ -114,3 +114,21 @@ export const addDemoday = (access_token, demodayData) => {
     },
   });
 };
+
+// 나의 책장 조회
+export const bookcase = (access_token) => {
+  return client.get('/v1/users/books', {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};
+
+// 나의 책 기록 모아보기
+export const bookRecord = (access_token, book_id) => {
+  return client.get(`/v1/users/books/${book_id}/posts`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};

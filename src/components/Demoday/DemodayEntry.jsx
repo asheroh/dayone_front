@@ -7,8 +7,8 @@ const DemodayOne = () => {
   const [demoday, setdemoday] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
+  const params = useParams();
 
-  const demodayId = useParams();
   // Path Variable 값 가져오기
   useEffect(() => {
     fetchData();
@@ -17,7 +17,7 @@ const DemodayOne = () => {
 
   const fetchData = async () => {
     const request = await authAPI
-      .demodayOne(cookies.access_token, demodayId['demodayId'])
+      .demodayOne(cookies.access_token, params['demodayId'])
       .then((r) => {
         setdemoday(r.data.data[0]);
         console.log(r.data.data[0]);
@@ -32,7 +32,7 @@ const DemodayOne = () => {
   const onClickApplyBtn = async () => {
     console.log('데모데이', cookies.access_token);
     const request = await authAPI
-      .joinDemoday(cookies.access_token, demodayId['demodayId'])
+      .joinDemoday(cookies.access_token, params['demodayId'])
       .then((r) => {
         console.log(r.data.data);
         alert(
