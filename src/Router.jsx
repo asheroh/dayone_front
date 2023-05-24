@@ -8,7 +8,6 @@ import {
   Outlet,
   redirect,
 } from 'react-router-dom';
-import MyPage from './pages/MyPage';
 import WritePostPage from './pages/WritePostPage';
 import LoginPage from './pages/LoginPage';
 import KaKaoLoginCallBackPage from './pages/KaKaoLoginCallBackPage';
@@ -22,6 +21,7 @@ import DemodayPage from './pages/DemodayPage';
 import CreateDemodayPage from './pages/CreateDemodayPage';
 import DemodayListPage from './pages/DemodayListPage';
 import NotFoundPage from './pages/NotFoundPage';
+import MyPage from './pages/MyPage';
 
 const ProtectedRoute = ({ redirectPath = '/login', currentPath, children }) => {
   console.log('ProtectedRoute request path:', currentPath);
