@@ -48,7 +48,7 @@ const Spacer = styled.div`
   height = 4rem;
 `;
 
-const MypageHeader = ({ title }) => {
+const MyPageHeader = ({ title }) => {
   return (
     <HeaderBlock>
       <Wrapper>
@@ -63,4 +63,4 @@ const MypageHeader = ({ title }) => {
   );
 };
 
-export default MypageHeader;
+export default MyPageHeader;

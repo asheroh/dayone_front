@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Responsive from './Responsive';
-import Nav from '../Nav/Nav';
+import Nav from '../nav/Nav';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 

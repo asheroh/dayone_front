@@ -1,17 +1,17 @@
 import React from 'react';
-import AllPost from '../components/DayRecord/AllPost';
-import BestPost from '../components/DayRecord/BestPost';
 import { Link } from 'react-router-dom';
 import HeaderContainer from '../components/common/HeaderContainer';
+import BestPostList from '../components/post/BestPostList';
+import AllPostList from '../components/post/AllPostList';
 
-const Main = () => {
+const MainPage = () => {
   return (
     <>
       <HeaderContainer />
       <br /> <br /> <br /> <br /> <br /> <br />
-      <BestPost />
+      <BestPostList />
       <br />
-      <AllPost />
+      <AllPostList />
       <br />
       <Link to="/postform">
         <button>기록하기</button>
@@ -20,4 +20,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainPage;

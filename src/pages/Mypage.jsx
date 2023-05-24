@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderContainer from '../components/common/HeaderContainer';
 import MyBookcase from '../components/mypage/MyBookcase';
 
-const Mypage = () => {
+const MyPage = () => {
   return (
     <>
       <HeaderContainer />
@@ -13,4 +13,4 @@ const Mypage = () => {
   );
 };
 
-export default Mypage;
+export default MyPage;

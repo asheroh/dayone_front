@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import MypageHeader from '../components/mypage/MypageHeader';
-import BookRecord from '../components/mypage/BookRecord';
+import MyBookPostList from '../components/mypage/MyBookPostList';
+import MyPageHeader from '../components/mypage/MyPageHeader';
 
-const MybooksRecord = () => {
+const MyBookPostListPage = () => {
   const location = useLocation();
   const title = location.state.title;
   console.log('booktitle:', title);
@@ -11,7 +11,7 @@ const MybooksRecord = () => {
 
   return (
     <div>
-      <MypageHeader title={title} />
+      <MyPageHeader title={title} />
       <br /> <br /> <br /> <br /> <br />
       <img
         src={thumbnailImage}
@@ -25,9 +25,9 @@ const MybooksRecord = () => {
         }}
       ></img>
       <br />
-      <BookRecord />
+      <MyBookPostList />
     </div>
   );
 };
 
-export default MybooksRecord;
+export default MyBookPostListPage;

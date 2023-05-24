@@ -1,7 +1,7 @@
 import React from 'react';
 import './PostItem.css';
 
-const PostItem = ({ post }) => {
+const PostListItem = ({ post }) => {
   return (
     <div>
       <img
@@ -22,4 +22,4 @@ const PostItem = ({ post }) => {
   );
 };
 
-export default PostItem;
+export default PostListItem;

@@ -13,7 +13,7 @@ const AuthFormBlock = styled.div`
   align-items: center;
 `;
 
-const AuthForm = () => {
+const AuthKakaoLoginForm = () => {
   useEffect(() => {
     authAPI.healthCheck().catch((e) => {
       alert('서버가 실행 중이 아닙니다.');
@@ -37,4 +37,4 @@ const AuthForm = () => {
   );
 };
 
-export default AuthForm;
+export default AuthKakaoLoginForm;

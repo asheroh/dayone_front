@@ -1,5 +1,5 @@
 import client from './client';
-import AuthForm from '../../components/auth/AuthForm';
+import AuthForm from '../../components/auth/AuthKakaoLoginForm';
 
 // 로그인
 export const healthCheck = () => client.get(`/ping`);
@@ -125,7 +125,7 @@ export const bookcase = (access_token) => {
 };
 
 // 나의 책 기록 모아보기
-export const bookRecord = (access_token, book_id) => {
+export const bookPost = (access_token, book_id) => {
   return client.get(`/v1/users/books/${book_id}/posts`, {
     headers: {
       Authorization: `Bearer ${access_token}`,

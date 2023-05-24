@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../../lib/api/testClient';
-import requests from '../../lib/api/requests';
 import { useCookies } from 'react-cookie';
 import * as authAPI from '../../lib/api/auth';
 import PostModal from './PostModal';
 import { redirect, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import PostItem from './PostItem';
+import PostListItem from './PostListItem';
 
-const AllPost = () => {
+const AllPostList = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -39,7 +37,7 @@ const AllPost = () => {
       {posts.map((post) => {
         return (
           <div key={post.id} onClick={() => handleClick(post)}>
-            <PostItem key={post.id} post={post} />
+            <PostListItem key={post.id} post={post} />
           </div>
         );
       })}
@@ -50,4 +48,4 @@ const AllPost = () => {
   );
 };
 
-export default AllPost;
+export default AllPostList;
