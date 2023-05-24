@@ -21,7 +21,7 @@ import DemodayPage from './pages/DemodayPage';
 import CreateDemodayPage from './pages/CreateDemodayPage';
 import DemodayListPage from './pages/DemodayListPage';
 import NotFoundPage from './pages/NotFoundPage';
-import MyPage from './pages/Mypage';
+import MyPage from './pages/MyPage';
 
 const ProtectedRoute = ({ redirectPath = '/login', currentPath, children }) => {
   console.log('ProtectedRoute request path:', currentPath);
