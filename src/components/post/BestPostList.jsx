@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../../lib/api/testClient';
-import requests from '../../lib/api/requests';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import PostModal from './PostModal';
-import PostItem from './PostItem';
+import PostListItem from './PostListItem';
 
-const BestPost = () => {
+const BestPostList = () => {
   const [posts, setPosts] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const [modalOpen, setModalOpen] = useState(false);
@@ -45,7 +43,7 @@ const BestPost = () => {
           {posts.map((post) => {
             return (
               <div key={post.id} onClick={() => handleClick(post)}>
-                <PostItem key={post.id} post={post} />
+                <PostListItem key={post.id} post={post} />
               </div>
             );
           })}
@@ -58,4 +56,4 @@ const BestPost = () => {
   );
 };
 
-export default BestPost;
+export default BestPostList;

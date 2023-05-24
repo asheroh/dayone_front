@@ -8,34 +8,23 @@ import {
   Outlet,
   redirect,
 } from 'react-router-dom';
-import About from './pages/About';
-import Main from './pages/Main';
-import Mypage from './pages/Mypage';
-import NotFound from './pages/NotFound';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import MyRecord from './pages/MyRecord.jsx';
-import DemoDay from './pages/DemoDay';
-import PostForm from './pages/PostForm';
-import LoginTest from './pages/LoginTest';
-import Login from './pages/Login';
-import KaKaoCallBack from './components/Login/KaKaoCallBack';
+import WritePostPage from './pages/WritePostPage';
+import LoginPage from './pages/LoginPage';
+import KaKaoLoginCallBackPage from './pages/KaKaoLoginCallBackPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import createSagaMiddleware from 'redux-saga';
-import user, { tempSetUser, check } from './modules/user';
-import DemodayForm from './pages/DemodayForm';
-import DemodayOne from './pages/DemodayOne';
-import MybooksRecord from './pages/MybooksRecord';
+import { tempSetUser, check } from './modules/user';
+import MainPage from './pages/MainPage';
+import MyBookPostListPage from './pages/MyBookPostListPage';
+import DemodayPage from './pages/DemodayPage';
+import CreateDemodayPage from './pages/CreateDemodayPage';
+import DemodayListPage from './pages/DemodayListPage';
+import NotFoundPage from './pages/NotFoundPage';
+import MyPage from './pages/Mypage';
 
-const ProtectedRoute = ({
-  isLoggedIn,
-  redirectPath,
-  currentPath,
-  children,
-}) => {
+const ProtectedRoute = ({ redirectPath = '/login', currentPath, children }) => {
   console.log('ProtectedRoute request path:', currentPath);
-
   const user = localStorage.getItem('user');
   if (!user) {
     return <Navigate to={redirectPath} replace />;
@@ -45,158 +34,106 @@ const ProtectedRoute = ({
 };
 
 const Router = () => {
-  const sagaMiddleware = createSagaMiddleware();
   const dispatch = useDispatch();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const sagaMiddleware = createSagaMiddleware();
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
-  const { auth, authError, user1 } = useSelector(({ auth, user }) => ({
+  const { auth, authError, user } = useSelector(({ auth, user }) => ({
     auth: auth.auth,
     authError: auth.authError,
-    user1: user.user,
+    user: user.user,
   }));
 
   useEffect(() => {
     console.log('router useEffect');
-    const user = localStorage.getItem('user');
+    const localStorageUser = localStorage.getItem('user');
 
     try {
-      if (user) {
-        console.log('user exist');
-        dispatch(tempSetUser(JSON.parse(user)));
+      if (localStorageUser) {
+        console.log('localstorage user exist');
+        dispatch(tempSetUser(JSON.parse(localStorageUser)));
         console.log(cookies.access_token);
-        setIsLoggedIn(true);
-        console.log('route', isLoggedIn);
-        // redirect('/');
       } else {
-        console.log('user empty');
+        console.log('localstorage user empty');
         console.log('route', cookies.access_token);
         dispatch(check(cookies.access_token));
-        console.log('redux user', user1);
-
-        setIsLoggedIn(true);
+        console.log('redux user', user);
       }
-      console.log('route1', isLoggedIn);
     } catch (e) {
       console.log(e);
       console.log('로컬 스토리지가 작동하지 않거나 쿠키가 없습니다.');
-      setIsLoggedIn(false);
-      console.log('route2', isLoggedIn);
     }
   }, []);
-
-  // useEffect(() => {
-  //   try {
-  //     dispatch(check(cookies.access_token));
-  //   } catch (e) {
-  //     console.log(e);
-  //     console.log('로컬 스토리지가 작동하지 않거나 쿠키가 없습니다.');
-  //     setIsLoggedIn(false);
-  //     console.log('route2', isLoggedIn);
-  //     redirect('/login');
-  //   }
-  // }, []);
 
   return (
     <>
       <BrowserRouter>
         <Routes>
           {/* private url */}
-          {/* <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}> */}
           <Route
             path="/"
             element={
-              <ProtectedRoute
-                redirectPath="/login"
-                currentPath="/"
-                isLoggedIn={isLoggedIn}
-              >
-                <Main />
+              <ProtectedRoute currentPath="/">
+                <MainPage />
               </ProtectedRoute>
             }
           />
           <Route
             path="/mypage"
             element={
-              <ProtectedRoute
-                redirectPath="/login"
-                currentPath="/mypage"
-                isLoggedIn={isLoggedIn}
-              >
-                <Mypage />
+              <ProtectedRoute currentPath="/mypage">
+                <MyPage />
               </ProtectedRoute>
             }
           />
           <Route
             path="/mypage/mybooks/:bookId/records"
             element={
-              <ProtectedRoute
-                redirectPath="/login"
-                currentPath="/mypage/books/:bookId/records"
-                isLoggedIn={isLoggedIn}
-              >
-                <MybooksRecord />
+              <ProtectedRoute currentPath="/mypage/books/:bookId/records">
+                <MyBookPostListPage />
               </ProtectedRoute>
             }
           />
           <Route
             path="/demoday/:demodayId"
             element={
-              <ProtectedRoute
-                redirectPath="/login"
-                currentPath="/demoday/:demodayId"
-                isLoggedIn={isLoggedIn}
-              >
-                <DemodayOne />
+              <ProtectedRoute currentPath="/demoday/:demodayId">
+                <DemodayPage />
               </ProtectedRoute>
             }
           />
           <Route
             path="/demoday"
             element={
-              <ProtectedRoute
-                redirectPath="/login"
-                currentPath="/demoday"
-                isLoggedIn={isLoggedIn}
-              >
-                <DemoDay />
+              <ProtectedRoute currentPath="/demoday">
+                <DemodayListPage />
               </ProtectedRoute>
             }
           />
           <Route
             path="/postform"
             element={
-              <ProtectedRoute
-                redirectPath="/login"
-                currentPath="/postform"
-                isLoggedIn={isLoggedIn}
-              >
-                <PostForm />
+              <ProtectedRoute currentPath="/postform">
+                <WritePostPage />
               </ProtectedRoute>
             }
           />
           <Route
             path="/demodayform"
             element={
-              <ProtectedRoute
-                redirectPath="/login"
-                currentPath="/demodayform"
-                isLoggedIn={isLoggedIn}
-              >
-                <DemodayForm />
+              <ProtectedRoute currentPath="/demodayform">
+                <CreateDemodayPage />
               </ProtectedRoute>
             }
           />
-          {/* <Route path="/signin" element={<SignIn />}></Route> */}
-          {/* <Route path="/signup" element={<SignUp />}></Route> */}
           {/* <Route path="/about" element={<About />}></Route> */}
-          {/* </Route> */}
+
           {/* public url */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route
             path="/auth/kakao/callback"
-            element={<KaKaoCallBack setIsLoggedIn={setIsLoggedIn} />}
+            element={<KaKaoLoginCallBackPage />}
           />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -17,7 +17,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 //     demo_code: "잠옷"
 // }
 
-const CreateDemodayForm = () => {
+const DemodayForm = () => {
   const [title, setTitle] = useState('');
   const [demodayImageUrl, setDemodayImageUrl] = useState(
     'https://dayone-bucket-1.s3.ap-northeast-2.amazonaws.com/demoday_default_image.jpeg'
@@ -141,7 +141,7 @@ const CreateDemodayForm = () => {
         startRegisterationDate,
         endRegistrationDate,
         eventDate,
-        meetingTime: demoTime,
+        meetingTime: demoTime + ':00',
         totalCapacity,
         demodayImageUrl,
       };
@@ -238,7 +238,7 @@ const CreateDemodayForm = () => {
           type="text"
           placeholder="demo_time"
           value={demoTime}
-          onChange={(e) => setDemoTime(e.target.value + ':00')}
+          onChange={(e) => setDemoTime(e.target.value)}
         />
         <br />
         <h3>원하는 인원</h3>
@@ -254,4 +254,4 @@ const CreateDemodayForm = () => {
   );
 };
 
-export default CreateDemodayForm;
+export default DemodayForm;

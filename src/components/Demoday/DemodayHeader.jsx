@@ -48,7 +48,7 @@ const Spacer = styled.div`
   height = 4rem;
 `;
 
-const DemoHeader = () => {
+const DemodayHeader = () => {
   return (
     <HeaderBlock>
       <Wrapper>
@@ -63,4 +63,4 @@ const DemoHeader = () => {
   );
 };
 
-export default DemoHeader;
+export default DemodayHeader;

@@ -3,8 +3,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as authAPI from '../../lib/api/auth';
 
-const BookRecord = () => {
-  const [bookname, setbookname] = useState('');
+const MyBookPostList = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
@@ -16,10 +15,9 @@ const BookRecord = () => {
 
   const fetchData = async () => {
     const request = await authAPI
-      .bookRecord(cookies.access_token, params['bookId'])
+      .bookPost(cookies.access_token, params['bookId'])
       .then((r) => {
         setPost(r.data.data);
-        setbookname(r.data.data[0].book_title);
         console.log('r.data.data:', r.data.data);
       })
       .catch((error) => {
@@ -44,7 +42,7 @@ const BookRecord = () => {
   );
 };
 
-export default BookRecord;
+export default MyBookPostList;
 
 const PostItem = ({ postItem }) => {
   const formatDate = (isoDateString) => {

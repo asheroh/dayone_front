@@ -4,7 +4,6 @@ import createRequestSaga, {
   createRequestActionTypes,
 } from '../lib/createRequestSaga';
 import * as authAPI from '../lib/api/auth';
-import * as testAuthAPI from '../lib/api/testAuth';
 
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] =
   createRequestActionTypes('auth/LOGIN');

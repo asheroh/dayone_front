@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Router from '../../Router';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useCookies } from 'react-cookie';
 import * as authAPI from '../../lib/api/auth';
-import './CreatePostForm.css';
+import './PostForm.css';
 
-const CreatePostForm = () => {
+const PostForm = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const [bookname, setBookname] = useState('');
@@ -157,4 +155,4 @@ const CreatePostForm = () => {
   );
 };
 
-export default CreatePostForm;
+export default PostForm;

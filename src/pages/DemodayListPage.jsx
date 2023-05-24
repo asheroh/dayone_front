@@ -1,9 +1,9 @@
 import React from 'react';
-import DemodayList from '../components/Demoday/DemodayList';
+import DemodayList from '../components/demoday/DemodayList';
 import HeaderContainer from '../components/common/HeaderContainer';
 import { Link } from 'react-router-dom';
 
-const DemoDay = () => {
+const DemodayListPage = () => {
   return (
     <>
       <HeaderContainer />
@@ -17,4 +17,4 @@ const DemoDay = () => {
   );
 };
 
-export default DemoDay;
+export default DemodayListPage;

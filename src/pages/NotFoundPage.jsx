@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NotFound = () => {
+const NotFoundPage = () => {
   return (
     <>
       <p>존재하지 않는 페이지입니다.</p>
@@ -8,4 +8,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;

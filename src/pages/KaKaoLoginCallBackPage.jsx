@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
-import { check } from '../../modules/user';
-import { login } from '../../modules/auth';
-import client from '../../lib/api/client';
+import { check } from '../modules/user';
+import { login } from '../modules/auth';
 
 /**
  * 카카오 auth 서버와 유저간의 인증 -> 리다이렉트 page에서 처리
@@ -15,7 +13,7 @@ import client from '../../lib/api/client';
  */
 //
 
-const KaKaoCallBack = ({ setIsLoggedIn }) => {
+const KaKaoLoginCallBackPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
@@ -75,7 +73,6 @@ const KaKaoCallBack = ({ setIsLoggedIn }) => {
         console.log('로컬 스토리지가 작동하지 않습니다.');
       }
       console.log('kakao call back user ok3');
-      setIsLoggedIn(true);
       navigate('/');
       console.log('kakao call back user ok4');
     }
@@ -84,4 +81,4 @@ const KaKaoCallBack = ({ setIsLoggedIn }) => {
   return <></>;
 };
 
-export default KaKaoCallBack;
+export default KaKaoLoginCallBackPage;

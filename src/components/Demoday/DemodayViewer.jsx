@@ -3,7 +3,7 @@ import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-const DemodayOne = () => {
+const DemodayViewer = () => {
   const [demoday, setdemoday] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
@@ -95,4 +95,4 @@ const DemodayOne = () => {
   );
 };
 
-export default DemodayOne;
+export default DemodayViewer;
