@@ -106,22 +106,20 @@ const DemodayViewer = () => {
         <div className="row">모임 정원: {demoday.total_capacity}명</div>
         <div className="row">모임 장소: {demoday.location}</div>
       </div>
-
-      {/* 백엔드 업데이트되면 다시 ㄱㄱ */}
-      {/* {demoday.isApplication ? (
-        <div className="apply_btn">
-          <button onClick={onClickApplyBtn}>신청취소</button>
-        </div>
-      ) : (
-        <div className="apply_btn">
-          <button onClick={onClickApplyBtn}>신청하기</button>
-        </div>
-      )} */}
       <br />
+      {/* 
+        분기 기준
+        1. 내가 만든 데모데이일 경우 현재 모집현황을 볼 수 있게 함.
+        2. 타인의 데모데이일 경우 신청했는지 여부 판단, 신청시 신청완료 텍스트 가시화
+        3. 인원이 꽉 찼을 경우, 신청 마감 텍스트 가시화
+        4. 참여 가능할 경우 신청하기 버튼 활성화
+      */}
       {demoday.user_id === user.userId ? (
         <div>
-          진행 상황: {demoday.current_capacity} / {demoday.total_capacity}
+          모집 현황: {demoday.current_capacity} / {demoday.total_capacity}
         </div>
+      ) : demoday.is_application === '1' ? (
+        <div>신청완료</div>
       ) : demoday.current_capacity === demoday.total_capacity ? (
         <div className="apply_end">신청 마감!!!</div>
       ) : (
