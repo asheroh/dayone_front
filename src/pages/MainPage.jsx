@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderContainer from '../components/common/HeaderContainer';
 import BestPostList from '../components/post/BestPostList';
-import AllPostList from '../components/post/AllPostList';
+import DatePostList from '../components/post/DatePostList';
 
 const MainPage = () => {
   return (
@@ -10,8 +10,11 @@ const MainPage = () => {
       <HeaderContainer />
       <br /> <br /> <br /> <br /> <br /> <br />
       <BestPostList />
+      <p>
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      </p>
       <br />
-      <AllPostList />
+      <DatePostList />
       <br />
       <Link to="/postform">
         <button>기록하기</button>

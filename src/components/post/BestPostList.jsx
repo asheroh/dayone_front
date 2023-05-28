@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PostModal from './PostModal';
 import PostListItem from './PostListItem';
 
@@ -34,7 +34,7 @@ const BestPostList = () => {
   };
   return (
     <div>
-      <h1>Best comment</h1>
+      <h1>실시간 인기 덧붙임</h1>
       <br />
       {posts.length === 0 ? (
         <p>이번주 주간 베스트 기록이 없습니다!!!</p>
@@ -42,14 +42,15 @@ const BestPostList = () => {
         <div>
           {posts.map((post) => {
             return (
-              <div key={post.id} onClick={() => handleClick(post)}>
-                <PostListItem key={post.id} post={post} />
-              </div>
+              <Link
+                to={`/posts/${post.post_id}`}
+                state={{ post: post }}
+                key={post.post_id}
+              >
+                <PostListItem post={post} />
+              </Link>
             );
           })}
-          {modalOpen && (
-            <PostModal {...movieSelected} setModalOpen={setModalOpen} />
-          )}
         </div>
       )}
     </div>

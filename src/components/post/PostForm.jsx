@@ -4,6 +4,7 @@ import { useDebounce } from '../../hooks/useDebounce';
 import { useCookies } from 'react-cookie';
 import * as authAPI from '../../lib/api/auth';
 import './PostForm.css';
+import FormHeader from '../common/FormHeader';
 
 const PostForm = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const PostForm = () => {
   const [isbn, setIsbn] = useState('');
   const [passage, setPassage] = useState('');
   const [comment, setComment] = useState('');
+  const [postData, setPostData] = useState(null);
 
   // API search 결과
   const [searchResults, setSearchResults] = useState([]);
@@ -26,13 +28,6 @@ const PostForm = () => {
 
   // debounce 검색어
   const debouncedSearchTerm = useDebounce(bookname, 500);
-
-  // 임시 유저 데이터
-  const countDay = 1;
-  const username = '준서';
-  const sympathyCount = 0;
-  const imageUrl =
-    'https://cdn.aitimes.com/news/photo/202204/143854_149286_5624.png';
 
   useEffect(() => {
     if (!isSelected && debouncedSearchTerm) {
@@ -79,8 +74,7 @@ const PostForm = () => {
     setBookImageUrl(image);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // 페이지 이동을 저지
+  const handleSubmit = async () => {
     const PostData = {
       passage,
       comment,
@@ -107,16 +101,11 @@ const PostForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <Link to="/">
-            <button>취소</button>
-          </Link>
-          <p>N일차</p>
-          <button type="submit">Create Post</button>
-        </div>
-
+      <FormHeader headerTitle={'기록하기'} clickMethod={handleSubmit} />
+      <br /> <br /> <br /> <br /> <br />
+      <form>
         <input
+          style={{ width: '300px', height: '50px' }}
           type="text"
           placeholder="bookname"
           value={bookname}
@@ -134,17 +123,33 @@ const PostForm = () => {
             </div>
           ))}
         </div>
-        <img src={bookImageUrl} alt="logo" className="book_image"></img>
+        <br />
+
+        <img
+          src={bookImageUrl}
+          alt="logo"
+          className="search book_image"
+          style={{
+            width: '200px',
+            height: 'auto',
+            objectFit: 'cover',
+            aspectRatio: '11/16',
+          }}
+        ></img>
 
         <br />
-        <input
+        <br />
+
+        <textarea
+          style={{ width: '300px', height: '200px' }}
           type="text"
           placeholder="passage"
           value={passage}
           onChange={(e) => setPassage(e.target.value)}
         />
         <br />
-        <input
+        <textarea
+          style={{ width: '300px', height: '200px' }}
           type="text"
           placeholder="comment"
           value={comment}

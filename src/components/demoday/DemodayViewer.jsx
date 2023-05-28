@@ -8,6 +8,9 @@ const DemodayViewer = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
   const params = useParams();
+  const jsonUser = localStorage.getItem('user');
+  const user = JSON.parse(jsonUser);
+  console.log('viewer localstorage user:', user);
 
   // Path Variable 값 가져오기
   useEffect(() => {
@@ -47,6 +50,35 @@ const DemodayViewer = () => {
       });
   };
 
+  const endRegistrationDate = (stringDate) => {
+    // XXXX-XX-XX
+    let date = new Date(stringDate);
+
+    date.setDate(date.getDate() - 1);
+
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+
+    return '' + year + '-' + month + '-' + day;
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+
+    const formattedDate = date
+      .toLocaleDateString('ko-KR', {
+        month: '2-digit',
+        day: '2-digit',
+      })
+      .replace(/. /g, '.')
+      .slice(0, -1);
+
+    const weekDay = date.toLocaleDateString('ko-KR', { weekday: 'short' });
+
+    return `${formattedDate} (${weekDay})`;
+  };
+
   return demoday ? (
     <div className="demodayInfo">
       <h1>데모 이름: {demoday.title}</h1>
@@ -64,14 +96,14 @@ const DemodayViewer = () => {
       <p>설명: {demoday.description}</p>
       <div className="demo_table">
         <div className="row">
-          신청 기간: {demoday.start_registeration_date.substring(0, 10)} ~{' '}
-          {demoday.end_registration_date.substring(0, 10)}
+          신청 기간: {formatDate(demoday.created_at.substring(0, 10))} ~{' '}
+          {formatDate(endRegistrationDate(demoday.event_date))}
         </div>
         <div className="row">
-          모임 날짜: {demoday.event_date.substring(0, 10)}
+          모임 날짜: {formatDate(demoday.event_date.substring(0, 10))}
         </div>
-        <div className="row">만남 시각: {demoday.meeting_time}</div>
-        <div className="row">모임 정원: {demoday.total_capacity}</div>
+        <div className="row">만남 시각: {demoday.meeting_time.slice(0, 5)}</div>
+        <div className="row">모임 정원: {demoday.total_capacity}명</div>
         <div className="row">모임 장소: {demoday.location}</div>
       </div>
 
@@ -85,10 +117,18 @@ const DemodayViewer = () => {
           <button onClick={onClickApplyBtn}>신청하기</button>
         </div>
       )} */}
-
-      <div className="apply_btn">
-        <button onClick={onClickApplyBtn}>신청하기</button>
-      </div>
+      <br />
+      {demoday.user_id === user.userId ? (
+        <div>
+          진행 상황: {demoday.current_capacity} / {demoday.total_capacity}
+        </div>
+      ) : demoday.current_capacity === demoday.total_capacity ? (
+        <div className="apply_end">신청 마감!!!</div>
+      ) : (
+        <div className="apply_btn">
+          <button onClick={onClickApplyBtn}>신청하기</button>
+        </div>
+      )}
     </div>
   ) : (
     <div className="empty"></div>
@@ -96,3 +136,41 @@ const DemodayViewer = () => {
 };
 
 export default DemodayViewer;
+
+function DemoDayImage({ demoday }) {
+  const isFull = demoday.current_capacity === demoday.total_capacity;
+
+  const imageStyle = {
+    width: '200px',
+    height: 'auto',
+    objectFit: 'cover',
+    aspectRatio: '16/9',
+    filter: isFull ? 'brightness(50%)' : 'none', // 밝기를 낮추기 위한 조건부 스타일링
+  };
+
+  return (
+    <div style={{ position: 'relative', width: '200px', height: 'auto' }}>
+      <img
+        src={demoday.demoday_image_url}
+        alt="demoday_image_url"
+        className="profile_image"
+        style={imageStyle}
+      />
+      {isFull && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            color: 'white',
+            fontSize: '20px',
+            fontWeight: 'bold',
+          }}
+        >
+          마감
+        </div>
+      )}
+    </div>
+  );
+}

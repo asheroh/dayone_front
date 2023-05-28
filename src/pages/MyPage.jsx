@@ -1,13 +1,17 @@
 import React from 'react';
 import HeaderContainer from '../components/common/HeaderContainer';
 import MyBookcase from '../components/mypage/MyBookcase';
+import MyInfoViewer from '../components/mypage/MyInfoViewer';
 
 const MyPage = () => {
   return (
     <>
       <HeaderContainer />
       <br /> <br /> <br /> <br /> <br /> <br />
-      <p>마이페이지 내정보</p>
+      <MyInfoViewer />
+      <br />
+      <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+      <br />
       <MyBookcase />
     </>
   );

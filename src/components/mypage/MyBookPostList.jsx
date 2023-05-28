@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import * as authAPI from '../../lib/api/auth';
 
 const MyBookPostList = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
-  const [post, setPost] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -17,7 +17,7 @@ const MyBookPostList = () => {
     const request = await authAPI
       .bookPost(cookies.access_token, params['bookId'])
       .then((r) => {
-        setPost(r.data.data);
+        setPosts(r.data.data);
         console.log('r.data.data:', r.data.data);
       })
       .catch((error) => {
@@ -31,11 +31,15 @@ const MyBookPostList = () => {
       <br />
       <h1>덧붙임 모음</h1>
       <br />
-      {post.map((postItem) => {
+      {posts.map((post) => {
         return (
-          <div key={postItem.id}>
-            <PostItem key={postItem.id} postItem={postItem} />
-          </div>
+          <Link
+            to={`/posts/${post.post_id}`}
+            state={{ post: post }}
+            key={post.post_id}
+          >
+            <PostItem post={post} />
+          </Link>
         );
       })}
     </div>
@@ -44,7 +48,7 @@ const MyBookPostList = () => {
 
 export default MyBookPostList;
 
-const PostItem = ({ postItem }) => {
+const PostItem = ({ post }) => {
   const formatDate = (isoDateString) => {
     const date = new Date(isoDateString);
 
@@ -56,11 +60,10 @@ const PostItem = ({ postItem }) => {
   };
   return (
     <div>
-      <h3>{formatDate(postItem.created_at)}</h3>
+      <h3>{formatDate(post.created_at)}</h3>
       <br />
-      <p>{postItem.username}</p>
-      <p>passage: {postItem.passage}</p>
-      <p>comment: {postItem.comment}</p>
+      <p>passage: {post.passage}</p>
+      <p>comment: {post.comment}</p>
       <br />
       <br />
     </div>
