@@ -1,7 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Responsive from '../common/Responsive';
 
 const HeaderBlock = styled.div`
@@ -40,6 +39,7 @@ const Wrapper = styled(Responsive)`
     margin-left: auto;
     font-size: 1.125rem;
     font-weight: 800;
+    cursor: pointer;
   }
 `;
 
@@ -50,9 +50,8 @@ const Spacer = styled.div`
   height = 4rem;
 `;
 
-const MyPageHeader = ({ title }) => {
+const FormHeader = ({ headerTitle, clickMethod }) => {
   const navigate = useNavigate();
-
   return (
     <HeaderBlock>
       <Wrapper>
@@ -62,14 +61,21 @@ const MyPageHeader = ({ title }) => {
             navigate(-1);
           }}
         >
-          {'<'}
+          취소
         </div>
-        <div className="center">{title}</div>
-        <div className="right"></div>
+        <div className="center">{headerTitle}</div>
+        <div
+          className="right"
+          onClick={() => {
+            clickMethod();
+          }}
+        >
+          등록
+        </div>
       </Wrapper>
       <Spacer />
     </HeaderBlock>
   );
 };
 
-export default MyPageHeader;
+export default FormHeader;

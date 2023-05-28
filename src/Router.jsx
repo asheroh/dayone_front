@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
-  useNavigate,
   BrowserRouter,
   Routes,
   Route,
   Navigate,
   Outlet,
-  redirect,
 } from 'react-router-dom';
 import WritePostPage from './pages/WritePostPage';
 import LoginPage from './pages/LoginPage';
@@ -22,6 +20,7 @@ import CreateDemodayPage from './pages/CreateDemodayPage';
 import DemodayListPage from './pages/DemodayListPage';
 import NotFoundPage from './pages/NotFoundPage';
 import MyPage from './pages/MyPage';
+import PostPage from './pages/PostPage';
 
 const ProtectedRoute = ({ redirectPath = '/login', currentPath, children }) => {
   console.log('ProtectedRoute request path:', currentPath);
@@ -74,6 +73,14 @@ const Router = () => {
             element={
               <ProtectedRoute currentPath="/">
                 <MainPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/posts/:postId"
+            element={
+              <ProtectedRoute currentPath="/posts/:postId">
+                <PostPage />
               </ProtectedRoute>
             }
           />

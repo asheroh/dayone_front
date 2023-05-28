@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import DatePicker from 'react-datepicker';
 import { format } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
+import FormHeader from '../common/FormHeader';
 
 // {
 //     title: 한강에서 낚시하실 분 ,
@@ -25,7 +26,7 @@ const DemodayForm = () => {
   const [description, setDescription] = useState('');
   const [demoDate, setDemoDate] = useState(null);
   const [demoTime, setDemoTime] = useState('13:00');
-  const [totalCapacity, setTotalCapacity] = useState(0);
+  const [totalCapacity, setTotalCapacity] = useState(2);
   const [location, setLocation] = useState('');
 
   const [previewUrl, setPreviewUrl] = useState('img/demoday_default_img.png');
@@ -79,8 +80,6 @@ const DemodayForm = () => {
   //   "demodayImageUrl": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAzMjhfMjQ3%2FMDAxNjQ4NDY1MDk5MzE3.kd39gj6TvpaTVDSBi9nQYJ6WWaYtzY3p6FpM_7zzUDQg.jfY-C4vT91hcyAL6uYKDWXktiJzMBltrNflci3aCKD0g.JPEG.loveeat414%2FIMG_5826.jpg&type=a340"
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // 페이지 이동을 저지
-
     if (selectedFile) {
       const formData = new FormData();
       formData.append('image', selectedFile);
@@ -124,24 +123,14 @@ const DemodayForm = () => {
       //       console.error(error);
       //     });
     } else {
-      const now = new Date();
-      const startRegisterationDate = now.toISOString();
-      //   const endRegistrationDate = `${demoDate}T00:00:00.000Z`;
-      const demoDateType = new Date(demoDate);
-      const endRegistrationDate = new Date(
-        demoDateType.getTime() - 1
-      ).toISOString();
-
       const eventDate = format(demoDate, 'yyyy-MM-dd');
 
       const jsonData = {
         title,
         description,
         location,
-        startRegisterationDate,
-        endRegistrationDate,
         eventDate,
-        meetingTime: demoTime + ':00',
+        meetingTime: demoTime,
         totalCapacity,
         demodayImageUrl,
       };
@@ -160,14 +149,9 @@ const DemodayForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <Link to="/">
-            <button>취소</button>
-          </Link>
-          <p>데모데이 생성</p>
-          <button type="submit">등록</button>
-        </div>
+      <FormHeader headerTitle={'데모 생성'} clickMethod={handleSubmit} />
+      <br /> <br /> <br /> <br /> <br />
+      <form>
         <input
           type="text"
           placeholder="데모 제목"
@@ -242,7 +226,7 @@ const DemodayForm = () => {
         />
         <br />
         <h3>원하는 인원</h3>
-        <h4>원하는 인원 : 예) 5명</h4>
+        <h4>본인 포함 인원 : 예) 5명</h4>
         <input
           type="text"
           placeholder="total_capacity"
