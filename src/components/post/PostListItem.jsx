@@ -40,7 +40,7 @@ const PostListItem = ({ post }) => {
       <p>comment: {post.comment}</p>
       <br />
       <p>
-        공감: {post.is_sympathy === 1 ? '❤️' : '🖤'}
+        공감: {post.is_sympathy === '1' ? '❤️' : '🖤'}
         {post.sympathy_count}
       </p>
       <br />
