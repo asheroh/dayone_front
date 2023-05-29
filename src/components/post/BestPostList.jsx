@@ -8,8 +8,6 @@ import PostListItem from './PostListItem';
 const BestPostList = () => {
   const [posts, setPosts] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [movieSelected, setMovieSelected] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,10 +26,7 @@ const BestPostList = () => {
         navigate('/login');
       });
   };
-  const handleClick = (movie) => {
-    setModalOpen(true);
-    setMovieSelected(movie);
-  };
+
   return (
     <div>
       <h1>실시간 인기 덧붙임</h1>
