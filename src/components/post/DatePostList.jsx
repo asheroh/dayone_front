@@ -9,22 +9,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 const DatePostList = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
-
-  const TIME_ZONE = 9 * 60 * 60 * 1000; // 서울: +9시간
-  // const now =
   const [posts, setPosts] = useState([]);
-  const [selectedDate, setselectedDate] = useState(
-    new Date(new Date() + TIME_ZONE)
-  );
+  const [selectedDate, setselectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  // useEffect(() => {
-  //   const formatedDate = getFormattedDate(date);
-  //   setselectedDate(formatedDate);
-  //   fetchData();
-  // }, []);
-
   useEffect(() => {
+    console.log(selectedDate);
     fetchData();
   }, [selectedDate]);
 
@@ -33,8 +23,6 @@ const DatePostList = () => {
     const year = date.getFullYear();
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const day = ('0' + date.getDate()).slice(-2);
-    console.log('getFormattedDate:', '' + year + month + day);
-    // setselectedDate('' + year + month + day);
     return '' + year + month + day;
   };
 
@@ -85,17 +73,23 @@ const DatePostList = () => {
         )}
       </div>
       <br />
-      {posts.map((post) => {
-        return (
-          <Link
-            to={`/posts/${post.post_id}`}
-            state={{ post: post }}
-            key={post.post_id}
-          >
-            <PostListItem post={post} />
-          </Link>
-        );
-      })}
+      {posts?.length === 0 ? (
+        <p>오늘 기록이 아직 없습니다!!!</p>
+      ) : (
+        <div>
+          {posts?.map((post) => {
+            return (
+              <Link
+                to={`/posts/${post.post_id}`}
+                state={{ post: post }}
+                key={post.post_id}
+              >
+                <PostListItem post={post} />
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
