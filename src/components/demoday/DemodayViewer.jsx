@@ -44,9 +44,14 @@ const DemodayViewer = () => {
         navigate('/demoday');
       })
       .catch((error) => {
-        alert('토큰이 만료되었습니다.');
-        localStorage.removeItem('user');
-        navigate('/login');
+        if (error.response.status === 401) {
+          alert('토큰이 만료되었습니다.');
+          localStorage.removeItem('user');
+          navigate('/login');
+        } else if (error.response.status === 400) {
+          alert('모집 마감된 데모데이입니다!');
+          navigate('/demoday');
+        }
       });
   };
 
