@@ -73,7 +73,7 @@ const DemodayItem = ({ demoday }) => {
           alt="demoday_image_url"
           className="profile_image"
           style={{
-            width: '200px',
+            width: '300px',
             height: 'auto',
             objectFit: 'cover',
             aspectRatio: '16/9',

@@ -21,7 +21,7 @@ import FormHeader from '../common/FormHeader';
 const DemodayForm = () => {
   const [title, setTitle] = useState('');
   const [demodayImageUrl, setDemodayImageUrl] = useState(
-    'https://dayone-bucket-1.s3.ap-northeast-2.amazonaws.com/demoday_default_image.jpeg'
+    'https://dayone-bucket-1.s3.ap-northeast-2.amazonaws.com/default1.jpeg'
   );
   const [description, setDescription] = useState('');
   const [demoDate, setDemoDate] = useState(null);
@@ -40,111 +40,63 @@ const DemodayForm = () => {
     console.log('selectedFile:', selectedFile);
   }, []);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
 
     if (file) {
       const reader = new FileReader();
+
       reader.onload = () => {
         setPreviewUrl(reader.result);
       };
       reader.readAsDataURL(file);
     }
-  };
 
-  const handleUpload = () => {
-    if (selectedFile) {
-      // 파일 업로드 처리 로직을 구현합니다.
-      console.log('업로드된 파일:', selectedFile);
-      // 여기에서 서버로 파일을 전송하거나 다른 작업을 수행할 수 있습니다.
-    }
+    const formData = new FormData();
+    formData.append('image', file);
+
+    await authAPI
+      .addDemodayImage(cookies.access_token, formData)
+      .then((r) => {
+        console.log('image response:', r);
+
+        console.log('image response url:', r.data.data);
+        setDemodayImageUrl(r.data.data);
+      })
+      .catch((error) => {
+        console.log('image response:');
+
+        console.error(error);
+      });
   };
 
   const handleDateChange = (date) => {
     setDemoDate(date);
   };
 
-  const handleSelectFile = () => {
-    fileInputRef.current.click();
-  };
-
-  //   "title": "후",
-  //   "description": "치맥 ㄱ",
-  //   "location": "신촌",
-  //   "totalCapacity": 2,
-  //   "startRegisterationDate": "2023-05-16T09:00:00.000Z",
-  //   "endRegistrationDate": "2023-05-22T18:00:00.000Z",
-  //   "eventDate": "2023-05-24",
-  //   "meetingTime": "13:00:00",
-  //   "demodayImageUrl": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAzMjhfMjQ3%2FMDAxNjQ4NDY1MDk5MzE3.kd39gj6TvpaTVDSBi9nQYJ6WWaYtzY3p6FpM_7zzUDQg.jfY-C4vT91hcyAL6uYKDWXktiJzMBltrNflci3aCKD0g.JPEG.loveeat414%2FIMG_5826.jpg&type=a340"
-
   const handleSubmit = async (e) => {
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-      console.log(formData);
+    const eventDate = format(demoDate, 'yyyy-MM-dd');
 
-      //   await authAPI
-      //     .addDemodayImage(cookies.access_token, formData)
-      //     .then((r) => {
-      //       setDemodayImageUrl(r.data.data.image_url);
+    const jsonData = {
+      title,
+      description,
+      location,
+      eventDate,
+      meetingTime: demoTime,
+      totalCapacity,
+      demodayImageUrl,
+    };
 
-      //       const now = new Date();
-      //       const startRegisterationDate = now.toISOString();
-      //       const endRegistrationDate = new Date(
-      //         `${demoDate}T00:00:00.000Z`
-      //       ).toISOString();
-      //       const eventDate = format(demoDate, 'yyyy-MM-dd');
-
-      //       const jsonData = {
-      //         title,
-      //         description,
-      //         location,
-      //         startRegisterationDate,
-      //         endRegistrationDate,
-      //         eventDate,
-      //         meetingTime: demoTime,
-      //         totalCapacity,
-      //         demodayImageUrl,
-      //       };
-
-      //       authAPI
-      //         .addDemoday(cookies.access_token, jsonData)
-      //         .then((r) => {
-      //           console.log('데모데이 추가');
-      //           navigate('/demodays');
-      //         })
-      //         .catch((error) => {
-      //           console.error(error);
-      //         });
-      //     })
-      //     .catch((error) => {
-      //       console.error(error);
-      //     });
-    } else {
-      const eventDate = format(demoDate, 'yyyy-MM-dd');
-
-      const jsonData = {
-        title,
-        description,
-        location,
-        eventDate,
-        meetingTime: demoTime,
-        totalCapacity,
-        demodayImageUrl,
-      };
-
-      await authAPI
-        .addDemoday(cookies.access_token, jsonData)
-        .then((r) => {
-          console.log('데모데이 추가');
-          navigate('/demoday');
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+    await authAPI
+      .addDemoday(cookies.access_token, jsonData)
+      .then((r) => {
+        console.log('데모데이 추가');
+        navigate('/demoday');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -163,7 +115,7 @@ const DemodayForm = () => {
           <label htmlFor="fileInput">
             <img
               src={previewUrl}
-              style={{ width: '300px', height: '166' }}
+              style={{ width: '400px', height: '221' }}
               alt="파일 선택"
               //   style={{ cursor: 'pointer' }}
               //   onClick={handleSelectFile}
