@@ -26,11 +26,9 @@ const PostListItem = ({ post }) => {
           className="profile_image"
         ></img>
         <span>
-          {post.username} / {post.count_day}일차 기록
+          {post.username} / {post.count_day}일차 기록 |
         </span>
-        <span style={{ marginLeft: '300px' }}>
-          {formatDateAndTime(post.created_at)}
-        </span>
+        <span> {formatDateAndTime(post.created_at)}</span>
       </div>
       <br />
       <p>{post.bookname}</p>
