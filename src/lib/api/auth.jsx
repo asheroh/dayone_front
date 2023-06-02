@@ -144,10 +144,10 @@ export const joinDemoday = (access_token, demoday_id) => {
 
 // 데모데이 이미지 업로드 추가
 export const addDemodayImage = (access_token, imageData) => {
-  return client.post('/v1/demodays/img', imageData, {
+  return client.post('/v1/demodays/image', imageData, {
     headers: {
       Authorization: `Bearer ${access_token}`,
-      'Content-Type': 'multipart/form-data',
+      // 'Content-Type': 'multipart/form-data',
     },
   });
 };
