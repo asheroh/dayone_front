@@ -1,5 +1,13 @@
-export const theme = {
-  // 배경색, 글꼴 색
+export const dark = {
+  bgColor: 'black',
+  textColor: 'white',
+  primaryBoldColor: '',
+  primaryColor: '',
+  secondaryColor: '',
+  pointColor: '',
+};
+
+export const light = {
   bgColor: 'white',
   textColor: 'black',
   primaryBoldColor: '',
