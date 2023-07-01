@@ -23,7 +23,7 @@ import MyPage from './pages/MyPage';
 import PostPage from './pages/PostPage';
 
 const ProtectedRoute = ({ redirectPath = '/login', currentPath, children }) => {
-  console.log('ProtectedRoute request path:', currentPath);
+  // console.log('ProtectedRoute request path:', currentPath);
   const user = localStorage.getItem('user');
   if (!user) {
     return <Navigate to={redirectPath} replace />;
@@ -43,23 +43,21 @@ const Router = () => {
   }));
 
   useEffect(() => {
-    console.log('router useEffect');
     const localStorageUser = localStorage.getItem('user');
-
     try {
       if (localStorageUser) {
-        console.log('localstorage user exist');
+        // console.log('localstorage user exist');
         dispatch(tempSetUser(JSON.parse(localStorageUser)));
-        console.log(cookies.access_token);
+        // console.log(cookies.access_token);
       } else {
-        console.log('localstorage user empty');
-        console.log('route', cookies.access_token);
+        // console.log('localstorage user empty');
+        // console.log('route', cookies.access_token);
         dispatch(check(cookies.access_token));
-        console.log('redux user', user);
+        // console.log('redux user', user);
       }
     } catch (e) {
-      console.log(e);
-      console.log('로컬 스토리지가 작동하지 않거나 쿠키가 없습니다.');
+      // console.log(e);
+      // console.log('로컬 스토리지가 작동하지 않거나 쿠키가 없습니다.');
     }
   }, []);
 

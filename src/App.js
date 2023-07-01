@@ -5,8 +5,6 @@ import { theme } from './Theme';
 import React from 'react';
 
 function App() {
-  console.log('app');
-
   return (
     <>
       <ThemeProvider theme={theme}>
