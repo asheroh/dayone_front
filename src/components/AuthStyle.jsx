@@ -6,7 +6,6 @@ export const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 5px solid brown;
 `;
 
 export const BodySection = styled.section`
