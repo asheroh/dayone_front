@@ -6,6 +6,7 @@ import PostListItem from './PostListItem';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {
+  CommentGridContainer,
   DayContainer,
   DayEmptyIcon,
   DayEmptySection,
@@ -64,7 +65,7 @@ const DatePostList = () => {
           onClick={() => setShowDatePicker(!showDatePicker)}
         />
       </DayTodate>
-      {/* {showDatePicker && (
+      {showDatePicker && (
         <DatePicker
           selected={selectedDate}
           onChange={(date) => {
@@ -74,7 +75,7 @@ const DatePostList = () => {
           withPortal
           inline
         />
-      )} */}
+      )}
       {posts?.length === 0 ? (
         <DayEmptySection>
           <DayEmptyIcon>
@@ -83,7 +84,7 @@ const DatePostList = () => {
           <DayEmptyText>오늘 첫 번째 기록을 작성해보세요.!</DayEmptyText>
         </DayEmptySection>
       ) : (
-        <>
+        <CommentGridContainer>
           {posts?.map((post) => {
             return (
               <Link
@@ -95,7 +96,7 @@ const DatePostList = () => {
               </Link>
             );
           })}
-        </>
+        </CommentGridContainer>
       )}
     </DayContainer>
   );

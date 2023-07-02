@@ -17,7 +17,7 @@ export const DayRecordButton = styled.button`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  position: absolute;
+  position: fixed;
   left: 50%;
   bottom: 3%;
   transform: translate(-50%, 0);
@@ -33,7 +33,7 @@ export const DayRecordButton = styled.button`
 
 export const DayRecordButtonLine = styled.section`
   width: 125px;
-  position: absolute;
+  position: fixed;
   left: 50%;
   bottom: 1%;
   transform: translate(-50%, 0);
@@ -85,7 +85,7 @@ export const HotCommentEmptyIcon = styled.section`
 export const HotCommentEmptyText = styled.p`
   font-size: 14px;
   font-weight: 900;
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
 `;
 
 export const HotCommentContainer = styled.div`
@@ -99,6 +99,13 @@ export const HotCommentContainer = styled.div`
   background-color: ${(props) => props.theme.textColor};
   color: ${(props) => props.theme.bgColor};
   padding: 15px;
+  transition: all 0.3s;
+  @media all and (min-width: 1028px) {
+    width: 500px;
+  }
+  @media all and (min-width: 768px) and (max-width: 1028px) {
+    width: 400px;
+  }
   @media all and (max-width: 400px) {
     width: 270px;
   }
@@ -246,18 +253,32 @@ export const DayEmptyText = styled.p`
 `;
 
 // 일자별 기록-----------------------------------------
+export const CommentGridContainer = styled.div`
+  width: 100%;
+  min-height: 300px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  justify-items: flex-start;
+  gap: 15px;
+  border: 3px solid yellow;
+  @media all and (min-width: 786px) {
+    /*  */
+  }
+`;
+
 export const CommentContainer = styled.div`
-  width: 350px;
-  height: 100%;
+  width: 400px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: none;
-  border-radius: 10px;
+  border-bottom: ${(props) => `1px solid ${props.theme.secondaryColor}`};
   background-color: transparent;
   color: ${(props) => props.theme.textColor};
   padding: 15px;
   @media all and (max-width: 400px) {
-    width: 270px;
+    min-width: 100%;
   }
+  border: 2px solid red;
 `;

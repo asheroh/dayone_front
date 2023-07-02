@@ -75,7 +75,7 @@ const PostListItem = ({ post }) => {
         )}
       </CommentBorder>
       <HotCommentBoxFooter>
-        <BookContent>
+        <BookContent isCool={isCool}>
           {post.comment.length > 55
             ? post.comment.substring(0, 55) + '...'
             : post.comment}
