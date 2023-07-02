@@ -1,5 +1,22 @@
 import React from 'react';
 import './PostItem.css';
+import {
+  BookContent,
+  BookTitle,
+  CommentBorder,
+  CommentButton,
+  DateBox,
+  HotCommentBoxBody,
+  HotCommentBoxFooter,
+  HotCommentBoxHeader,
+  HotCommentContainer,
+  LikeButton,
+  UserBox,
+  UserName,
+  UserProfile,
+} from '../DayRecordStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const PostListItem = ({ post }) => {
   const formatDateAndTime = (inputDate) => {
@@ -13,40 +30,50 @@ const PostListItem = ({ post }) => {
     // 원하는 형식으로 시간 변환
     const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
     const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
-
     return `${formattedDate} ${formattedTime}`;
   };
 
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
-        <img
-          src={post.user_profile_img}
-          alt="user image_url"
-          className="profile_image"
-        ></img>
-        <span>
-          {post.username} / {post.count_day}일차 기록 |
-        </span>
-        <span> {formatDateAndTime(post.created_at)}</span>
-      </div>
-      <br />
-      <p>{post.bookname}</p>
-      <br />
-      <p>passage: {post.passage}</p>
-      <br />
-      <p>comment: {post.comment}</p>
-      <br />
-      <p>
-        공감: {post.is_sympathy === '1' ? '❤️' : '🖤'}
-        {post.sympathy_count}
-      </p>
-      <br />
-      <p>
-        -----------------------------------------------------------------------------
-      </p>
-      <br />
-    </div>
+    <HotCommentContainer>
+      <HotCommentBoxHeader>
+        <UserBox>
+          <UserProfile postUserProfile={post.user_profile_img}></UserProfile>
+          <UserName>
+            {post.username} | {post.count_day}일차 기록
+          </UserName>
+        </UserBox>
+        <DateBox>{formatDateAndTime(post.created_at)}</DateBox>
+      </HotCommentBoxHeader>
+      <HotCommentBoxBody>
+        <BookTitle>
+          {post.bookname.length > 25
+            ? post.bookname.substring(0, 25) + '...'
+            : post.bookname}
+        </BookTitle>
+        <BookContent>
+          {post.passage.length > 118
+            ? post.passage.substring(0, 118) + '...'
+            : post.passage}
+        </BookContent>
+      </HotCommentBoxBody>
+      <CommentBorder>
+        <CommentButton>Comment</CommentButton>
+        {post.is_sympathy === '1' ? (
+          <LikeButton>
+            <FontAwesomeIcon icon={faHeart} /> {post.sympathy_count}
+          </LikeButton>
+        ) : (
+          ''
+        )}
+      </CommentBorder>
+      <HotCommentBoxFooter>
+        <BookContent>
+          {post.comment.length > 55
+            ? post.comment.substring(0, 55) + '...'
+            : post.comment}
+        </BookContent>
+      </HotCommentBoxFooter>
+    </HotCommentContainer>
   );
 };
 

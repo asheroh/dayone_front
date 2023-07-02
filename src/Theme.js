@@ -3,7 +3,7 @@ export const dark = {
   textColor: 'white',
   primaryBoldColor: '',
   primaryColor: '#F9E64C',
-  secondaryColor: '',
+  secondaryColor: '#9E9E9E',
   pointColor: '',
 };
 
@@ -12,6 +12,6 @@ export const light = {
   textColor: 'black',
   primaryBoldColor: '',
   primaryColor: '#F9E64C',
-  secondaryColor: '',
+  secondaryColor: '#9E9E9E',
   pointColor: '',
 };

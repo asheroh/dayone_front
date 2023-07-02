@@ -4,10 +4,14 @@ import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import PostListItem from './PostListItem';
 import {
+  HotCommentEmptyIcon,
+  HotCommentEmptyText,
   HotCommentHeader,
   HotCommentScrollBox,
   HotCommentSection,
 } from '../DayRecordStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFeatherPointed } from '@fortawesome/free-solid-svg-icons';
 
 const BestPostList = () => {
   const [posts, setPosts] = useState([]);
@@ -35,11 +39,16 @@ const BestPostList = () => {
     <HotCommentSection>
       <HotCommentHeader>실시간 인기 덧붙임</HotCommentHeader>
       <HotCommentScrollBox>
-        {posts.length !== 0 ? (
-          <p>이번주 주간 베스트 기록이 없습니다!!!</p>
+        {posts.length === 0 ? (
+          <HotCommentEmptyIcon>
+            <FontAwesomeIcon icon={faFeatherPointed} />
+            <HotCommentEmptyText>
+              실시간 인기 덧붙임이 없습니다.
+            </HotCommentEmptyText>
+          </HotCommentEmptyIcon>
         ) : (
-          <div>
-            {posts.map((post) => {
+          <>
+            {posts?.map((post) => {
               return (
                 <Link
                   to={`/posts/${post.post_id}`}
@@ -50,7 +59,7 @@ const BestPostList = () => {
                 </Link>
               );
             })}
-          </div>
+          </>
         )}
       </HotCommentScrollBox>
     </HotCommentSection>
