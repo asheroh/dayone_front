@@ -4,7 +4,11 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  border: 3px solid brown;
+`;
+
+export const Body = styled.div`
+  width: 100vw;
+  height: 85%;
 `;
 
 // Navigation---------------------------------------------

@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
-import PostModal from './PostModal';
 import PostListItem from './PostListItem';
+import {
+  HotCommentHeader,
+  HotCommentScrollBox,
+  HotCommentSection,
+} from '../DayRecordStyle';
 
 const BestPostList = () => {
   const [posts, setPosts] = useState([]);
@@ -28,27 +32,28 @@ const BestPostList = () => {
   };
 
   return (
-    <div>
-      <h1>실시간 인기 덧붙임</h1>
-      <br />
-      {posts.length === 0 ? (
-        <p>이번주 주간 베스트 기록이 없습니다!!!</p>
-      ) : (
-        <div>
-          {posts.map((post) => {
-            return (
-              <Link
-                to={`/posts/${post.post_id}`}
-                state={{ post: post }}
-                key={post.post_id}
-              >
-                <PostListItem post={post} />
-              </Link>
-            );
-          })}
-        </div>
-      )}
-    </div>
+    <HotCommentSection>
+      <HotCommentHeader>실시간 인기 덧붙임</HotCommentHeader>
+      <HotCommentScrollBox>
+        {posts.length !== 0 ? (
+          <p>이번주 주간 베스트 기록이 없습니다!!!</p>
+        ) : (
+          <div>
+            {posts.map((post) => {
+              return (
+                <Link
+                  to={`/posts/${post.post_id}`}
+                  state={{ post: post }}
+                  key={post.post_id}
+                >
+                  <PostListItem post={post} />
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </HotCommentScrollBox>
+    </HotCommentSection>
   );
 };
 
