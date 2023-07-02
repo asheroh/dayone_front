@@ -7,13 +7,15 @@ import {
   HeaderLogoSection,
   HeaderNavSection,
   InfoBox,
-  Navsection,
+  Navsection0,
+  Navsection1,
+  Navsection2,
   SignButton,
   SmallLogoBox,
 } from '../HomeStyle';
 import SmallLogo from '../../assets/images/dayone_small_logo.svg';
 
-const Header = () => {
+const Header = ({ currentPage, setCurrentPage }) => {
   const { user } = useSelector(({ user }) => ({ user: user.user }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,15 +34,21 @@ const Header = () => {
         </InfoBox>
       </HeaderLogoSection>
       <HeaderNavSection>
-        <Navsection>
-          <Link to="/">데이기록</Link>
-        </Navsection>
-        <Navsection>
-          <Link to="/demoday">데모데이</Link>
-        </Navsection>
-        <Navsection>
-          <Link to="/mypage">나의기록</Link>
-        </Navsection>
+        <Navsection0 currentPage={currentPage}>
+          <Link to="/" onClick={() => setCurrentPage(0)}>
+            데이기록
+          </Link>
+        </Navsection0>
+        <Navsection1 currentPage={currentPage}>
+          <Link to="/demoday" onClick={() => setCurrentPage(1)}>
+            데모데이
+          </Link>
+        </Navsection1>
+        <Navsection2 currentPage={currentPage}>
+          <Link to="/mypage" onClick={() => setCurrentPage(2)}>
+            나의기록
+          </Link>
+        </Navsection2>
       </HeaderNavSection>
     </HeaderContainer>
   );

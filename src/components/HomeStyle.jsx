@@ -56,7 +56,7 @@ export const HeaderNavSection = styled.section`
   align-items: center;
 `;
 
-export const Navsection = styled.section`
+export const Navsection0 = styled.section`
   width: 32%;
   height: 100%;
   display: flex;
@@ -64,5 +64,30 @@ export const Navsection = styled.section`
   align-items: center;
   font-family: 'DMSansBold';
   font-weight: 900;
-  border-bottom: ${(props) => `2.5px solid ${props.theme.primaryColor}`};
+  border-bottom: ${(props) =>
+    props.currentPage === 0 ? `2.5px solid ${props.theme.primaryColor}` : ``};
+`;
+
+export const Navsection1 = styled.section`
+  width: 32%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'DMSansBold';
+  font-weight: 900;
+  border-bottom: ${(props) =>
+    props.currentPage === 1 ? `2.5px solid ${props.theme.primaryColor}` : ``};
+`;
+
+export const Navsection2 = styled.section`
+  width: 32%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'DMSansBold';
+  font-weight: 900;
+  border-bottom: ${(props) =>
+    props.currentPage === 2 ? `2.5px solid ${props.theme.primaryColor}` : ``};
 `;
