@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import DemodayHeader from '../components/demoday/DemodayHeader';
-import DemodayViewer from '../components/demoday/DemodayViewer';
+import DemodayHeader from '../components/DemoDay/DemodayHeader';
+import DemodayViewer from '../components/DemoDay/DemodayViewer';
 
 const DemodayPage = () => {
   const location = useLocation();

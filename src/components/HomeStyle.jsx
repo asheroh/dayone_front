@@ -66,6 +66,8 @@ export const Navsection0 = styled.section`
   font-weight: 900;
   border-bottom: ${(props) =>
     props.currentPage === 0 ? `2.5px solid ${props.theme.primaryColor}` : ``};
+  cursor: pointer;
+  transition: all 0.3s;
 `;
 
 export const Navsection1 = styled.section`
@@ -78,6 +80,8 @@ export const Navsection1 = styled.section`
   font-weight: 900;
   border-bottom: ${(props) =>
     props.currentPage === 1 ? `2.5px solid ${props.theme.primaryColor}` : ``};
+  cursor: pointer;
+  transition: all 0.3s;
 `;
 
 export const Navsection2 = styled.section`
@@ -90,4 +94,6 @@ export const Navsection2 = styled.section`
   font-weight: 900;
   border-bottom: ${(props) =>
     props.currentPage === 2 ? `2.5px solid ${props.theme.primaryColor}` : ``};
+  cursor: pointer;
+  transition: all 0.3s;
 `;

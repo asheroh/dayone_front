@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../modules/user';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   HeaderContainer,
   HeaderLogoSection,
@@ -22,7 +22,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
 
   const onLogout = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate('/login', { replace: true });
   };
   return (
     <HeaderContainer>
@@ -34,20 +34,23 @@ const Header = ({ currentPage, setCurrentPage }) => {
         </InfoBox>
       </HeaderLogoSection>
       <HeaderNavSection>
-        <Navsection0 currentPage={currentPage}>
-          <Link to="/" onClick={() => setCurrentPage(0)}>
-            데이기록
-          </Link>
+        <Navsection0
+          currentPage={currentPage}
+          onClick={() => setCurrentPage(0)}
+        >
+          데이기록
         </Navsection0>
-        <Navsection1 currentPage={currentPage}>
-          <Link to="/demoday" onClick={() => setCurrentPage(1)}>
-            데모데이
-          </Link>
+        <Navsection1
+          currentPage={currentPage}
+          onClick={() => setCurrentPage(1)}
+        >
+          데모데이
         </Navsection1>
-        <Navsection2 currentPage={currentPage}>
-          <Link to="/mypage" onClick={() => setCurrentPage(2)}>
-            나의기록
-          </Link>
+        <Navsection2
+          currentPage={currentPage}
+          onClick={() => setCurrentPage(2)}
+        >
+          나의기록
         </Navsection2>
       </HeaderNavSection>
     </HeaderContainer>
