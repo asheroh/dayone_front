@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HeaderContainer from '../components/common/HeaderContainer';
 import BestPostList from '../components/post/BestPostList';
 import DatePostList from '../components/post/DatePostList';
 import { Container } from '../components/HomeStyle';
+import Header from '../components/common/Header';
 
 const MainPage = () => {
   return (
     <Container>
-      <HeaderContainer />
+      <Header />
       <br /> <br /> <br /> <br /> <br /> <br />
       <BestPostList />
       <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>

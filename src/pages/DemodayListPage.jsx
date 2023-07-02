@@ -1,12 +1,12 @@
 import React from 'react';
 import DemodayList from '../components/demoday/DemodayList';
-import HeaderContainer from '../components/common/HeaderContainer';
 import { Link } from 'react-router-dom';
+import Header from '../components/common/Header';
 
 const DemodayListPage = () => {
   return (
     <>
-      <HeaderContainer />
+      <Header />
       <br /> <br /> <br /> <br /> <br /> <br />
       <DemodayList />
       <br />

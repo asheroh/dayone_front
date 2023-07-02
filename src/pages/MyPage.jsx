@@ -1,12 +1,12 @@
 import React from 'react';
-import HeaderContainer from '../components/common/HeaderContainer';
 import MyBookcase from '../components/mypage/MyBookcase';
 import MyInfoViewer from '../components/mypage/MyInfoViewer';
+import Header from '../components/common/Header';
 
 const MyPage = () => {
   return (
     <>
-      <HeaderContainer />
+      <Header />
       <br /> <br /> <br /> <br /> <br /> <br />
       <MyInfoViewer />
       <br />
