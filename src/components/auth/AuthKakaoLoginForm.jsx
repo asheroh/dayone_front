@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import styled from 'styled-components';
 
-/**
- * 로그인 페이지 폼
- */
-const AuthFormBlock = styled.div`
-  // flex로 내부 중앙정렬
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const KakaoButton = styled.button`
+  width: 300px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 800;
+  background-color: ${(props) => props.theme.primaryColor};
+  color: ${(props) => props.theme.bgColor};
+  cursor: pointer;
 `;
 
 const AuthKakaoLoginForm = () => {
@@ -27,13 +27,9 @@ const AuthKakaoLoginForm = () => {
     window.location.href = KAKAO_AUTH_URL;
   };
   return (
-    <AuthFormBlock>
-      <img
-        src="img/kakao_login_btn_img.png"
-        alt="kakao_login"
-        onClick={() => loginWithKakao()}
-      />
-    </AuthFormBlock>
+    <KakaoButton onClick={() => loginWithKakao()}>
+      카카오로 시작하기
+    </KakaoButton>
   );
 };
 

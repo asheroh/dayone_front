@@ -1,4 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
+import DMSansBold from './assets/fonts/DMSans-Bold.ttf';
+import DMSansMedium from './assets/fonts/DMSans-Medium.ttf';
+import DMSansRegular from './assets/fonts/DMSans-Regular.ttf';
 
 export const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -55,8 +58,28 @@ table {
 
 }
 // 추가2. 가져온 폰트를 body태그 안에 있으면 다 적용되게 해줌 + theme 적용
+@font-face {
+  font-family: "DMSansBold";
+  src: url(${DMSansBold});
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DMSansMedium";
+  src: url(${DMSansMedium});
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DMSansRegulr";
+  src: url(${DMSansRegular});
+  font-weight: normal;
+  font-style: normal;
+}
+
 body{
-    font-family: 'Source Sans Pro', sans-serif;
+    /* font-family: 'Source Sans Pro', sans-serif; */
+    font-family: "DMSansMedium";
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.textColor};
 }
