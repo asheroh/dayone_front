@@ -1,68 +1,56 @@
 import React from 'react';
-import styled from 'styled-components';
-import Responsive from './Responsive';
-import Nav from '../nav/Nav';
-import Button from './Button';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../modules/user';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  HeaderContainer,
+  HeaderLogoSection,
+  HeaderNavSection,
+  InfoBox,
+  Navsection0,
+  Navsection1,
+  Navsection2,
+  SignButton,
+  SmallLogoBox,
+} from '../HomeStyle';
+import SmallLogo from '../../assets/images/dayone_small_logo.svg';
 
-const HeaderBlock = styled.div`
-  position: fixed;
-  width: 100%;
-  background: black;
-  color: white;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-`;
+const Header = ({ currentPage, setCurrentPage }) => {
+  const { user } = useSelector(({ user }) => ({ user: user.user }));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-/**
- * Responsive 컴포넌트의 속성에 스타일을 추가해서 새로운 컴포넌트 생성
- */
-const Wrapper = styled(Responsive)`
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; // 자식 엘리멘트 사이의 여백을 최대로 설정
-  .logo {
-    font-size: 1.125rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-  }
-  .right {
-    display: flex;
-    align-items: center;
-  }
-`;
-
-/**
- * 헤더가 fixed로 되어 있기 때문에 페이지의 콘텐츠가 4rem 아래에 나타나도록 해주는 컴포넌트
- */
-const Spacer = styled.div``;
-
-const UserInfo = styled.div`
-  font-weight: 800;
-  margin-right: 1rem;
-`;
-
-const Header = ({ user, onLogout }) => {
+  const onLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
   return (
-    <HeaderBlock>
-      <Wrapper>
-        <Link to="/" className="logo">
-          DAY ONE
-        </Link>
-        {user ? (
-          <div className="right">
-            <UserInfo>{user.username}</UserInfo>
-            <Button onClick={onLogout}>로그아웃</Button>
-          </div>
-        ) : (
-          <div className="right">
-            <Button to="/login">로그인</Button>
-          </div>
-        )}
-      </Wrapper>
-      <Spacer />
-      <Nav />
-    </HeaderBlock>
+    <HeaderContainer>
+      <HeaderLogoSection>
+        <SmallLogoBox src={SmallLogo} alt="dayone" loading="lazy" />
+        <InfoBox>
+          {user?.username}
+          <SignButton onClick={onLogout}>로그아웃</SignButton>
+        </InfoBox>
+      </HeaderLogoSection>
+      <HeaderNavSection>
+        <Navsection0 currentPage={currentPage}>
+          <Link to="/" onClick={() => setCurrentPage(0)}>
+            데이기록
+          </Link>
+        </Navsection0>
+        <Navsection1 currentPage={currentPage}>
+          <Link to="/demoday" onClick={() => setCurrentPage(1)}>
+            데모데이
+          </Link>
+        </Navsection1>
+        <Navsection2 currentPage={currentPage}>
+          <Link to="/mypage" onClick={() => setCurrentPage(2)}>
+            나의기록
+          </Link>
+        </Navsection2>
+      </HeaderNavSection>
+    </HeaderContainer>
   );
 };
 
