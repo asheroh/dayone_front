@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
-import PostListItem from './PostListItem';
+import PostHotList from './PostHotList';
 import {
   HotCommentEmptyIcon,
   HotCommentEmptyText,
@@ -37,6 +37,7 @@ const BestPostList = () => {
 
   return (
     <HotCommentSection>
+      <br />
       <HotCommentHeader>실시간 인기 덧붙임</HotCommentHeader>
       <HotCommentScrollBox>
         {posts.length === 0 ? (
@@ -55,7 +56,7 @@ const BestPostList = () => {
                   state={{ post: post }}
                   key={post.post_id}
                 >
-                  <PostListItem post={post} />
+                  <PostHotList post={post} />
                 </Link>
               );
             })}

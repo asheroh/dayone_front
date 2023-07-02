@@ -5,6 +5,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import PostListItem from './PostListItem';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import {
+  DayContainer,
+  DayEmptyIcon,
+  DayEmptySection,
+  DayEmptyText,
+  DayTodate,
+} from '../DayRecordStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBoxOpen, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const DatePostList = () => {
   const navigate = useNavigate();
@@ -14,7 +23,7 @@ const DatePostList = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   useEffect(() => {
-    console.log(selectedDate);
+    // console.log(selectedDate);
     fetchData();
   }, [selectedDate]);
 
@@ -37,7 +46,7 @@ const DatePostList = () => {
   };
 
   const fetchData = async () => {
-    console.log('ㄹㅇㄴㅁㄹ', cookies.access_token);
+    // console.log('ㄹㅇㄴㅁㄹ', cookies.access_token);
 
     const request = await authAPI
       .datePost(cookies.access_token, getFormattedParamsDate(selectedDate))
@@ -47,36 +56,34 @@ const DatePostList = () => {
   };
 
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
-        {getFormattedKoreanDate(selectedDate)} 덧붙임
-        <div
+    <DayContainer>
+      <DayTodate>
+        {getFormattedKoreanDate(selectedDate)} 덧붙임{' '}
+        <FontAwesomeIcon
+          icon={faChevronDown}
           onClick={() => setShowDatePicker(!showDatePicker)}
-          style={{
-            cursor: 'pointer',
-            display: 'inline-block',
-            marginRight: '10px',
+        />
+      </DayTodate>
+      {/* {showDatePicker && (
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date) => {
+            setselectedDate(date);
+            setShowDatePicker(false);
           }}
-        >
-          ▽
-        </div>
-        {showDatePicker && (
-          <DatePicker
-            selected={selectedDate}
-            onChange={(date) => {
-              setselectedDate(date);
-              setShowDatePicker(false);
-            }}
-            withPortal
-            inline
-          />
-        )}
-      </div>
-      <br />
+          withPortal
+          inline
+        />
+      )} */}
       {posts?.length === 0 ? (
-        <p>오늘 기록이 아직 없습니다!!!</p>
+        <DayEmptySection>
+          <DayEmptyIcon>
+            <FontAwesomeIcon icon={faBoxOpen} />
+          </DayEmptyIcon>
+          <DayEmptyText>오늘 첫 번째 기록을 작성해보세요.!</DayEmptyText>
+        </DayEmptySection>
       ) : (
-        <div>
+        <>
           {posts?.map((post) => {
             return (
               <Link
@@ -88,9 +95,9 @@ const DatePostList = () => {
               </Link>
             );
           })}
-        </div>
+        </>
       )}
-    </div>
+    </DayContainer>
   );
 };
 

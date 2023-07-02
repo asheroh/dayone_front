@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useCookies } from 'react-cookie';
 import * as authAPI from '../../lib/api/auth';
-import './PostForm.css';
 import FormHeader from '../common/FormHeader';
 
 const PostForm = () => {
