@@ -1,16 +1,17 @@
-import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './GlobalStyle';
 import Router from './Router';
 import { theme } from './Theme';
+import React from 'react';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log('app');
+
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Router isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Router />
       </ThemeProvider>
     </>
   );

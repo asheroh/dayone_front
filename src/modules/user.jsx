@@ -4,7 +4,6 @@ import createRequestSaga, {
 import { createAction, handleActions } from 'redux-actions';
 import { takeLatest, call } from 'redux-saga/effects';
 import * as authAPI from '../lib/api/auth';
-import * as testAuthAPI from '../lib/api/testAuth';
 
 const TEMP_SET_USER = 'user/TEMP_SET_USER'; // 새로고침 이후 임시 로그인 처리
 
@@ -14,16 +13,19 @@ const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] =
 const LOGOUT = 'user/LOGOUT';
 
 export const tempSetUser = createAction(TEMP_SET_USER, (user) => user);
-export const check = createAction(CHECK);
+export const check = createAction(CHECK, ({ access_token }) => ({
+  access_token,
+}));
 export const logout = createAction(LOGOUT);
 
-const checkSaga = createRequestSaga(CHECK, testAuthAPI.check);
+const checkSaga = createRequestSaga(CHECK, authAPI.check);
 
 /**
  * 토큰 만료 등 로그인 정보가 만료되었을 때 로컬 스토리지 초기화
  */
 function checkFailureSaga() {
   try {
+    console.log('checkFailureSaga: remove localstorage user');
     localStorage.removeItem('user'); // 로컬 스토리지에서 user 제거
   } catch (e) {
     console.log('로컬 스토리지가 작동하지 않습니다.');
@@ -32,7 +34,8 @@ function checkFailureSaga() {
 
 function* logoutSaga() {
   try {
-    yield call(testAuthAPI.logout);
+    yield call(authAPI.logout);
+    console.log('checkFailureSaga: remove localstorage user');
     localStorage.removeItem('user'); // 로컬 스토리지에서 user 제거
   } catch (e) {
     console.log('로컬 스토리지가 작동하지 않습니다.');
@@ -50,15 +53,15 @@ const initialState = {
   checkError: null,
 };
 
-export default handleActions(
+const user = handleActions(
   {
     [TEMP_SET_USER]: (state, { payload: user }) => ({
       ...state,
-      user,
+      user: user,
     }),
     [CHECK_SUCCESS]: (state, { payload: user }) => ({
       ...state,
-      user,
+      user: user.data,
       checkError: null,
     }),
     [CHECK_FAILURE]: (state, { payload: error }) => ({
@@ -72,3 +75,5 @@ export default handleActions(
   },
   initialState
 );
+
+export default user;

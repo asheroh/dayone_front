@@ -4,7 +4,6 @@ import createRequestSaga, {
   createRequestActionTypes,
 } from '../lib/createRequestSaga';
 import * as authAPI from '../lib/api/auth';
-import * as testAuthAPI from '../lib/api/testAuth';
 
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] =
   createRequestActionTypes('auth/LOGIN');
@@ -14,7 +13,7 @@ export const login = createAction(LOGIN, ({ code }) => ({
 }));
 
 // 사가 생성
-const loginSaga = createRequestSaga(LOGIN, testAuthAPI.login);
+const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga() {
   yield takeLatest(LOGIN, loginSaga);
 }
@@ -29,7 +28,7 @@ const auth = handleActions(
     [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
-      auth,
+      auth: auth.data,
     }),
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
