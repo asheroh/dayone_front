@@ -24,7 +24,7 @@ export const DayRecordButton = styled.button`
   border: none;
   border-radius: 25px;
   background-color: ${(props) => props.theme.primaryColor};
-  color: ${(props) => props.theme.bgColor};
+  color: black;
   font-size: 14px;
   font-family: 'DMSansBold';
   font-weight: 900;
@@ -226,6 +226,13 @@ export const DayContainer = styled.div`
   margin-top: 30px;
 `;
 
+export const DayPickerBox = styled.section`
+  width: auto;
+  height: auto;
+  position: absolute;
+  transition: all 0.3s;
+`;
+
 export const DayTodate = styled.h1`
   font-family: 'DMSansBold';
   font-weight: 900;
@@ -262,7 +269,6 @@ export const CommentGridContainer = styled.div`
   grid-template-rows: repeat(1, 1fr);
   justify-items: center;
   gap: 15px;
-
   transition: all 0.3s;
   margin-top: 30px;
   @media all and (max-width: 1680px) {

@@ -3,14 +3,15 @@ import { useCookies } from 'react-cookie';
 import * as authAPI from '../../lib/api/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import PostListItem from './PostListItem';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-// import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import {
   CommentGridContainer,
   DayContainer,
   DayEmptyIcon,
   DayEmptySection,
   DayEmptyText,
+  DayPickerBox,
   DayTodate,
 } from '../DayRecordStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -64,19 +65,21 @@ const DatePostList = () => {
           icon={faChevronDown}
           onClick={() => setShowDatePicker(!showDatePicker)}
         />
+        {showDatePicker && (
+          <DayPickerBox>
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => {
+                setselectedDate(date);
+                setShowDatePicker(false);
+              }}
+              withPortal
+              inline
+            />
+          </DayPickerBox>
+        )}
       </DayTodate>
-      {showDatePicker && (
-        <DatePicker label="Basic date picker" />
-        // <DatePicker
-        //   selected={selectedDate}
-        //   onChange={(date) => {
-        //     setselectedDate(date);
-        //     setShowDatePicker(false);
-        //   }}
-        //   withPortal
-        //   inline
-        // />
-      )}
+
       {posts?.length === 0 ? (
         <DayEmptySection>
           <DayEmptyIcon>
