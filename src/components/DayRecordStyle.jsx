@@ -29,6 +29,7 @@ export const DayRecordButton = styled.button`
   font-family: 'DMSansBold';
   font-weight: 900;
   padding: 10px;
+  cursor: pointer;
 `;
 
 export const DayRecordButtonLine = styled.section`
@@ -257,13 +258,24 @@ export const CommentGridContainer = styled.div`
   width: 100%;
   min-height: 300px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(1, 1fr);
-  justify-items: flex-start;
+  justify-items: center;
   gap: 15px;
-  border: 3px solid yellow;
-  @media all and (min-width: 786px) {
-    /*  */
+
+  transition: all 0.3s;
+  margin-top: 30px;
+  @media all and (max-width: 1680px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
+  }
+  @media all and (max-width: 1280px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
+  }
+  @media all and (max-width: 860px) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
   }
 `;
 
@@ -280,5 +292,4 @@ export const CommentContainer = styled.div`
   @media all and (max-width: 400px) {
     min-width: 100%;
   }
-  border: 2px solid red;
 `;

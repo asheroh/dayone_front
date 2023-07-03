@@ -81,7 +81,9 @@ const DatePostList = () => {
           <DayEmptyIcon>
             <FontAwesomeIcon icon={faBoxOpen} />
           </DayEmptyIcon>
-          <DayEmptyText>오늘 첫 번째 기록을 작성해보세요.!</DayEmptyText>
+          <DayEmptyText>
+            {getFormattedKoreanDate(selectedDate)}의 기록이 비어있어요.
+          </DayEmptyText>
         </DayEmptySection>
       ) : (
         <CommentGridContainer>
