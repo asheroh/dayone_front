@@ -299,3 +299,127 @@ export const CommentContainer = styled.div`
     min-width: 100%;
   }
 `;
+
+// 기록하기 페이지------------------------------------------------
+export const PostContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid gray;
+`;
+
+export const PostHeader = styled.section`
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const PostLogoBox = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-family: 'DMSansBold';
+  font-weight: 900;
+  color: ${(props) => props.theme.textColor};
+`;
+
+export const PostLogo = styled.img`
+  width: 150px;
+  transition: all 0.3s;
+`;
+
+export const PostHandleButton = styled.button`
+  background-color: transparent;
+  color: ${(props) => props.theme.textColor};
+  border: none;
+  font-size: 14px;
+  transition: all 0.3s;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const PostBody = styled.section`
+  width: 100%;
+  min-height: 85%;
+  border: 1px solid yellow;
+`;
+
+export const PostFormBox = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  border: 1px solid red;
+  padding: 15px;
+  transition: all 0.3s;
+`;
+
+export const PostTitleInput = styled.input`
+  width: 90%;
+  height: 45px;
+  background-color: transparent;
+  color: ${(props) => props.theme.textColor};
+  padding: 10px;
+  border: none;
+  border: ${(props) => `1px solid ${props.theme.textColor}`};
+`;
+
+export const PostBookSelectSection = styled.section`
+  width: 90%;
+  height: 200px;
+  display: ${(props) =>
+    props.bookname === '' || props.isSelected ? 'none' : 'flex'};
+  flex-direction: column;
+  gap: 20px;
+  font-size: 14px;
+  color: ${(props) => props.theme.textColor};
+  overflow-y: auto;
+  padding: 15px;
+  line-height: 1.5;
+  z-index: 1;
+`;
+
+export const PostBookSelectBox = styled.section`
+  width: 100%;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+export const PostImageSection = styled.section`
+  width: 100%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PostImage = styled.img`
+  width: 150px;
+`;
+
+export const PostContentSection = styled.section`
+  width: 100%;
+  height: 200px;
+  border: 1px solid gray;
+`;
+
+export const PostCommentSection = styled.section`
+  width: 100%;
+  height: 200px;
+  border: 1px solid gray;
+`;

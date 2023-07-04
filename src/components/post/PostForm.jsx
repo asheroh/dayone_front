@@ -1,9 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useCookies } from 'react-cookie';
 import * as authAPI from '../../lib/api/auth';
-import FormHeader from '../common/FormHeader';
+import SmallWhiteLogo from '../../assets/images/dayone_small_logo_white.svg';
+import SmallBlackLogo from '../../assets/images/dayone_small_logo_black.svg';
+import {
+  PostBody,
+  PostContainer,
+  PostFormBox,
+  PostHandleButton,
+  PostHeader,
+  PostImageSection,
+  PostLogo,
+  PostLogoBox,
+  PostTitleInput,
+  PostBookSelectSection,
+  PostBookSelectBox,
+  PostImage,
+} from '../DayRecordStyle';
+import { Context } from '../../context/Context';
 
 const PostForm = () => {
   const navigate = useNavigate();
@@ -17,7 +33,7 @@ const PostForm = () => {
   const [passage, setPassage] = useState('');
   const [comment, setComment] = useState('');
   const [postData, setPostData] = useState(null);
-
+  const { themeMode } = useContext(Context);
   // API search 결과
   const [searchResults, setSearchResults] = useState([]);
   // 검색 상태
@@ -29,7 +45,7 @@ const PostForm = () => {
   const debouncedSearchTerm = useDebounce(bookname, 500);
 
   useEffect(() => {
-    if (!isSelected && debouncedSearchTerm) {
+    if (debouncedSearchTerm) {
       setIsSearching(true);
       searchCharacters(debouncedSearchTerm).then((results) => {
         setIsSearching(false);
@@ -52,11 +68,6 @@ const PostForm = () => {
         return [];
       });
   };
-
-  // "author": "리처드 도킨스",
-  // "publisher": "을유문화사",
-  // "pubdate": "20230130",
-  // "isbn": "9788932473901"
 
   const handleBookSelect = (item) => {
     setBookname(item.title);
@@ -96,11 +107,51 @@ const PostForm = () => {
         console.error(error);
       });
   };
-
+  console.log(isSelected);
   return (
-    <div>
-      <FormHeader headerTitle={'기록하기'} clickMethod={handleSubmit} />
-      <br /> <br /> <br /> <br /> <br />
+    <PostContainer>
+      <PostHeader>
+        <PostHandleButton onClick={() => navigate(-1)}>취소</PostHandleButton>
+        <PostLogoBox>
+          <PostLogo
+            src={themeMode === 'black' ? SmallWhiteLogo : SmallBlackLogo}
+            alt="dayone"
+            loading="lazy"
+          />
+          n일차 기록
+        </PostLogoBox>
+        <PostHandleButton onClick={handleSubmit}>등록</PostHandleButton>
+      </PostHeader>
+      <PostBody>
+        <PostFormBox>
+          <PostTitleInput
+            type="text"
+            placeholder="책 제목"
+            value={bookname}
+            onChange={(e) => setBookname(e.target.value)}
+          />
+          <PostBookSelectSection bookname={bookname} isSelected={isSelected}>
+            {searchResults.length === 0 ? (
+              <PostBookSelectBox>일치하는 도서가 없습니다.</PostBookSelectBox>
+            ) : (
+              searchResults?.map((item) => (
+                <PostBookSelectBox
+                  key={item.isbn}
+                  onClick={() => handleBookSelect(item)}
+                  onMouseOver={() => handleBookHover(item.image)}
+                >
+                  {item.title}
+                </PostBookSelectBox>
+              ))
+            )}
+          </PostBookSelectSection>
+          <PostImageSection>
+            <PostImage src={bookImageUrl} alt="booklogo" loading="lazy" />
+          </PostImageSection>
+        </PostFormBox>
+      </PostBody>
+      {/* <FormHeader headerTitle={'기록하기'} clickMethod={handleSubmit} /> */}
+      {/* <br /> <br /> <br /> <br /> <br />
       <form>
         <input
           style={{ width: '300px', height: '50px' }}
@@ -153,8 +204,8 @@ const PostForm = () => {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
-      </form>
-    </div>
+      </form> */}
+    </PostContainer>
   );
 };
 

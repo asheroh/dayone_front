@@ -9,18 +9,10 @@ import {
 } from '../DayRecordStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenFancy } from '@fortawesome/free-solid-svg-icons';
-import * as authAPI from '../../lib/api/auth';
-import { useCookies } from 'react-cookie';
 
 const DayRecord = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
 
-  const fetchData = async () => {
-    const me = await authAPI.myInfo(cookies.access_token);
-    console.log(me);
-  };
-  fetchData();
   return (
     <DayRecordContainer>
       {/* 실시간 인기 덧붙임 ---------------------------------*/}
