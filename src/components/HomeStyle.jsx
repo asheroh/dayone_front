@@ -3,8 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
-  border: 3px solid brown;
+  overflow-x: hidden;
+`;
+
+export const Body = styled.div`
+  width: 100%;
+  height: 85%;
 `;
 
 // Navigation---------------------------------------------
@@ -24,6 +28,7 @@ export const HeaderLogoSection = styled.section`
 
 export const SmallLogoBox = styled.img`
   width: 150px;
+  transition: all 0.3s;
 `;
 
 export const InfoBox = styled.section`
@@ -66,6 +71,7 @@ export const Navsection0 = styled.section`
   font-weight: 900;
   border-bottom: ${(props) =>
     props.currentPage === 0 ? `2.5px solid ${props.theme.primaryColor}` : ``};
+  cursor: pointer;
 `;
 
 export const Navsection1 = styled.section`
@@ -78,6 +84,7 @@ export const Navsection1 = styled.section`
   font-weight: 900;
   border-bottom: ${(props) =>
     props.currentPage === 1 ? `2.5px solid ${props.theme.primaryColor}` : ``};
+  cursor: pointer;
 `;
 
 export const Navsection2 = styled.section`
@@ -90,4 +97,5 @@ export const Navsection2 = styled.section`
   font-weight: 900;
   border-bottom: ${(props) =>
     props.currentPage === 2 ? `2.5px solid ${props.theme.primaryColor}` : ``};
+  cursor: pointer;
 `;

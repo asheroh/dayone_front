@@ -36,9 +36,9 @@ const DemodayForm = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log('selectedFile:', selectedFile);
-  }, []);
+  // useEffect(() => {
+  //   console.log('selectedFile:', selectedFile);
+  // }, []);
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];

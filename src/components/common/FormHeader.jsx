@@ -46,9 +46,6 @@ const Wrapper = styled(Responsive)`
 /**
  * 헤더가 fixed로 되ㅣ어 있기 때문에 페이지의 콘텐츠가 4rem 아래에 나타나도록 해주는 컴포넌트
  */
-const Spacer = styled.div`
-  height = 4rem;
-`;
 
 const FormHeader = ({ headerTitle, clickMethod }) => {
   const navigate = useNavigate();
@@ -73,7 +70,6 @@ const FormHeader = ({ headerTitle, clickMethod }) => {
           등록
         </div>
       </Wrapper>
-      <Spacer />
     </HeaderBlock>
   );
 };

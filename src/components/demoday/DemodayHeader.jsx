@@ -49,7 +49,7 @@ const Wrapper = styled(Responsive)`
  * 헤더가 fixed로 되ㅣ어 있기 때문에 페이지의 콘텐츠가 4rem 아래에 나타나도록 해주는 컴포넌트
  */
 const Spacer = styled.div`
-  height = 4rem;
+  height: 4rem;
 `;
 
 const DemodayHeader = ({ demoday }) => {
@@ -58,14 +58,14 @@ const DemodayHeader = ({ demoday }) => {
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const jsonUser = localStorage.getItem('user');
   const user = JSON.parse(jsonUser);
-  console.log('demoday header user:', user);
-  console.log('demoday header demoday:', demoday);
+  // console.log('demoday header user:', user);
+  // console.log('demoday header demoday:', demoday);
 
   const onClickDeleteBtn = async () => {
     const request = await authAPI
       .deleteDemoday(cookies.access_token, params['demodayId'])
       .then((r) => {
-        console.log('deletePost return data:', r.data);
+        // console.log('deletePost return data:', r.data);
         if (r.status >= 200 && r.status < 300) {
           alert('데모데이를 삭제했습니다!');
           navigate(-1);
@@ -91,7 +91,8 @@ const DemodayHeader = ({ demoday }) => {
         </div>
         <div className="center">데모상세</div>
         {/* 데모데이 유저와 현재 유저의 id가 같고 신청한 사람이 없을 때 삭제 가능 */}
-        {demoday.user_id === user.userId && demoday.current_capacity === '1' ? (
+        {demoday?.user_id === user.userId &&
+        demoday?.current_capacity === '1' ? (
           <div
             className="right"
             onClick={() => {

@@ -5,6 +5,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import PostListItem from './PostListItem';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import {
+  CommentGridContainer,
+  DayContainer,
+  DayEmptyIcon,
+  DayEmptySection,
+  DayEmptyText,
+  DayPickerBox,
+  DayTodate,
+} from '../DayRecordStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBoxOpen, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const DatePostList = () => {
   const navigate = useNavigate();
@@ -14,7 +25,7 @@ const DatePostList = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   useEffect(() => {
-    console.log(selectedDate);
+    // console.log(selectedDate);
     fetchData();
   }, [selectedDate]);
 
@@ -37,7 +48,7 @@ const DatePostList = () => {
   };
 
   const fetchData = async () => {
-    console.log('ㄹㅇㄴㅁㄹ', cookies.access_token);
+    // console.log('ㄹㅇㄴㅁㄹ', cookies.access_token);
 
     const request = await authAPI
       .datePost(cookies.access_token, getFormattedParamsDate(selectedDate))
@@ -47,36 +58,39 @@ const DatePostList = () => {
   };
 
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
-        {getFormattedKoreanDate(selectedDate)} 덧붙임
-        <div
+    <DayContainer>
+      <DayTodate>
+        {getFormattedKoreanDate(selectedDate)} 덧붙임{' '}
+        <FontAwesomeIcon
+          icon={faChevronDown}
           onClick={() => setShowDatePicker(!showDatePicker)}
-          style={{
-            cursor: 'pointer',
-            display: 'inline-block',
-            marginRight: '10px',
-          }}
-        >
-          ▽
-        </div>
+        />
         {showDatePicker && (
-          <DatePicker
-            selected={selectedDate}
-            onChange={(date) => {
-              setselectedDate(date);
-              setShowDatePicker(false);
-            }}
-            withPortal
-            inline
-          />
+          <DayPickerBox>
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => {
+                setselectedDate(date);
+                setShowDatePicker(false);
+              }}
+              withPortal
+              inline
+            />
+          </DayPickerBox>
         )}
-      </div>
-      <br />
+      </DayTodate>
+
       {posts?.length === 0 ? (
-        <p>오늘 기록이 아직 없습니다!!!</p>
+        <DayEmptySection>
+          <DayEmptyIcon>
+            <FontAwesomeIcon icon={faBoxOpen} />
+          </DayEmptyIcon>
+          <DayEmptyText>
+            {getFormattedKoreanDate(selectedDate)}의 기록이 비어있어요.
+          </DayEmptyText>
+        </DayEmptySection>
       ) : (
-        <div>
+        <CommentGridContainer>
           {posts?.map((post) => {
             return (
               <Link
@@ -88,9 +102,9 @@ const DatePostList = () => {
               </Link>
             );
           })}
-        </div>
+        </CommentGridContainer>
       )}
-    </div>
+    </DayContainer>
   );
 };
 

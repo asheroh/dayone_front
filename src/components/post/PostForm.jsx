@@ -1,10 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useCookies } from 'react-cookie';
 import * as authAPI from '../../lib/api/auth';
-import './PostForm.css';
-import FormHeader from '../common/FormHeader';
+import SmallWhiteLogo from '../../assets/images/dayone_small_logo_white.svg';
+import SmallBlackLogo from '../../assets/images/dayone_small_logo_black.svg';
+import {
+  PostBody,
+  PostContainer,
+  PostFormBox,
+  PostHandleButton,
+  PostHeader,
+  PostImageSection,
+  PostLogo,
+  PostLogoBox,
+  PostTitleInput,
+  PostBookSelectSection,
+  PostBookSelectBox,
+  PostImage,
+  PostContentInput,
+  PostCommentInput,
+  CommentButton,
+  PostCommentBox,
+} from '../DayRecordStyle';
+import { Context } from '../../context/Context';
 
 const PostForm = () => {
   const navigate = useNavigate();
@@ -18,7 +37,7 @@ const PostForm = () => {
   const [passage, setPassage] = useState('');
   const [comment, setComment] = useState('');
   const [postData, setPostData] = useState(null);
-
+  const { themeMode } = useContext(Context);
   // API search 결과
   const [searchResults, setSearchResults] = useState([]);
   // 검색 상태
@@ -30,7 +49,7 @@ const PostForm = () => {
   const debouncedSearchTerm = useDebounce(bookname, 500);
 
   useEffect(() => {
-    if (!isSelected && debouncedSearchTerm) {
+    if (debouncedSearchTerm) {
       setIsSearching(true);
       searchCharacters(debouncedSearchTerm).then((results) => {
         setIsSearching(false);
@@ -53,11 +72,6 @@ const PostForm = () => {
         return [];
       });
   };
-
-  // "author": "리처드 도킨스",
-  // "publisher": "을유문화사",
-  // "pubdate": "20230130",
-  // "isbn": "9788932473901"
 
   const handleBookSelect = (item) => {
     setBookname(item.title);
@@ -91,72 +105,71 @@ const PostForm = () => {
     await authAPI
       .addPost(cookies.access_token, PostData)
       .then((r) => {
-        console.log(231);
         navigate('/');
       })
       .catch((error) => {
         console.error(error);
       });
   };
-
+  console.log(isSelected);
   return (
-    <div>
-      <FormHeader headerTitle={'기록하기'} clickMethod={handleSubmit} />
-      <br /> <br /> <br /> <br /> <br />
-      <form>
-        <input
-          style={{ width: '300px', height: '50px' }}
-          type="text"
-          placeholder="bookname"
-          value={bookname}
-          onChange={(e) => setBookname(e.target.value)}
-        />
-        <div className="search_book">
-          {searchResults.map((item) => (
-            <div
-              key={item.isbn}
-              className="search_book_item"
-              onClick={() => handleBookSelect(item)}
-              onMouseOver={() => handleBookHover(item.image)}
-            >
-              {item.title}
-            </div>
-          ))}
-        </div>
-        <br />
-
-        <img
-          src={bookImageUrl}
-          alt="logo"
-          className="search book_image"
-          style={{
-            width: '200px',
-            height: 'auto',
-            objectFit: 'cover',
-            aspectRatio: '11/16',
-          }}
-        ></img>
-
-        <br />
-        <br />
-
-        <textarea
-          style={{ width: '300px', height: '200px' }}
-          type="text"
-          placeholder="passage"
-          value={passage}
-          onChange={(e) => setPassage(e.target.value)}
-        />
-        <br />
-        <textarea
-          style={{ width: '300px', height: '200px' }}
-          type="text"
-          placeholder="comment"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-      </form>
-    </div>
+    <PostContainer>
+      <PostHeader>
+        <PostHandleButton onClick={() => navigate(-1)}>취소</PostHandleButton>
+        <PostLogoBox>
+          <PostLogo
+            src={themeMode === 'black' ? SmallWhiteLogo : SmallBlackLogo}
+            alt="dayone"
+            loading="lazy"
+          />
+          n일차 기록
+        </PostLogoBox>
+        <PostHandleButton onClick={handleSubmit}>등록</PostHandleButton>
+      </PostHeader>
+      <PostBody>
+        <PostFormBox>
+          <PostTitleInput
+            type="text"
+            placeholder="책 제목"
+            value={bookname}
+            onChange={(e) => setBookname(e.target.value)}
+          />
+          <PostBookSelectSection bookname={bookname} isSelected={isSelected}>
+            {searchResults.length === 0 ? (
+              <PostBookSelectBox>일치하는 도서가 없습니다.</PostBookSelectBox>
+            ) : (
+              searchResults?.map((item) => (
+                <PostBookSelectBox
+                  key={item.isbn}
+                  onClick={() => handleBookSelect(item)}
+                  onMouseOver={() => handleBookHover(item.image)}
+                >
+                  {item.title}
+                </PostBookSelectBox>
+              ))
+            )}
+          </PostBookSelectSection>
+          <PostImageSection>
+            <PostImage src={bookImageUrl} alt="booklogo" loading="lazy" />
+          </PostImageSection>
+          <PostContentInput
+            type="text"
+            placeholder="인상에 남는 구절을 적어주세요!"
+            value={passage}
+            onChange={(e) => setPassage(e.target.value)}
+          />
+          <PostCommentBox>
+            <CommentButton>Comment</CommentButton>
+          </PostCommentBox>
+          <PostCommentInput
+            type="text"
+            placeholder="덧붙임"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+        </PostFormBox>
+      </PostBody>
+    </PostContainer>
   );
 };
 

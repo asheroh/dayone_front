@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   BookContent,
   BookTitle,
   CommentBorder,
   CommentButton,
-  CommentContainer,
   DateBox,
   HotCommentBoxBody,
   HotCommentBoxFooter,
@@ -18,15 +17,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-const PostListItem = ({ post }) => {
-  const [isCool, setIsCool] = useState(Boolean);
-  useEffect(() => {
-    setIsCool(true);
-    return () => {
-      setIsCool(false);
-    };
-  }, []);
-
+const PostHotList = ({ post }) => {
   const formatDateAndTime = (inputDate) => {
     // 문자열로부터 Date 객체 생성
     let date = new Date(inputDate);
@@ -42,7 +33,7 @@ const PostListItem = ({ post }) => {
   };
 
   return (
-    <CommentContainer>
+    <HotCommentContainer>
       <HotCommentBoxHeader>
         <UserBox>
           <UserProfile postUserProfile={post.user_profile_img}></UserProfile>
@@ -53,19 +44,19 @@ const PostListItem = ({ post }) => {
         <DateBox>{formatDateAndTime(post.created_at)}</DateBox>
       </HotCommentBoxHeader>
       <HotCommentBoxBody>
-        <BookTitle isCool={isCool}>
+        <BookTitle>
           {post.bookname.length > 25
             ? post.bookname.substring(0, 25) + '...'
             : post.bookname}
         </BookTitle>
-        <BookContent isCool={isCool}>
+        <BookContent>
           {post.passage.length > 118
             ? post.passage.substring(0, 118) + '...'
             : post.passage}
         </BookContent>
       </HotCommentBoxBody>
       <CommentBorder>
-        <CommentButton isCool={isCool}>Comment</CommentButton>
+        <CommentButton>Comment</CommentButton>
         {post.is_sympathy === '1' ? (
           <LikeButton>
             <FontAwesomeIcon icon={faHeart} /> {post.sympathy_count}
@@ -75,14 +66,14 @@ const PostListItem = ({ post }) => {
         )}
       </CommentBorder>
       <HotCommentBoxFooter>
-        <BookContent isCool={isCool}>
+        <BookContent>
           {post.comment.length > 55
             ? post.comment.substring(0, 55) + '...'
             : post.comment}
         </BookContent>
       </HotCommentBoxFooter>
-    </CommentContainer>
+    </HotCommentContainer>
   );
 };
 
-export default PostListItem;
+export default PostHotList;

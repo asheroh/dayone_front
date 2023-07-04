@@ -10,7 +10,7 @@ const client = axios.create({
 client.interceptors.request.use(
   (config) => {
     // request logic
-    console.log('request config interceptor:', config);
+    // console.log('request config interceptor:', config);
 
     return config;
   },
@@ -24,7 +24,7 @@ client.interceptors.request.use(
 client.interceptors.response.use(
   (response) => {
     // response logic
-    console.log('response interceptor:', response);
+    // console.log('response interceptor:', response);
     return response;
   },
   (error) => {

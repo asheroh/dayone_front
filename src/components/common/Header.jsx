@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../modules/user';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   HeaderContainer,
   HeaderLogoSection,
@@ -13,41 +13,50 @@ import {
   SignButton,
   SmallLogoBox,
 } from '../HomeStyle';
-import SmallLogo from '../../assets/images/dayone_small_logo.svg';
+import SmallWhiteLogo from '../../assets/images/dayone_small_logo_white.svg';
+import SmallBlackLogo from '../../assets/images/dayone_small_logo_black.svg';
+import { Context } from '../../context/Context';
 
 const Header = ({ currentPage, setCurrentPage }) => {
   const { user } = useSelector(({ user }) => ({ user: user.user }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const { themeMode } = useContext(Context);
   const onLogout = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate('/login', { replace: true });
   };
   return (
     <HeaderContainer>
       <HeaderLogoSection>
-        <SmallLogoBox src={SmallLogo} alt="dayone" loading="lazy" />
+        <SmallLogoBox
+          src={themeMode === 'black' ? SmallWhiteLogo : SmallBlackLogo}
+          alt="dayone"
+          loading="lazy"
+        />
         <InfoBox>
           {user?.username}
           <SignButton onClick={onLogout}>로그아웃</SignButton>
         </InfoBox>
       </HeaderLogoSection>
       <HeaderNavSection>
-        <Navsection0 currentPage={currentPage}>
-          <Link to="/" onClick={() => setCurrentPage(0)}>
-            데이기록
-          </Link>
+        <Navsection0
+          currentPage={currentPage}
+          onClick={() => setCurrentPage(0)}
+        >
+          데이기록
         </Navsection0>
-        <Navsection1 currentPage={currentPage}>
-          <Link to="/demoday" onClick={() => setCurrentPage(1)}>
-            데모데이
-          </Link>
+        <Navsection1
+          currentPage={currentPage}
+          onClick={() => setCurrentPage(1)}
+        >
+          데모데이
         </Navsection1>
-        <Navsection2 currentPage={currentPage}>
-          <Link to="/mypage" onClick={() => setCurrentPage(2)}>
-            나의기록
-          </Link>
+        <Navsection2
+          currentPage={currentPage}
+          onClick={() => setCurrentPage(2)}
+        >
+          나의기록
         </Navsection2>
       </HeaderNavSection>
     </HeaderContainer>
