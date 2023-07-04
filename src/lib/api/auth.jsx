@@ -27,7 +27,7 @@ export const logout = () => client.get('/v1/auth/logout');
 
 // 나의 정보 조회
 export const myInfo = (access_token) => {
-  console.log('auth api', access_token);
+  // console.log('auth api', access_token);
   return client.get('/v1/auth/me', {
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -37,7 +37,7 @@ export const myInfo = (access_token) => {
 
 // 날짜별 기록조회
 export const datePost = (access_token, date) => {
-  console.log('auth api', access_token);
+  // console.log('auth api', access_token);
   return client.get(`/v1/posts?date=${date}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -83,7 +83,7 @@ export const deletePost = (access_token, post_id) => {
 
 // 책 조회
 export const searchBook = (search, access_token) => {
-  console.log('auth api', access_token);
+  // console.log('auth api', access_token);
   return client.get(
     `/v1/posts/search/book?query=${search}&display=10&start=1`,
     {
@@ -96,7 +96,7 @@ export const searchBook = (search, access_token) => {
 
 // 기록 공감 하기
 export const sympathize = (access_token, post_id) => {
-  console.log('auth api', access_token);
+  // console.log('auth api', access_token);
   return client.post(`/v1/posts/${post_id}/like`, null, {
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -106,7 +106,7 @@ export const sympathize = (access_token, post_id) => {
 
 // 기록 공감 취소하기
 export const noSympathize = (access_token, post_id) => {
-  console.log('auth api', access_token);
+  // console.log('auth api', access_token);
   return client.delete(`/v1/posts/${post_id}/like`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -133,7 +133,7 @@ export const demodayOne = (access_token, demoday_id) => {
 
 // 데모데이 참가신청
 export const joinDemoday = (access_token, demoday_id) => {
-  console.log('joinDemoday api', access_token);
+  // console.log('joinDemoday api', access_token);
 
   return client.post(`/v1/demodays/${demoday_id}/join`, null, {
     headers: {

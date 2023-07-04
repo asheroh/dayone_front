@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../modules/user';
 import { useNavigate } from 'react-router-dom';
@@ -13,13 +13,15 @@ import {
   SignButton,
   SmallLogoBox,
 } from '../HomeStyle';
-import SmallLogo from '../../assets/images/dayone_small_logo.svg';
+import SmallWhiteLogo from '../../assets/images/dayone_small_logo_white.svg';
+import SmallBlackLogo from '../../assets/images/dayone_small_logo_black.svg';
+import { Context } from '../../context/Context';
 
 const Header = ({ currentPage, setCurrentPage }) => {
   const { user } = useSelector(({ user }) => ({ user: user.user }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const { themeMode } = useContext(Context);
   const onLogout = () => {
     dispatch(logout());
     navigate('/login', { replace: true });
@@ -27,7 +29,11 @@ const Header = ({ currentPage, setCurrentPage }) => {
   return (
     <HeaderContainer>
       <HeaderLogoSection>
-        <SmallLogoBox src={SmallLogo} alt="dayone" loading="lazy" />
+        <SmallLogoBox
+          src={themeMode === 'black' ? SmallWhiteLogo : SmallBlackLogo}
+          alt="dayone"
+          loading="lazy"
+        />
         <InfoBox>
           {user?.username}
           <SignButton onClick={onLogout}>로그아웃</SignButton>

@@ -92,7 +92,7 @@ const DemodayHeader = ({ demoday }) => {
         <div className="center">데모상세</div>
         {/* 데모데이 유저와 현재 유저의 id가 같고 신청한 사람이 없을 때 삭제 가능 */}
         {demoday?.user_id === user.userId &&
-        demoday.current_capacity === '1' ? (
+        demoday?.current_capacity === '1' ? (
           <div
             className="right"
             onClick={() => {

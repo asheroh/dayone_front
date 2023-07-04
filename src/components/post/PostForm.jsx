@@ -90,7 +90,6 @@ const PostForm = () => {
     await authAPI
       .addPost(cookies.access_token, PostData)
       .then((r) => {
-        console.log(231);
         navigate('/');
       })
       .catch((error) => {
