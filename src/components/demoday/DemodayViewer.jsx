@@ -10,12 +10,12 @@ const DemodayViewer = () => {
   const params = useParams();
   const jsonUser = localStorage.getItem('user');
   const user = JSON.parse(jsonUser);
-  console.log('viewer localstorage user:', user);
+  // console.log('viewer localstorage user:', user);
 
   // Path Variable 값 가져오기
   useEffect(() => {
     fetchData();
-    console.log('fklsjdaf', cookies.access_token);
+    // console.log('fklsjdaf', cookies.access_token);
   }, []);
 
   const fetchData = async () => {
@@ -33,7 +33,7 @@ const DemodayViewer = () => {
   };
 
   const onClickApplyBtn = async () => {
-    console.log('데모데이', cookies.access_token);
+    // console.log('데모데이', cookies.access_token);
     const request = await authAPI
       .joinDemoday(cookies.access_token, params['demodayId'])
       .then((r) => {

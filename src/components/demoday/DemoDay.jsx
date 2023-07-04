@@ -3,9 +3,11 @@ import DemodayHeader from './DemodayHeader';
 import DemodayViewer from './DemodayViewer';
 
 const DemoDay = () => {
+  const location = useLocation();
+  const demoday = location.state?.demoday;
   return (
     <>
-      <DemodayHeader demoday={null} />
+      <DemodayHeader demoday={demoday} />
       <br /> <br /> <br /> <br /> <br />
       <DemodayViewer />
     </>
