@@ -197,13 +197,14 @@ export const CommentBorder = styled.section`
 export const CommentButton = styled.button`
   width: 85px;
   height: 22px;
-  border: ${(props) => (props.isCool ? `1.5px solid white` : 'none')};
+  border: ${(props) =>
+    props.isCool ? `1.5px solid ${props.theme.textColor}` : 'none'};
   border-radius: 25px;
   font-size: 11px;
   background-color: ${(props) =>
-    props.isCool ? 'transparent' : props.theme.bgColor};
-  color: ${(props) => props.theme.textColor};
-  opacity: ${(props) => (props.isCool ? '1' : '0.4')};
+    props.isCool ? 'transparent' : props.theme.secondaryColor};
+  color: ${(props) =>
+    props.isCool ? props.theme.textColor : props.theme.bgColor};
 `;
 
 export const LikeButton = styled.section`
@@ -307,7 +308,6 @@ export const PostContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  border: 3px solid gray;
 `;
 
 export const PostHeader = styled.section`
@@ -316,6 +316,11 @@ export const PostHeader = styled.section`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  @media all and (max-width: 400px) {
+    height: 20%;
+    padding: 10px;
+  }
 `;
 
 export const PostLogoBox = styled.section`
@@ -350,17 +355,19 @@ export const PostHandleButton = styled.button`
 export const PostBody = styled.section`
   width: 100%;
   min-height: 85%;
-  border: 1px solid yellow;
+  @media all and (max-width: 400px) {
+    min-height: 80%;
+  }
 `;
 
 export const PostFormBox = styled.form`
   width: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
   position: relative;
-  border: 1px solid red;
   padding: 15px;
   transition: all 0.3s;
 `;
@@ -372,7 +379,36 @@ export const PostTitleInput = styled.input`
   color: ${(props) => props.theme.textColor};
   padding: 10px;
   border: none;
-  border: ${(props) => `1px solid ${props.theme.textColor}`};
+  border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
+`;
+
+export const PostContentInput = styled.textarea`
+  width: 90%;
+  min-height: 200px;
+  background-color: transparent;
+  color: ${(props) => props.theme.textColor};
+  padding: 10px;
+  border: none;
+  border-bottom: ${(props) => `1px dashed ${props.theme.textColor}`};
+  resize: none;
+`;
+
+export const PostCommentBox = styled.section`
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+export const PostCommentInput = styled.textarea`
+  width: 90%;
+  min-height: 200px;
+  background-color: transparent;
+  color: ${(props) => props.theme.textColor};
+  padding: 10px;
+  border: none;
+  border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
+  resize: none;
 `;
 
 export const PostBookSelectSection = styled.section`

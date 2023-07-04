@@ -18,6 +18,10 @@ import {
   PostBookSelectSection,
   PostBookSelectBox,
   PostImage,
+  PostContentInput,
+  PostCommentInput,
+  CommentButton,
+  PostCommentBox,
 } from '../DayRecordStyle';
 import { Context } from '../../context/Context';
 
@@ -148,63 +152,23 @@ const PostForm = () => {
           <PostImageSection>
             <PostImage src={bookImageUrl} alt="booklogo" loading="lazy" />
           </PostImageSection>
+          <PostContentInput
+            type="text"
+            placeholder="인상에 남는 구절을 적어주세요!"
+            value={passage}
+            onChange={(e) => setPassage(e.target.value)}
+          />
+          <PostCommentBox>
+            <CommentButton>Comment</CommentButton>
+          </PostCommentBox>
+          <PostCommentInput
+            type="text"
+            placeholder="덧붙임"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
         </PostFormBox>
       </PostBody>
-      {/* <FormHeader headerTitle={'기록하기'} clickMethod={handleSubmit} /> */}
-      {/* <br /> <br /> <br /> <br /> <br />
-      <form>
-        <input
-          style={{ width: '300px', height: '50px' }}
-          type="text"
-          placeholder="bookname"
-          value={bookname}
-          onChange={(e) => setBookname(e.target.value)}
-        />
-        <div className="search_book">
-          {searchResults.map((item) => (
-            <div
-              key={item.isbn}
-              className="search_book_item"
-              onClick={() => handleBookSelect(item)}
-              onMouseOver={() => handleBookHover(item.image)}
-            >
-              {item.title}
-            </div>
-          ))}
-        </div>
-        <br />
-
-        <img
-          src={bookImageUrl}
-          alt="logo"
-          className="search book_image"
-          style={{
-            width: '200px',
-            height: 'auto',
-            objectFit: 'cover',
-            aspectRatio: '11/16',
-          }}
-        ></img>
-
-        <br />
-        <br />
-
-        <textarea
-          style={{ width: '300px', height: '200px' }}
-          type="text"
-          placeholder="passage"
-          value={passage}
-          onChange={(e) => setPassage(e.target.value)}
-        />
-        <br />
-        <textarea
-          style={{ width: '300px', height: '200px' }}
-          type="text"
-          placeholder="comment"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-      </form> */}
     </PostContainer>
   );
 };
