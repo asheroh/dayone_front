@@ -54,9 +54,23 @@ table {
 // 추가1. 모든 태그에 border-box 적용 (테두리와 안쪽 여백의 크기도 요소의 크기로 고려)
 * {
     box-sizing: border-box;
-    font-family: 'insungitCutelivelyjisu';
-
 }
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: ${(props) => props.theme.textColor};
+}
+
+*::-webkit-scrollbar-thumb {
+  background: ${(props) => props.theme.secondaryColor};
+}
+
+*::selection {
+  color: black;
+  background: #daa520;
+}
+
 // 추가2. 가져온 폰트를 body태그 안에 있으면 다 적용되게 해줌 + theme 적용
 @font-face {
   font-family: "DMSansBold";

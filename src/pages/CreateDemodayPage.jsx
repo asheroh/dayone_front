@@ -1,5 +1,5 @@
 import React from 'react';
-import DemodayForm from '../components/demoday/DemodayForm';
+import DemodayForm from '../components/DemoDay/DemodayForm';
 
 const CreateDemodayPage = () => {
   return (

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import BestPostList from '../components/post/BestPostList';
-import DatePostList from '../components/post/DatePostList';
-import { Container } from '../components/HomeStyle';
+import { Body, Container } from '../components/HomeStyle';
 import Header from '../components/common/Header';
+import DayRecord from '../components/DayRecord/DayRecord';
+import DemoDay from '../components/DemoDay/DemoDay';
 
 const MainPage = () => {
   // Nav Pagination-------------------------------------
@@ -12,15 +11,17 @@ const MainPage = () => {
   return (
     <Container>
       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      <br /> <br /> <br /> <br /> <br /> <br />
-      <BestPostList />
-      <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
-      <br />
-      <DatePostList />
-      <br />
-      <Link to="/postform">
-        <button>기록하기</button>
-      </Link>
+      <Body>
+        {currentPage === 0 ? (
+          <DayRecord />
+        ) : currentPage === 1 ? (
+          <DemoDay />
+        ) : currentPage === 2 ? (
+          '나의 기록 페이지'
+        ) : (
+          ''
+        )}
+      </Body>
     </Container>
   );
 };

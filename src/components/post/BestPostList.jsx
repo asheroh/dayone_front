@@ -2,8 +2,16 @@ import React, { useState, useEffect } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
-import PostModal from './PostModal';
-import PostListItem from './PostListItem';
+import PostHotList from './PostHotList';
+import {
+  HotCommentEmptyIcon,
+  HotCommentEmptyText,
+  HotCommentHeader,
+  HotCommentScrollBox,
+  HotCommentSection,
+} from '../DayRecordStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFeatherPointed } from '@fortawesome/free-solid-svg-icons';
 
 const BestPostList = () => {
   const [posts, setPosts] = useState([]);
@@ -28,27 +36,34 @@ const BestPostList = () => {
   };
 
   return (
-    <div>
-      <h1>실시간 인기 덧붙임</h1>
+    <HotCommentSection>
       <br />
-      {posts.length === 0 ? (
-        <p>이번주 주간 베스트 기록이 없습니다!!!</p>
-      ) : (
-        <div>
-          {posts.map((post) => {
-            return (
-              <Link
-                to={`/posts/${post.post_id}`}
-                state={{ post: post }}
-                key={post.post_id}
-              >
-                <PostListItem post={post} />
-              </Link>
-            );
-          })}
-        </div>
-      )}
-    </div>
+      <HotCommentHeader>실시간 인기 덧붙임</HotCommentHeader>
+      <HotCommentScrollBox>
+        {posts.length === 0 ? (
+          <HotCommentEmptyIcon>
+            <FontAwesomeIcon icon={faFeatherPointed} />
+            <HotCommentEmptyText>
+              실시간 인기 덧붙임이 없습니다.
+            </HotCommentEmptyText>
+          </HotCommentEmptyIcon>
+        ) : (
+          <>
+            {posts?.map((post) => {
+              return (
+                <Link
+                  to={`/posts/${post.post_id}`}
+                  state={{ post: post }}
+                  key={post.post_id}
+                >
+                  <PostHotList post={post} />
+                </Link>
+              );
+            })}
+          </>
+        )}
+      </HotCommentScrollBox>
+    </HotCommentSection>
   );
 };
 
