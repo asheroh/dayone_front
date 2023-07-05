@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Body, Container } from '../components/HomeStyle';
 import Header from '../components/common/Header';
 import DayRecord from '../components/DayRecord/DayRecord';
-import DemoDay from '../components/DemoDay/DemoDay';
+import DemoDay from '../components/Demoday/DemoDay';
 
 const MainPage = () => {
   // Nav Pagination-------------------------------------
