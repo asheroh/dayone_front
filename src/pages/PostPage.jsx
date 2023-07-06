@@ -7,17 +7,12 @@ const PostPage = () => {
   const location = useLocation();
   const post = location.state.post;
 
-  console.log('post:', post);
-
-  console.log('username:', post.username);
-  //   console.log('userId:', user.userId);
-
   return (
-    <div>
+    <>
       <PostViewerHeader post={post} />
       <br /> <br /> <br /> <br /> <br />
       <PostViewer />
-    </div>
+    </>
   );
 };
 
