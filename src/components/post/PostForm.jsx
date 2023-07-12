@@ -111,7 +111,7 @@ const PostForm = () => {
         console.error(error);
       });
   };
-  console.log(isSelected);
+
   return (
     <PostContainer>
       <PostHeader>

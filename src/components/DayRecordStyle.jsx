@@ -231,12 +231,14 @@ export const DayPickerBox = styled.section`
   width: auto;
   height: auto;
   position: absolute;
+  top: 150%;
   transition: all 0.3s;
 `;
 
 export const DayTodate = styled.h1`
   font-family: 'DMSansBold';
   font-weight: 900;
+  position: relative;
 `;
 
 export const DayEmptySection = styled.section`
@@ -316,7 +318,7 @@ export const PostHeader = styled.section`
   display: flex;
   justify-content: space-around;
   align-items: center;
-
+  position: relative;
   @media all and (max-width: 400px) {
     height: 20%;
     padding: 10px;
@@ -458,4 +460,37 @@ export const PostCommentSection = styled.section`
   width: 100%;
   height: 200px;
   border: 1px solid gray;
+`;
+
+// Day Record Detail------------------------------------
+export const PostBackButton = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translate(0, -50%);
+  color: ${(props) => props.theme.textColor};
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
+export const PostDeleteButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translate(0, -50%);
+  color: ${(props) => props.theme.textColor};
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
+export const PostDetailOwner = styled.section`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: ${(props) => props.theme.textColor};
+  font-family: 'DMSansBold';
+  font-weight: 900;
 `;
