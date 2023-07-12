@@ -11,13 +11,13 @@ const PostPage = () => {
   // console.log('post:', post);
 
   // console.log('username:', post.username);
-  //   console.log('userId:', user.userId);
+  // console.log('userId:', user.userId);
 
   return (
     <>
       <PostContainer>
         <PostViewerHeader post={post} />
-        {/* <PostViewer /> */}
+        <PostViewer />
       </PostContainer>
     </>
   );

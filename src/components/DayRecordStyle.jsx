@@ -319,6 +319,7 @@ export const PostHeader = styled.section`
   justify-content: space-around;
   align-items: center;
   position: relative;
+  border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
   @media all and (max-width: 400px) {
     height: 20%;
     padding: 10px;
@@ -357,6 +358,9 @@ export const PostHandleButton = styled.button`
 export const PostBody = styled.section`
   width: 100%;
   min-height: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   @media all and (max-width: 400px) {
     min-height: 80%;
   }
@@ -493,4 +497,57 @@ export const PostDetailOwner = styled.section`
   color: ${(props) => props.theme.textColor};
   font-family: 'DMSansBold';
   font-weight: 900;
+`;
+
+export const PostDetailThumbnailBox = styled.div`
+  width: 700px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 10px;
+  border-bottom: ${(props) => `1px dashed ${props.theme.textColor}`};
+  margin-top: 30px;
+  @media all and (max-width: 705px) {
+    width: 500px;
+  }
+  @media all and (max-width: 505px) {
+    width: 350px;
+  }
+`;
+
+export const PostDetailThumbnailLeft = styled.section`
+  height: 45px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const PostDetailThumbnailRight = styled.h4`
+  color: ${(props) => props.theme.secondaryColor};
+  font-family: 'DMSansRegular';
+  font-size: 12px;
+`;
+
+export const PostDetailThumbnail = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+`;
+
+export const PostDetailOwnerBox = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+export const PostDetailName = styled.h2`
+  color: ${(props) => props.theme.textColor};
+  font-family: 'DMSansBold';
+  font-weight: 900;
+  font-size: 14px;
+`;
+export const PostDetailDate = styled.h3`
+  color: ${(props) => props.theme.secondaryColor};
+  font-size: 12px;
 `;

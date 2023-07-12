@@ -2,6 +2,16 @@ import React, { useEffect, useState } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+  PostBody,
+  PostDetailDate,
+  PostDetailName,
+  PostDetailOwnerBox,
+  PostDetailThumbnail,
+  PostDetailThumbnailBox,
+  PostDetailThumbnailLeft,
+  PostDetailThumbnailRight,
+} from '../DayRecordStyle';
 
 const PostViewer = () => {
   const [post, setPost] = useState({});
@@ -19,7 +29,7 @@ const PostViewer = () => {
     await authAPI
       .postOne(cookies.access_token, params['postId'])
       .then((r) => {
-        console.log('기록 단건 조회 res data:', r.data.data[0]);
+        // console.log('기록 단건 조회 res data:', r.data.data[0]);
         setPost(r.data.data[0]);
         setIsSympathy(r.data.data[0].is_sympathy);
       })
@@ -57,8 +67,23 @@ const PostViewer = () => {
   };
 
   return (
-    <div>
-      {post ? (
+    <PostBody>
+      <PostDetailThumbnailBox>
+        <PostDetailThumbnailLeft>
+          <PostDetailThumbnail
+            src={post.user_profile_img}
+            alt="user_image"
+            loading="lazy"
+          />
+          <PostDetailOwnerBox>
+            <PostDetailName>{post.username}</PostDetailName>
+            <PostDetailDate>{post.count_day}일차 기록</PostDetailDate>
+          </PostDetailOwnerBox>
+        </PostDetailThumbnailLeft>
+        <PostDetailThumbnailRight>{post.created_at}</PostDetailThumbnailRight>
+      </PostDetailThumbnailBox>
+
+      {/* {post ? (
         <div>
           <div style={{ display: 'flex' }}>
             <img
@@ -99,8 +124,8 @@ const PostViewer = () => {
         </div>
       ) : (
         <div>fsd</div>
-      )}
-    </div>
+      )} */}
+    </PostBody>
   );
 };
 
