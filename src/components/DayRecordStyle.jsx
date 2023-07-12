@@ -231,12 +231,14 @@ export const DayPickerBox = styled.section`
   width: auto;
   height: auto;
   position: absolute;
+  top: 150%;
   transition: all 0.3s;
 `;
 
 export const DayTodate = styled.h1`
   font-family: 'DMSansBold';
   font-weight: 900;
+  position: relative;
 `;
 
 export const DayEmptySection = styled.section`
@@ -316,7 +318,12 @@ export const PostHeader = styled.section`
   display: flex;
   justify-content: space-around;
   align-items: center;
+<<<<<<< HEAD
+  position: relative;
+  border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
+=======
   padding: 15px 0;
+>>>>>>> 64c67cf312e57e93cdf12e164cf8eb5c1faa463e
   @media all and (max-width: 400px) {
     height: 20%;
   }
@@ -353,7 +360,14 @@ export const PostHandleButton = styled.button`
 
 export const PostBody = styled.section`
   width: 100%;
+<<<<<<< HEAD
+  min-height: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+=======
   min-height: 75%;
+>>>>>>> 64c67cf312e57e93cdf12e164cf8eb5c1faa463e
   @media all and (max-width: 400px) {
     min-height: 70%;
   }
@@ -457,4 +471,90 @@ export const PostCommentSection = styled.section`
   width: 100%;
   height: 200px;
   border: 1px solid gray;
+`;
+
+// Day Record Detail------------------------------------
+export const PostBackButton = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translate(0, -50%);
+  color: ${(props) => props.theme.textColor};
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
+export const PostDeleteButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translate(0, -50%);
+  color: ${(props) => props.theme.textColor};
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
+export const PostDetailOwner = styled.section`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: ${(props) => props.theme.textColor};
+  font-family: 'DMSansBold';
+  font-weight: 900;
+`;
+
+export const PostDetailThumbnailBox = styled.div`
+  width: 700px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 10px;
+  border-bottom: ${(props) => `1px dashed ${props.theme.textColor}`};
+  margin-top: 30px;
+  @media all and (max-width: 705px) {
+    width: 500px;
+  }
+  @media all and (max-width: 505px) {
+    width: 350px;
+  }
+`;
+
+export const PostDetailThumbnailLeft = styled.section`
+  height: 45px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const PostDetailThumbnailRight = styled.h4`
+  color: ${(props) => props.theme.secondaryColor};
+  font-family: 'DMSansRegular';
+  font-size: 12px;
+`;
+
+export const PostDetailThumbnail = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+`;
+
+export const PostDetailOwnerBox = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+export const PostDetailName = styled.h2`
+  color: ${(props) => props.theme.textColor};
+  font-family: 'DMSansBold';
+  font-weight: 900;
+  font-size: 14px;
+`;
+export const PostDetailDate = styled.h3`
+  color: ${(props) => props.theme.secondaryColor};
+  font-size: 12px;
 `;

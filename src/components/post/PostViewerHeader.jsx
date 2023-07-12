@@ -1,9 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import Responsive from '../common/Responsive';
 import * as authAPI from '../../lib/api/auth';
+<<<<<<< HEAD
+import {
+  PostBackButton,
+  PostDeleteButton,
+  PostDetailOwner,
+  PostHeader,
+} from '../DayRecordStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+=======
 
 const HeaderBlock = styled.div`
   position: fixed;
@@ -44,6 +52,7 @@ const Wrapper = styled(Responsive)`
     cursor: pointer;
   }
 `;
+>>>>>>> 64c67cf312e57e93cdf12e164cf8eb5c1faa463e
 
 const PostViewerHeader = ({ post }) => {
   const navigate = useNavigate();
@@ -51,7 +60,7 @@ const PostViewerHeader = ({ post }) => {
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const jsonUser = localStorage.getItem('user');
   const user = JSON.parse(jsonUser);
-  console.log('header user:', user);
+  // console.log('header user:', user);
 
   const onClickDeleteBtn = async () => {
     const request = await authAPI
@@ -71,14 +80,25 @@ const PostViewerHeader = ({ post }) => {
   };
 
   return (
-    <HeaderBlock>
-      <Wrapper>
-        <div
-          className="left"
+    <PostHeader>
+      <PostBackButton onClick={() => navigate(-1)}>
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </PostBackButton>
+      <PostDetailOwner>{post.username} 덧붙임</PostDetailOwner>
+      {post.user_id === user.userId ? (
+        <PostDeleteButton
           onClick={() => {
-            navigate(-1);
+            onClickDeleteBtn();
           }}
         >
+<<<<<<< HEAD
+          삭제
+        </PostDeleteButton>
+      ) : (
+        ''
+      )}
+    </PostHeader>
+=======
           {'<'}
         </div>
         <div className="center">{post.username} 덧붙임</div>
@@ -96,6 +116,7 @@ const PostViewerHeader = ({ post }) => {
         )}
       </Wrapper>
     </HeaderBlock>
+>>>>>>> 64c67cf312e57e93cdf12e164cf8eb5c1faa463e
   );
 };
 
