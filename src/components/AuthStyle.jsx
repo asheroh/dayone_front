@@ -10,7 +10,7 @@ export const AuthContainer = styled.div`
 
 export const BodySection = styled.section`
   width: 100%;
-  height: 50%;
+  height: 55%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -37,7 +37,7 @@ export const LogoBoldText = styled.span`
 
 export const FooterSection = styled.section`
   width: 100%;
-  height: 50%;
+  height: 45%;
   display: flex;
   flex-direction: column;
   justify-content: center;

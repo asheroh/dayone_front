@@ -46,7 +46,7 @@ export const DayRecordButtonLine = styled.section`
 
 export const HotCommentSection = styled.section`
   width: 100%;
-  height: 40%;
+  height: 65%;
   padding: 15px;
   margin-bottom: 30px;
 `;
@@ -90,7 +90,7 @@ export const HotCommentEmptyText = styled.p`
 `;
 
 export const HotCommentContainer = styled.div`
-  width: 300px;
+  width: 350px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -314,15 +314,18 @@ export const PostContainer = styled.div`
 
 export const PostHeader = styled.section`
   width: 100%;
-  height: 15%;
+  height: 25%;
   display: flex;
   justify-content: space-around;
   align-items: center;
+<<<<<<< HEAD
   position: relative;
   border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
+=======
+  padding: 15px 0;
+>>>>>>> 64c67cf312e57e93cdf12e164cf8eb5c1faa463e
   @media all and (max-width: 400px) {
     height: 20%;
-    padding: 10px;
   }
 `;
 
@@ -357,12 +360,16 @@ export const PostHandleButton = styled.button`
 
 export const PostBody = styled.section`
   width: 100%;
+<<<<<<< HEAD
   min-height: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;
+=======
+  min-height: 75%;
+>>>>>>> 64c67cf312e57e93cdf12e164cf8eb5c1faa463e
   @media all and (max-width: 400px) {
-    min-height: 80%;
+    min-height: 70%;
   }
 `;
 
