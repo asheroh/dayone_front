@@ -591,3 +591,53 @@ export const PostBookComment = styled.h3`
   font-size: 14px;
   line-height: 2;
 `;
+
+export const PostBookFooter = styled.div`
+  width: 700px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  bottom: 0;
+  transition: all 0.3s;
+  z-index: 1;
+  @media all and (max-width: 705px) {
+    width: 500px;
+  }
+  @media all and (max-width: 505px) {
+    width: 350px;
+  }
+  border-top: ${(props) => `1px solid ${props.theme.secondaryColor}`};
+`;
+
+export const FooterLeftBox = styled.section`
+  width: auto;
+`;
+
+export const NiceButton = styled.button`
+  width: 100px;
+  height: 50px;
+  background-color: transparent;
+  color: ${(props) =>
+    props.isSympathy === '1' ? '#73a8f1' : props.theme.secondaryColor};
+  border: none;
+  cursor: pointer;
+`;
+
+export const HeartButton = styled.button`
+  width: 100px;
+  height: 50px;
+  background-color: transparent;
+  color: ${(props) =>
+    props.isSympathy === '1' ? '#f1738c' : props.theme.secondaryColor};
+  border: none;
+  cursor: pointer;
+`;
+
+export const FooterRightBox = styled.section`
+  width: auto;
+  font-size: 20px;
+  cursor: pointer;
+`;

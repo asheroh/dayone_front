@@ -4,9 +4,14 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   CommentButton,
+  FooterLeftBox,
+  FooterRightBox,
+  HeartButton,
+  NiceButton,
   PostBody,
   PostBookComment,
   PostBookContentBox,
+  PostBookFooter,
   PostBookName,
   PostBookPassage,
   PostBookThumbnail,
@@ -18,6 +23,12 @@ import {
   PostDetailThumbnailLeft,
   PostDetailThumbnailRight,
 } from '../DayRecordStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faHeart,
+  faShareAlt,
+  faThumbsUp,
+} from '@fortawesome/free-solid-svg-icons';
 
 const PostViewer = () => {
   const [post, setPost] = useState({});
@@ -104,6 +115,24 @@ const PostViewer = () => {
         <br />
         <PostBookComment>{post.comment}</PostBookComment>
       </PostBookContentBox>
+      <PostBookFooter>
+        <FooterLeftBox>
+          <NiceButton
+            isSympathy={isSympathy}
+            onClick={() => {
+              onClickSympathyBtn();
+            }}
+          >
+            <FontAwesomeIcon icon={faThumbsUp} /> 멋져요
+          </NiceButton>
+          <HeartButton>
+            <FontAwesomeIcon icon={faHeart} /> 공감해요
+          </HeartButton>
+        </FooterLeftBox>
+        <FooterRightBox>
+          <FontAwesomeIcon icon={faShareAlt} />
+        </FooterRightBox>
+      </PostBookFooter>
       {/* {post ? (
         <div>
           <img

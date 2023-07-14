@@ -3,6 +3,7 @@ import { Body, Container } from '../components/HomeStyle';
 import Header from '../components/common/Header';
 import DayRecord from '../components/DayRecord/DayRecord';
 import DemoDay from '../components/Demoday/DemoDay';
+import MyPage from '../components/mypage/MyPage';
 
 const MainPage = () => {
   // Nav Pagination-------------------------------------
@@ -17,7 +18,7 @@ const MainPage = () => {
         ) : currentPage === 1 ? (
           <DemoDay />
         ) : currentPage === 2 ? (
-          '나의 기록 페이지'
+          <MyPage />
         ) : (
           ''
         )}
