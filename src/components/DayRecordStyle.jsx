@@ -368,7 +368,7 @@ export const PostBody = styled.section`
 
 export const PostFormBox = styled.form`
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -419,17 +419,35 @@ export const PostCommentInput = styled.textarea`
 
 export const PostBookSelectSection = styled.section`
   width: 90%;
-  height: 200px;
+  height: 250px;
   display: ${(props) =>
     props.bookname === '' || props.isSelected ? 'none' : 'flex'};
-  flex-direction: column;
-  gap: 20px;
+  position: absolute;
+  top: 60px;
   font-size: 14px;
   color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.bgColor};
   overflow-y: auto;
   padding: 15px;
   line-height: 1.5;
   z-index: 1;
+  border: ${(props) => `1px solid ${props.theme.textColor}`};
+`;
+
+export const BookSelectLeftBox = styled.section`
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const BookSelectRightBox = styled.section`
+  width: 30%;
+  height: 100%;
+  position: sticky;
+  top: 5px;
+  text-align: right;
 `;
 
 export const PostBookSelectBox = styled.section`
@@ -445,6 +463,8 @@ export const PostBookSelectBox = styled.section`
 export const PostImageSection = styled.section`
   width: 100%;
   height: 250px;
+  min-height: 250px;
+  max-height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -452,6 +472,11 @@ export const PostImageSection = styled.section`
 
 export const PostImage = styled.img`
   width: 150px;
+`;
+
+export const PostSmallImage = styled.img`
+  width: 100px;
+  height: auto;
 `;
 
 export const PostContentSection = styled.section`
