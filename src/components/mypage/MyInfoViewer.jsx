@@ -22,27 +22,13 @@ import { faPenClip } from '@fortawesome/free-solid-svg-icons';
 
 const MyInfoViewer = () => {
   const [info, setInfo] = useState(null);
+  const [currentDay, setCurrentDay] = useState(new Date().getDay());
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  const printWeek = (week) => {
-    // 요일을 표현하는 문자열 배열
-    const days = ['월', '화', '수', '목', '금', '토', '일'];
-
-    let result = '';
-
-    for (let i = 0; i < week.length; i++) {
-      // week 배열의 요소가 0이 아니면 'O', 아니면 'X'
-      const mark = week[i] !== 0 ? 'O' : 'X';
-      result += ` ${days[i]}:${mark} `;
-    }
-
-    return result.trim();
-  };
 
   const fetchData = async () => {
     const request = await authAPI
@@ -56,6 +42,7 @@ const MyInfoViewer = () => {
         navigate('/login');
       });
   };
+
   return info ? (
     <MypageHeaderSection>
       <MypageProfileBox>
@@ -85,36 +72,35 @@ const MyInfoViewer = () => {
           기록
         </RecordText>
         <RecordBox>
-          <RecordDaily>
+          <RecordDaily today={1 - currentDay}>
             월
-            <RecordCheckBox />
+            <RecordCheckBox check={info.week[0]} today={1 - currentDay} />
           </RecordDaily>
-          <RecordDaily>
+          <RecordDaily today={2 - currentDay}>
             화
-            <RecordCheckBox />
+            <RecordCheckBox check={info.week[1]} today={2 - currentDay} />
           </RecordDaily>
-          <RecordDaily>
+          <RecordDaily today={3 - currentDay}>
             수
-            <RecordCheckBox />
+            <RecordCheckBox check={info.week[2]} today={3 - currentDay} />
           </RecordDaily>
-          <RecordDaily>
+          <RecordDaily today={4 - currentDay}>
             목
-            <RecordCheckBox />
+            <RecordCheckBox check={info.week[3]} today={4 - currentDay} />
           </RecordDaily>
-          <RecordDaily>
+          <RecordDaily today={5 - currentDay}>
             금
-            <RecordCheckBox />
+            <RecordCheckBox check={info.week[4]} today={5 - currentDay} />
           </RecordDaily>
-          <RecordDaily>
+          <RecordDaily today={6 - currentDay}>
             토
-            <RecordCheckBox />
+            <RecordCheckBox check={info.week[5]} today={6 - currentDay} />
           </RecordDaily>
-          <RecordDaily>
+          <RecordDaily today={7 - currentDay}>
             일
-            <RecordCheckBox />
+            <RecordCheckBox check={info.week[6]} today={7 - currentDay} />
           </RecordDaily>
         </RecordBox>
-        {/* <div>{printWeek(info.week)}</div> */}
       </MypageRecordBox>
     </MypageHeaderSection>
   ) : (

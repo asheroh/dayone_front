@@ -126,12 +126,21 @@ export const RecordDaily = styled.section`
   justify-content: center;
   align-items: center;
   gap: 15px;
-  border: 1px solid yellow;
+  font-weight: ${(props) => (props.today === 0 ? '900' : '')};
+  color: ${(props) => (props.today === 0 ? props.theme.primaryColor : '')};
 `;
 
 export const RecordCheckBox = styled.section`
   width: 10px;
   height: 10px;
+  border: ${(props) =>
+    props.today >= 0 ? `1px dashed ${props.theme.primaryColor}` : ''};
   border-radius: 50%;
-  background-color: yellow;
+  background-color: ${(props) =>
+    props.check === '1' && props.today <= 0
+      ? props.theme.primaryColor
+      : props.check !== '1' && props.today < 0
+      ? props.theme.secondaryColor
+      : 'transparent'};
+  /* background-color: ${(props) => (props.today >= 0 ? 'transparent' : '')}; */
 `;

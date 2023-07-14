@@ -306,6 +306,7 @@ export const CommentContainer = styled.div`
 // 기록하기 페이지------------------------------------------------
 export const PostContainer = styled.div`
   width: 100vw;
+  max-width: 100%;
   height: 100vh;
   min-height: 100vh;
   display: flex;
@@ -361,6 +362,7 @@ export const PostBody = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   @media all and (max-width: 400px) {
     min-height: 70%;
   }
@@ -624,8 +626,10 @@ export const PostBookFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  position: fixed;
+  position: sticky;
   bottom: 0;
+  background-color: ${(props) => props.theme.bgColor};
+  box-shadow: 0px -20px 25px -4px rgba(0, 0, 0, 0.75);
   transition: all 0.3s;
   z-index: 1;
   @media all and (max-width: 705px) {
