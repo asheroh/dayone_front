@@ -318,12 +318,9 @@ export const PostHeader = styled.section`
   display: flex;
   justify-content: space-around;
   align-items: center;
-<<<<<<< HEAD
   position: relative;
   border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
-=======
   padding: 15px 0;
->>>>>>> 64c67cf312e57e93cdf12e164cf8eb5c1faa463e
   @media all and (max-width: 400px) {
     height: 20%;
   }
@@ -360,14 +357,10 @@ export const PostHandleButton = styled.button`
 
 export const PostBody = styled.section`
   width: 100%;
-<<<<<<< HEAD
-  min-height: 85%;
+  min-height: 75%;
   display: flex;
   flex-direction: column;
   align-items: center;
-=======
-  min-height: 75%;
->>>>>>> 64c67cf312e57e93cdf12e164cf8eb5c1faa463e
   @media all and (max-width: 400px) {
     min-height: 70%;
   }
@@ -515,6 +508,7 @@ export const PostDetailThumbnailBox = styled.div`
   padding-bottom: 10px;
   border-bottom: ${(props) => `1px dashed ${props.theme.textColor}`};
   margin-top: 30px;
+  transition: all 0.3s;
   @media all and (max-width: 705px) {
     width: 500px;
   }
@@ -557,4 +551,43 @@ export const PostDetailName = styled.h2`
 export const PostDetailDate = styled.h3`
   color: ${(props) => props.theme.secondaryColor};
   font-size: 12px;
+`;
+
+export const PostBookThumbnail = styled.img`
+  width: 200px;
+  height: auto;
+  transition: all 0.3s;
+  @media all and (max-width: 400px) {
+    width: 150px;
+  }
+`;
+
+export const PostBookName = styled.h1`
+  font-family: 'DMSansBold';
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 2;
+`;
+
+export const PostBookContentBox = styled.section`
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s;
+  @media all and (max-width: 705px) {
+    width: 500px;
+  }
+  @media all and (max-width: 505px) {
+    width: 350px;
+  }
+`;
+
+export const PostBookPassage = styled.h2`
+  font-size: 14px;
+  line-height: 2;
+`;
+
+export const PostBookComment = styled.h3`
+  font-size: 14px;
+  line-height: 2;
 `;

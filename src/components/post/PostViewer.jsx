@@ -3,7 +3,13 @@ import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
+  CommentButton,
   PostBody,
+  PostBookComment,
+  PostBookContentBox,
+  PostBookName,
+  PostBookPassage,
+  PostBookThumbnail,
   PostDetailDate,
   PostDetailName,
   PostDetailOwnerBox,
@@ -82,21 +88,24 @@ const PostViewer = () => {
         </PostDetailThumbnailLeft>
         <PostDetailThumbnailRight>{post.created_at}</PostDetailThumbnailRight>
       </PostDetailThumbnailBox>
-
+      <br />
+      <PostBookThumbnail
+        src={post.book_image}
+        alt="book_image"
+        loading="lazy"
+      />
+      <br />
+      <PostBookName>{post.bookname}</PostBookName>
+      <br /> <br /> <br />
+      <PostBookContentBox>
+        <PostBookPassage>{post.passage}</PostBookPassage>
+        <br /> <br />
+        <CommentButton>Comment</CommentButton>
+        <br />
+        <PostBookComment>{post.comment}</PostBookComment>
+      </PostBookContentBox>
       {/* {post ? (
         <div>
-          <div style={{ display: 'flex' }}>
-            <img
-              src={post.user_profile_img}
-              alt="user image_url"
-              className="profile_image"
-            ></img>
-            <span>
-              {post.username} / {post.count_day}일차 기록
-            </span>
-          </div>
-          <p>{post.created_at}</p>
-
           <img
             src={post.book_image}
             alt="book_image_url"
