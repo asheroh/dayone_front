@@ -14,7 +14,6 @@ export const MypageHeaderSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid brown;
 `;
 
 export const MypageBodySection = styled.div`
@@ -30,9 +29,8 @@ export const MypageProfileBox = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
   transition: all 0.3s;
-  border: 1px solid brown;
+  border-bottom: ${(props) => `1px dashed ${props.theme.textColor}`};
   @media all and (max-width: 705px) {
     width: 500px;
   }
@@ -47,7 +45,6 @@ export const ProfileLeftBox = styled.section`
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid brown;
 `;
 
 export const ProfileMiddleBox = styled.section`
@@ -82,7 +79,6 @@ export const ProfileRightBox = styled.section`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border: 1px solid brown;
 `;
 
 export const MypageRecordBox = styled.section`
@@ -92,7 +88,7 @@ export const MypageRecordBox = styled.section`
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s;
-  border: 1px solid brown;
+
   @media all and (max-width: 705px) {
     width: 500px;
   }
@@ -102,7 +98,6 @@ export const MypageRecordBox = styled.section`
 `;
 
 export const RecordText = styled.span`
-  width: 20%;
   text-align: center;
   font-family: 'DMSansBold';
   font-weight: 900;
