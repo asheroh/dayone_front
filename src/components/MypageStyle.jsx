@@ -7,6 +7,7 @@ export const MypageContainer = styled.div`
   flex-direction: column;
 `;
 
+// Mypage Header Section----------------------------------------
 export const MypageHeaderSection = styled.div`
   width: 100%;
   height: 30%;
@@ -14,13 +15,6 @@ export const MypageHeaderSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const MypageBodySection = styled.div`
-  width: 100%;
-  height: 70%;
-  min-height: 70%;
-  border: 1px solid brown;
 `;
 
 export const MypageProfileBox = styled.section`
@@ -88,7 +82,7 @@ export const MypageRecordBox = styled.section`
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s;
-
+  border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
   @media all and (max-width: 705px) {
     width: 500px;
   }
@@ -137,5 +131,98 @@ export const RecordCheckBox = styled.section`
       : props.check !== '1' && props.today < 0
       ? props.theme.secondaryColor
       : 'transparent'};
-  /* background-color: ${(props) => (props.today >= 0 ? 'transparent' : '')}; */
+`;
+
+// Mypage Body Section----------------------------------------
+export const MypageBodySection = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+export const MypageBox = styled.section`
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0;
+  @media all and (max-width: 705px) {
+    width: 500px;
+  }
+  @media all and (max-width: 505px) {
+    width: 350px;
+  }
+`;
+
+export const MypageRecordText = styled.h2`
+  width: 100%;
+  font-family: 'DMSansBold';
+  font-weight: 900;
+  font-size: 14px;
+  color: ${(props) => props.theme.textColor};
+`;
+
+export const MypageGridBox = styled.section`
+  width: 100%;
+  height: auto;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(auto-fit, 1fr);
+  transition: all 0.3s;
+  @media all and (max-width: 705px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media all and (max-width: 505px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+export const MypageBookImage = styled.img`
+  width: 150px;
+  height: auto;
+  transition: all 0.3s;
+`;
+
+// Mypage Post detail------------------------------------------
+export const PostDetailContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const PostDetailHeader = styled.section`
+  width: 100%;
+  height: 120px;
+  position: relative;
+  border-bottom: ${(props) => `1px solid ${props.theme.secondaryColor}`};
+`;
+
+export const PostDetailBody = styled.section`
+  width: 100%;
+  height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 15px;
+`;
+
+export const PostDetailBox = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+  border-bottom: ${(props) => `1px solid ${props.theme.secondaryColor}`};
+  &:hover {
+    box-shadow: 0px 0px 10px 4px rgba(78, 78, 78, 0.5);
+  }
+`;
+
+export const PostDetailPubDate = styled.h3`
+  font-family: 'DMSansBold';
+  font-weight: 900;
+  font-size: 14px;
+  color: ${(props) => props.theme.textColor};
 `;

@@ -104,6 +104,10 @@ const PostViewer = () => {
         src={post.book_image}
         alt="book_image"
         loading="lazy"
+        style={{
+          objectFit: 'cover',
+          aspectRatio: '11/16',
+        }}
       />
       <br />
       <PostBookName>{post.bookname}</PostBookName>

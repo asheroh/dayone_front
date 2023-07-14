@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authAPI from '../../lib/api/auth';
-import { MypageBodySection } from '../MypageStyle';
+import {
+  MypageBodySection,
+  MypageBookImage,
+  MypageBox,
+  MypageGridBox,
+  MypageRecordText,
+} from '../MypageStyle';
 
 const MyBookcase = () => {
   const [myBooks, setMyBooks] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
-
-  const handleClick = () => {};
 
   useEffect(() => {
     fetchData();
@@ -29,45 +33,39 @@ const MyBookcase = () => {
         navigate('/login');
       });
   };
+
   return (
     <MypageBodySection>
-      {/* 내 책장과 기록
-      <br />
-      {myBooks.map((mybookItem) => {
-        return (
-          <div key={mybookItem.id} onClick={() => handleClick(mybookItem)}>
-            <MyBookItem mybookItem={mybookItem} />
-          </div>
-        );
-      })} */}
+      <MypageBox>
+        <br />
+        <MypageRecordText>내 책장과 기록</MypageRecordText>
+        <br />
+        <MypageGridBox>
+          {myBooks.map((mybookItem) => {
+            return (
+              <Link
+                key={mybookItem.id}
+                to={`/mypage/mybooks/${mybookItem.id}/records`}
+                state={{
+                  title: mybookItem.title,
+                  thumbnailImage: mybookItem.thumbnail_image,
+                }}
+              >
+                <MypageBookImage
+                  src={mybookItem.thumbnail_image}
+                  alt="thumbnail_image"
+                  style={{
+                    objectFit: 'cover',
+                    aspectRatio: '11/16',
+                  }}
+                />
+              </Link>
+            );
+          })}
+        </MypageGridBox>
+      </MypageBox>
     </MypageBodySection>
   );
 };
 
 export default MyBookcase;
-
-const MyBookItem = ({ mybookItem }) => {
-  return (
-    <></>
-    // <Link
-    //   to={`/mypage/mybooks/${mybookItem.id}/records`}
-    //   state={{
-    //     title: mybookItem.title,
-    //     thumbnailImage: mybookItem.thumbnail_image,
-    //   }}
-    // >
-    //   <img
-    //     src={mybookItem.thumbnail_image}
-    //     alt="thumbnail_image"
-    //     className="thumbnail_image"
-    //     style={{
-    //       width: '200px',
-    //       height: 'auto',
-    //       objectFit: 'cover',
-    //       aspectRatio: '11/16',
-    //     }}
-    //   ></img>
-    //   <br />
-    // </Link>
-  );
-};

@@ -51,6 +51,9 @@ const MyInfoViewer = () => {
             src={info.user_profile_img}
             alt="profile_image"
             loading="lazy"
+            style={{
+              objectFit: 'cover',
+            }}
           />
           <ProfileMiddleBox>
             <ProfileName>{info.username}</ProfileName>
