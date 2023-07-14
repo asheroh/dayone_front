@@ -133,36 +133,6 @@ const PostViewer = () => {
           <FontAwesomeIcon icon={faShareAlt} />
         </FooterRightBox>
       </PostBookFooter>
-      {/* {post ? (
-        <div>
-          <img
-            src={post.book_image}
-            alt="book_image_url"
-            className="book_image"
-            style={{
-              width: '200px',
-              height: 'auto',
-              objectFit: 'cover',
-              aspectRatio: '11/16',
-            }}
-          ></img>
-          <p>bookname: {post.bookname}</p>
-          <br />
-          <p>passage: {post.passage}</p>
-          <br />
-          <p>comment: {post.comment}</p>
-          <br />
-          <button
-            onClick={() => {
-              onClickSympathyBtn();
-            }}
-          >
-            {isSympathy === '1' ? '❤️공감해요' : '🖤공감해요'}
-          </button>
-        </div>
-      ) : (
-        <div>fsd</div>
-      )} */}
     </PostBody>
   );
 };

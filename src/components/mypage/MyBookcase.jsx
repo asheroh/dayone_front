@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authAPI from '../../lib/api/auth';
+import { MypageBodySection } from '../MypageStyle';
 
 const MyBookcase = () => {
   const [myBooks, setMyBooks] = useState([]);
@@ -12,7 +13,7 @@ const MyBookcase = () => {
 
   useEffect(() => {
     fetchData();
-    console.log('fklsjdaf', cookies.access_token);
+    // console.log('access token', cookies.access_token);
   }, []);
 
   const fetchData = async () => {
@@ -20,7 +21,7 @@ const MyBookcase = () => {
       .bookcase(cookies.access_token)
       .then((r) => {
         setMyBooks(r.data.data);
-        console.log(r.data.data);
+        // console.log(r.data.data);
       })
       .catch((error) => {
         alert('토큰이 만료되었습니다.');
@@ -29,8 +30,8 @@ const MyBookcase = () => {
       });
   };
   return (
-    <div>
-      내 책장과 기록
+    <MypageBodySection>
+      {/* 내 책장과 기록
       <br />
       {myBooks.map((mybookItem) => {
         return (
@@ -38,8 +39,8 @@ const MyBookcase = () => {
             <MyBookItem mybookItem={mybookItem} />
           </div>
         );
-      })}
-    </div>
+      })} */}
+    </MypageBodySection>
   );
 };
 
@@ -47,25 +48,26 @@ export default MyBookcase;
 
 const MyBookItem = ({ mybookItem }) => {
   return (
-    <Link
-      to={`/mypage/mybooks/${mybookItem.id}/records`}
-      state={{
-        title: mybookItem.title,
-        thumbnailImage: mybookItem.thumbnail_image,
-      }}
-    >
-      <img
-        src={mybookItem.thumbnail_image}
-        alt="thumbnail_image"
-        className="thumbnail_image"
-        style={{
-          width: '200px',
-          height: 'auto',
-          objectFit: 'cover',
-          aspectRatio: '11/16',
-        }}
-      ></img>
-      <br />
-    </Link>
+    <></>
+    // <Link
+    //   to={`/mypage/mybooks/${mybookItem.id}/records`}
+    //   state={{
+    //     title: mybookItem.title,
+    //     thumbnailImage: mybookItem.thumbnail_image,
+    //   }}
+    // >
+    //   <img
+    //     src={mybookItem.thumbnail_image}
+    //     alt="thumbnail_image"
+    //     className="thumbnail_image"
+    //     style={{
+    //       width: '200px',
+    //       height: 'auto',
+    //       objectFit: 'cover',
+    //       aspectRatio: '11/16',
+    //     }}
+    //   ></img>
+    //   <br />
+    // </Link>
   );
 };

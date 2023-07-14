@@ -8,9 +8,6 @@ const MyPage = () => {
     <>
       <MypageContainer>
         <MyInfoViewer />
-        <br />
-        <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
-        <br />
         <MyBookcase />
       </MypageContainer>
     </>
