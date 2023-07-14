@@ -2,6 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import * as authAPI from '../../lib/api/auth';
+import {
+  CommentButton,
+  PostBookComment,
+  PostBookContentBox,
+  PostBookPassage,
+} from '../DayRecordStyle';
+import {
+  MypageRecordText,
+  PostDetailBox,
+  PostDetailPubDate,
+} from '../MypageStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const MyBookPostList = () => {
   const params = useParams();
@@ -26,29 +39,7 @@ const MyBookPostList = () => {
         navigate('/login');
       });
   };
-  return (
-    <div>
-      <br />
-      <h1>덧붙임 모음</h1>
-      <br />
-      {posts.map((post) => {
-        return (
-          <Link
-            to={`/posts/${post.post_id}`}
-            state={{ post: post }}
-            key={post.post_id}
-          >
-            <PostItem post={post} />
-          </Link>
-        );
-      })}
-    </div>
-  );
-};
 
-export default MyBookPostList;
-
-const PostItem = ({ post }) => {
   const formatDate = (isoDateString) => {
     const date = new Date(isoDateString);
 
@@ -58,14 +49,46 @@ const PostItem = ({ post }) => {
 
     return `${year}년 ${month}월 ${day}일 기록`;
   };
+
   return (
-    <div>
-      <h3>{formatDate(post.created_at)}</h3>
-      <br />
-      <p>passage: {post.passage}</p>
-      <p>comment: {post.comment}</p>
-      <br />
-      <br />
-    </div>
+    <>
+      <MypageRecordText>
+        덧붙임 모음 <FontAwesomeIcon icon={faChevronDown} />
+      </MypageRecordText>
+
+      {posts.map((post) => {
+        return (
+          <Link
+            to={`/posts/${post.post_id}`}
+            state={{ post: post }}
+            key={post.post_id}
+          >
+            <PostDetailBox>
+              <PostDetailPubDate>
+                {formatDate(post.created_at)}
+              </PostDetailPubDate>
+              <PostBookContentBox>
+                <PostBookPassage>
+                  {post.passage.length > 100
+                    ? post.passage.slice(0, 100) + ' ...'
+                    : post.passage}
+                </PostBookPassage>
+                <br />
+                <CommentButton isCool={true}>Comment</CommentButton>
+                <br />
+                <PostBookComment>
+                  {post.comment.length > 100
+                    ? post.comment.slice(0, 100) + ' ...'
+                    : post.comment}
+                </PostBookComment>
+                <br />
+              </PostBookContentBox>
+            </PostDetailBox>
+          </Link>
+        );
+      })}
+    </>
   );
 };
+
+export default MyBookPostList;

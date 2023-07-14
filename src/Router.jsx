@@ -19,7 +19,6 @@ import DemodayPage from './pages/DemodayPage';
 import CreateDemodayPage from './pages/CreateDemodayPage';
 import DemodayListPage from './pages/DemodayListPage';
 import NotFoundPage from './pages/NotFoundPage';
-import MyPage from './pages/MyPage';
 import PostPage from './pages/PostPage';
 
 const ProtectedRoute = ({ redirectPath = '/login', currentPath, children }) => {
@@ -82,14 +81,14 @@ const Router = () => {
               </ProtectedRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/mypage"
             element={
               <ProtectedRoute currentPath="/mypage">
                 <MyPage />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/mypage/mybooks/:bookId/records"
             element={
