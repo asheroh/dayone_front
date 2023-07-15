@@ -4,16 +4,10 @@ export const DemodayContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   position: relative;
-`;
-
-export const DemodayBox = styled.section`
-  width: 100%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   line-height: 2;
   border: 1px solid yellow;
 `;
@@ -34,9 +28,8 @@ export const DemodaySubText = styled.h2`
 
 export const DemoTrailerBox = styled.div`
   width: 700px;
-  height: 300px;
+  height: 500px;
   display: flex;
-  justify-content: space-around;
   align-items: center;
   flex-wrap: nowrap;
   gap: 15px;
@@ -45,9 +38,11 @@ export const DemoTrailerBox = styled.div`
   border: 1px solid yellow;
   @media all and (max-width: 705px) {
     width: 500px;
+    height: 400px;
   }
   @media all and (max-width: 505px) {
     width: 350px;
+    height: 300px;
   }
 `;
 
@@ -86,6 +81,9 @@ export const DemoTrailerThumbnail = styled.img`
   height: 55%;
   border: none;
   border-radius: 15px 15px 0 0;
+  object-fit: cover;
+  object-position: center;
+  filter: ${(props) => (props.isFull ? 'brightness(50%)' : 'none')};
 `;
 
 export const DemoTrailerBody = styled.section`

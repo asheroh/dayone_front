@@ -7,7 +7,6 @@ import {
   DemoTrailerBox,
   DemoTrailerItem,
   DemoTrailerThumbnail,
-  DemodayBox,
   DemodayHeadText,
   DemodaySubText,
   ShadowScreen,
@@ -38,7 +37,7 @@ const DemodayList = () => {
   };
 
   return (
-    <DemodayBox>
+    <>
       <DemodayHeadText>데이원 모임 번개 DAY</DemodayHeadText>
       <DemodaySubText>서로에 대해 더 알아가며 함께 성장하자!</DemodaySubText>
       <DemoTrailerBox>
@@ -54,7 +53,7 @@ const DemodayList = () => {
           );
         })}
       </DemoTrailerBox>
-    </DemodayBox>
+    </>
   );
 };
 
@@ -84,11 +83,7 @@ const DemodayItem = ({ demoday }) => {
         src={demoday.demoday_image_url}
         alt="demoday_image_url"
         className="profile_image"
-        style={{
-          objectFit: 'cover',
-          aspectRatio: '16/9',
-          filter: isFull ? 'brightness(50%)' : 'none',
-        }}
+        isFull={isFull}
       />
       {isFull && <ShadowScreen>마감</ShadowScreen>}
       <DemoTrailerBody>
