@@ -90,39 +90,6 @@ const DemodayItem = ({ demoday }) => {
         <TrailerPubDate>{formatDate(demoday.event_date)}</TrailerPubDate>
         <TrailerTitle>{demoday.title}</TrailerTitle>
       </DemoTrailerBody>
-      {/* <div style={{ position: 'relative', width: '200px', height: 'auto' }}>
-        <img
-          src={demoday.demoday_image_url}
-          alt="demoday_image_url"
-          className="profile_image"
-          style={{
-            width: '200px',
-            height: 'auto',
-            objectFit: 'cover',
-            aspectRatio: '16/9',
-            filter: isFull ? 'brightness(50%)' : 'none', // 밝기를 낮추기 위한 조건부 스타일링
-          }}
-        />
-        {isFull && (
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              color: 'white',
-              fontSize: '20px',
-              fontWeight: 'bold',
-            }}
-          >
-            마감
-          </div>
-        )}
-      </div>
-    
-      <h3>데모명: {demoday.title}</h3>
-      <p>일시: {formatDate(demoday.event_date)}</p>
-       */}
     </DemoTrailerItem>
   );
 };
