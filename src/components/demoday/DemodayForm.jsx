@@ -6,6 +6,18 @@ import DatePicker from 'react-datepicker';
 import { format } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import FormHeader from '../common/FormHeader';
+import { PostBody, PostContainer } from '../DayRecordStyle';
+import {
+  CreateBoxInput,
+  CreateDemoBox,
+  CreateDemoForm,
+  CreateHeadText,
+  CreateImageInput,
+  CreateImageLabel,
+  CreateSubText,
+  CreateThumbnail,
+  CreateTitleInput,
+} from '../DemodayStyle';
 
 // {
 //     title: 한강에서 낚시하실 분 ,
@@ -25,7 +37,7 @@ const DemodayForm = () => {
   );
   const [description, setDescription] = useState('');
   const [demoDate, setDemoDate] = useState(null);
-  const [demoTime, setDemoTime] = useState('13:00');
+  const [demoTime, setDemoTime] = useState('19:00');
   const [totalCapacity, setTotalCapacity] = useState(2);
   const [location, setLocation] = useState('');
 
@@ -59,14 +71,12 @@ const DemodayForm = () => {
     await authAPI
       .addDemodayImage(cookies.access_token, formData)
       .then((r) => {
-        console.log('image response:', r);
-
-        console.log('image response url:', r.data.data);
+        // console.log('image response:', r);
+        // console.log('image response url:', r.data.data);
         setDemodayImageUrl(r.data.data);
       })
       .catch((error) => {
-        console.log('image response:');
-
+        // console.log('image response:');
         console.error(error);
       });
   };
@@ -90,9 +100,9 @@ const DemodayForm = () => {
 
     await authAPI
       .addDemoday(cookies.access_token, jsonData)
-      .then((r) => {
-        console.log('데모데이 추가');
-        navigate('/demoday');
+      .then((res) => {
+        console.log(res);
+        navigate('/');
       })
       .catch((error) => {
         console.error(error);
@@ -100,93 +110,83 @@ const DemodayForm = () => {
   };
 
   return (
-    <div>
-      <FormHeader headerTitle={'데모 생성'} clickMethod={handleSubmit} />
-      <br /> <br /> <br /> <br /> <br />
-      <form>
-        <input
-          type="text"
-          placeholder="데모 제목"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-
-        <div>
-          <label htmlFor="fileInput">
-            <img
+    <PostContainer>
+      <FormHeader clickMethod={handleSubmit} />
+      <PostBody>
+        <CreateDemoForm>
+          <CreateTitleInput
+            type="text"
+            placeholder="데모 제목"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <CreateImageLabel htmlFor="fileInput">
+            <CreateThumbnail
               src={previewUrl}
-              style={{ width: '400px', height: '221' }}
-              alt="파일 선택"
-              //   style={{ cursor: 'pointer' }}
-              //   onClick={handleSelectFile}
+              alt="select_thumbnail"
+              loading="lazy"
             />
-          </label>
-          <input
+          </CreateImageLabel>
+          <CreateImageInput
             id="fileInput"
             type="file"
             ref={fileInputRef}
-            style={{ display: 'none' }}
             onChange={handleFileChange}
           />
-          {/* <button onClick={handleUpload}>업로드</button> */}
-        </div>
-        <br />
-        <h3>원하는 장소</h3>
-        <h4>예) 한강 노들섬, 을지로 만선호프 등</h4>
-        <input
-          type="text"
-          placeholder="내 답변"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-        <br />
-        <h3>설명 (뭐할건지)</h3>
-        <h4>
-          예) 노들섬에서 돗자리 펴고 누워서 책 읽기, 만선호프에서 비전에 대한
-          이야기 하기
-        </h4>
-        <input
-          type="text"
-          placeholder="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <br />
-        <h3>모임 날짜</h3>
-        <h4>언제까지 모일까요? 예) "2023-05-24"</h4>
-        {/* <input
-          type="text"
-          placeholder="년도, 월, 일"
-          value={demoDate}
-          onChange={(e) => setDemoDate(e.target.value)}
-        /> */}
-        <div>
-          <DatePicker
-            selected={demoDate}
-            onChange={handleDateChange}
-            dateFormat="yyyy-MM-dd"
-          />
-        </div>
-        <br />
-        <h3>모임 시간 </h3>
-        <h4>예) 오후 1시일 경우 "13:00"</h4>
-        <input
-          type="text"
-          placeholder="demo_time"
-          value={demoTime}
-          onChange={(e) => setDemoTime(e.target.value)}
-        />
-        <br />
-        <h3>원하는 인원</h3>
-        <h4>본인 포함 인원 : 예) 5명</h4>
-        <input
-          type="text"
-          placeholder="total_capacity"
-          value={totalCapacity}
-          onChange={(e) => setTotalCapacity(e.target.value)}
-        />
-      </form>
-    </div>
+          <CreateDemoBox>
+            <CreateHeadText>원하는 장소</CreateHeadText>
+            <CreateSubText>예) 한강 노들섬, 을지로 만선호프 등</CreateSubText>
+            <CreateBoxInput
+              type="text"
+              placeholder="내 답변"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
+          </CreateDemoBox>
+          <CreateDemoBox>
+            <CreateHeadText>설명 (뭐할건지)</CreateHeadText>
+            <CreateSubText>
+              예) 노들섬에서 돗자리 펴고 누워서 책 읽기, 만선호프에서 비전에
+              대한 이야기 하기
+            </CreateSubText>
+            <CreateBoxInput
+              type="text"
+              placeholder="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </CreateDemoBox>
+          <CreateDemoBox>
+            <CreateHeadText>모임 날짜</CreateHeadText>
+            <CreateSubText>언제까지 모일까요?</CreateSubText>
+            <DatePicker
+              selected={demoDate}
+              onChange={handleDateChange}
+              dateFormat="yyyy-MM-dd"
+            />
+          </CreateDemoBox>
+          <CreateDemoBox>
+            <CreateHeadText>모임 시간</CreateHeadText>
+            <CreateBoxInput
+              type="text"
+              placeholder="demo_time"
+              value={demoTime}
+              onChange={(e) => setDemoTime(e.target.value)}
+            />
+          </CreateDemoBox>
+          <CreateDemoBox>
+            <CreateHeadText>원하는 인원</CreateHeadText>
+            <CreateSubText>본인 포함 인원 : 예) 5명</CreateSubText>
+            <CreateBoxInput
+              type="text"
+              placeholder="total_capacity"
+              value={totalCapacity}
+              onChange={(e) => setTotalCapacity(e.target.value)}
+            />
+          </CreateDemoBox>
+        </CreateDemoForm>
+      </PostBody>
+    </PostContainer>
   );
 };
 

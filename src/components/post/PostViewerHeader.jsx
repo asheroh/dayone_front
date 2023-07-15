@@ -20,20 +20,24 @@ const PostViewerHeader = ({ post }) => {
   // console.log('header user:', user);
 
   const onClickDeleteBtn = async () => {
-    const request = await authAPI
-      .deletePost(cookies.access_token, params['postId'])
-      .then((r) => {
-        console.log('deletePost return data:', r.data);
-        if (r.status >= 200 && r.status < 300) {
-          alert('기록을 삭제했습니다!');
-          navigate(-1);
-        }
-      })
-      .catch((error) => {
-        alert('토큰이 만료되었습니다.');
-        localStorage.removeItem('user');
-        navigate('/login');
-      });
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      const request = await authAPI
+        .deletePost(cookies.access_token, params['postId'])
+        .then((r) => {
+          console.log('deletePost return data:', r.data);
+          if (r.status >= 200 && r.status < 300) {
+            alert('기록을 삭제했습니다!');
+            navigate(-1);
+          }
+        })
+        .catch((error) => {
+          alert('토큰이 만료되었습니다.');
+          localStorage.removeItem('user');
+          navigate('/login');
+        });
+    } else {
+      return;
+    }
   };
 
   return (

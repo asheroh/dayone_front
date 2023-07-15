@@ -126,9 +126,9 @@ export const RecordCheckBox = styled.section`
     props.today >= 0 ? `1px dashed ${props.theme.primaryColor}` : ''};
   border-radius: 50%;
   background-color: ${(props) =>
-    props.check === '1' && props.today <= 0
+    props.check !== 0 && props.today <= 0
       ? props.theme.primaryColor
-      : props.check !== '1' && props.today < 0
+      : props.check === 0 && props.today < 0
       ? props.theme.secondaryColor
       : 'transparent'};
 `;

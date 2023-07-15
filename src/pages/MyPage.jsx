@@ -1,7 +1,7 @@
 import React from 'react';
-import MyBookcase from './MyBookcase';
-import MyInfoViewer from './MyInfoViewer';
-import { MypageContainer } from '../MypageStyle';
+import MyBookcase from '../components/mypage/MyBookcase';
+import MyInfoViewer from '../components/mypage/MyInfoViewer';
+import { MypageContainer } from '../components/MypageStyle';
 
 const MyPage = () => {
   return (

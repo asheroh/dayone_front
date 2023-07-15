@@ -1,22 +1,17 @@
-import React from 'react';
 import { useLocation } from 'react-router-dom';
 import DemodayHeader from '../components/Demoday/DemodayHeader';
 import DemodayViewer from '../components/Demoday/DemodayViewer';
+import { PostDetailContainer } from '../components/MypageStyle';
 
-const DemodayPage = () => {
+const DemoDayPage = () => {
   const location = useLocation();
-  const demoday = location.state.demoday;
-
-  console.log('demoday:', demoday);
-
-  console.log('username:', demoday.username);
+  const demoday = location.state?.demoday;
   return (
-    <>
+    <PostDetailContainer>
       <DemodayHeader demoday={demoday} />
-      <br /> <br /> <br /> <br /> <br />
       <DemodayViewer />
-    </>
+    </PostDetailContainer>
   );
 };
 
-export default DemodayPage;
+export default DemoDayPage;

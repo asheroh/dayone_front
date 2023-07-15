@@ -1,19 +1,26 @@
 import React from 'react';
 import DemodayList from '../components/Demoday/DemodayList';
-import { Link } from 'react-router-dom';
-import Header from '../components/common/Header';
+import { useNavigate } from 'react-router-dom';
+import { DemodayContainer } from '../components/DemodayStyle';
+import {
+  DayRecordButton,
+  DayRecordButtonLine,
+} from '../components/DayRecordStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 const DemodayListPage = () => {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <Header />
-      <br /> <br /> <br /> <br /> <br /> <br />
+    <DemodayContainer>
       <DemodayList />
-      <br />
-      <Link to="/demodayform">
-        <button>+ 데모 만들기</button>
-      </Link>
-    </>
+      <DayRecordButton onClick={() => navigate('/demodayform')}>
+        <FontAwesomeIcon icon={faPlusCircle} />
+        데모 만들기
+      </DayRecordButton>
+      <DayRecordButtonLine />
+    </DemodayContainer>
   );
 };
 

@@ -42,19 +42,25 @@ const Header = ({ currentPage, setCurrentPage }) => {
       <HeaderNavSection>
         <Navsection0
           currentPage={currentPage}
-          onClick={() => setCurrentPage(0)}
+          onClick={() => {
+            setCurrentPage(0);
+          }}
         >
           데이기록
         </Navsection0>
         <Navsection1
           currentPage={currentPage}
-          onClick={() => setCurrentPage(1)}
+          onClick={() => {
+            setCurrentPage(1);
+          }}
         >
           데모데이
         </Navsection1>
         <Navsection2
           currentPage={currentPage}
-          onClick={() => setCurrentPage(2)}
+          onClick={() => {
+            setCurrentPage(2);
+          }}
         >
           나의기록
         </Navsection2>

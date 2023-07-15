@@ -3,9 +3,9 @@ import DemodayForm from '../components/Demoday/DemodayForm';
 
 const CreateDemodayPage = () => {
   return (
-    <div>
+    <>
       <DemodayForm />
-    </div>
+    </>
   );
 };
 
