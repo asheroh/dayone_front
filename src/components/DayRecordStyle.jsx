@@ -315,16 +315,13 @@ export const PostContainer = styled.div`
 
 export const PostHeader = styled.section`
   width: 100%;
-  height: 25%;
+  height: 120px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: relative;
   border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
   padding: 15px 0;
-  @media all and (max-width: 400px) {
-    height: 20%;
-  }
 `;
 
 export const PostLogoBox = styled.section`
@@ -358,14 +355,10 @@ export const PostHandleButton = styled.button`
 
 export const PostBody = styled.section`
   width: 100%;
-  min-height: 75%;
+  min-height: calc(100% - 120px);
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media all and (max-width: 400px) {
-    min-height: 70%;
-  }
 `;
 
 export const PostFormBox = styled.form`
