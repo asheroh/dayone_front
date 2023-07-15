@@ -90,9 +90,9 @@ const DemodayForm = () => {
 
     await authAPI
       .addDemoday(cookies.access_token, jsonData)
-      .then((r) => {
-        console.log('데모데이 추가');
-        navigate('/demoday');
+      .then((res) => {
+        console.log(res);
+        navigate('/');
       })
       .catch((error) => {
         console.error(error);
@@ -169,7 +169,7 @@ const DemodayForm = () => {
         </div>
         <br />
         <h3>모임 시간 </h3>
-        <h4>예) 오후 1시일 경우 "13:00"</h4>
+        <h4>예 오후 1시일 경우 "13:00"</h4>
         <input
           type="text"
           placeholder="demo_time"

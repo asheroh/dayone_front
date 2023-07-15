@@ -2,6 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import * as authAPI from '../../lib/api/auth';
 import { useNavigate, Link } from 'react-router-dom';
+import {
+  DemoTrailerBody,
+  DemoTrailerBox,
+  DemoTrailerItem,
+  DemoTrailerThumbnail,
+  DemodayBox,
+  DemodayHeadText,
+  DemodaySubText,
+  ShadowScreen,
+  TrailerPubDate,
+  TrailerTitle,
+} from '../DemodayStyle';
 
 const DemodayList = () => {
   const navigate = useNavigate();
@@ -24,24 +36,25 @@ const DemodayList = () => {
         navigate('/login');
       });
   };
+
   return (
-    <div>
-      <h1>데이원 모임 번개 DAY</h1>
-      <br />
-      <h2>서로에 대해 더 알아가며 함께 성장하자!</h2>
-      <br />
-      {demodays.map((demoday) => {
-        return (
-          <Link
-            to={`/demoday/${demoday.demoday_id}`}
-            key={demoday.demoday_id}
-            state={{ demoday: demoday }}
-          >
-            <DemodayItem demoday={demoday} />
-          </Link>
-        );
-      })}
-    </div>
+    <DemodayBox>
+      <DemodayHeadText>데이원 모임 번개 DAY</DemodayHeadText>
+      <DemodaySubText>서로에 대해 더 알아가며 함께 성장하자!</DemodaySubText>
+      <DemoTrailerBox>
+        {demodays.map((demoday) => {
+          return (
+            <Link
+              to={`/demoday/${demoday.demoday_id}`}
+              key={demoday.demoday_id}
+              state={{ demoday: demoday }}
+            >
+              <DemodayItem demoday={demoday} />
+            </Link>
+          );
+        })}
+      </DemoTrailerBox>
+    </DemodayBox>
   );
 };
 
@@ -66,14 +79,29 @@ const DemodayItem = ({ demoday }) => {
     return `${formattedDate} (${weekDay})`;
   };
   return (
-    <div>
-      <div style={{ position: 'relative', width: '200px', height: 'auto' }}>
+    <DemoTrailerItem>
+      <DemoTrailerThumbnail
+        src={demoday.demoday_image_url}
+        alt="demoday_image_url"
+        className="profile_image"
+        style={{
+          objectFit: 'cover',
+          aspectRatio: '16/9',
+          filter: isFull ? 'brightness(50%)' : 'none',
+        }}
+      />
+      {isFull && <ShadowScreen>마감</ShadowScreen>}
+      <DemoTrailerBody>
+        <TrailerPubDate>{formatDate(demoday.event_date)}</TrailerPubDate>
+        <TrailerTitle>{demoday.title}</TrailerTitle>
+      </DemoTrailerBody>
+      {/* <div style={{ position: 'relative', width: '200px', height: 'auto' }}>
         <img
           src={demoday.demoday_image_url}
           alt="demoday_image_url"
           className="profile_image"
           style={{
-            width: '300px',
+            width: '200px',
             height: 'auto',
             objectFit: 'cover',
             aspectRatio: '16/9',
@@ -96,20 +124,10 @@ const DemodayItem = ({ demoday }) => {
           </div>
         )}
       </div>
-      {/* <img
-        src={demodayItem.demoday_image_url}
-        alt="demoday_image_url"
-        className="profile_image"
-        style={{
-          width: '200px',
-          height: 'auto',
-          objectFit: 'cover',
-          aspectRatio: '16/9',
-        }}
-      ></img> */}
+    
       <h3>데모명: {demoday.title}</h3>
       <p>일시: {formatDate(demoday.event_date)}</p>
-      <br />
-    </div>
+       */}
+    </DemoTrailerItem>
   );
 };
