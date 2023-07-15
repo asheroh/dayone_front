@@ -260,3 +260,94 @@ export const DemoSignUpButton = styled.button`
   padding: 10px;
   cursor: pointer;
 `;
+
+// Demoday Create page------------------------------------------
+export const CreateDemoForm = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+`;
+
+export const CreateTitleInput = styled.input`
+  width: 700px;
+  height: 50px;
+  border: none;
+  border-bottom: ${(props) => `1px dashed ${props.theme.textColor}`};
+  color: ${(props) => props.theme.textColor};
+  background-color: transparent;
+  transition: all 0.3s;
+  @media all and (max-width: 705px) {
+    width: 500px;
+  }
+  @media all and (max-width: 505px) {
+    width: 350px;
+  }
+`;
+
+export const CreateImageLabel = styled.label`
+  width: 700px;
+  transition: all 0.3s;
+  @media all and (max-width: 705px) {
+    width: 500px;
+  }
+  @media all and (max-width: 505px) {
+    width: 350px;
+  }
+`;
+
+export const CreateImageInput = styled.input`
+  display: none;
+`;
+
+export const CreateThumbnail = styled.img`
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
+export const CreateDemoBox = styled.section`
+  width: 700px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.bgColor};
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s;
+  padding: 30px;
+  @media all and (max-width: 705px) {
+    width: 500px;
+    height: 150px;
+    gap: 15px;
+    padding: 15px;
+  }
+  @media all and (max-width: 505px) {
+    width: 350px;
+    height: 120px;
+    gap: 10px;
+    padding: 12px;
+  }
+`;
+
+export const CreateHeadText = styled.h2`
+  font-family: 'DMSansBold';
+  font-size: 14px;
+  font-weight: 900;
+`;
+
+export const CreateSubText = styled.h2`
+  font-size: 13px;
+`;
+
+export const CreateBoxInput = styled.input`
+  width: 95%;
+  height: 30px;
+  border: none;
+  border-bottom: ${(props) => `1px dashed ${props.theme.secondaryColor}`};
+  background-color: transparent;
+`;

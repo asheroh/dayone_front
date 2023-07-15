@@ -28,6 +28,9 @@ const MyInfoViewer = () => {
 
   useEffect(() => {
     fetchData();
+    if (currentDay === 0) {
+      setCurrentDay(7);
+    }
   }, []);
 
   const fetchData = async () => {
