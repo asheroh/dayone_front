@@ -21,20 +21,24 @@ const DemodayHeader = ({ demoday }) => {
   // console.log('demoday header demoday:', demoday);
 
   const onClickDeleteBtn = async () => {
-    const request = await authAPI
-      .deleteDemoday(cookies.access_token, params['demodayId'])
-      .then((r) => {
-        // console.log('deletePost return data:', r.data);
-        if (r.status >= 200 && r.status < 300) {
-          alert('데모데이를 삭제했습니다!');
-          navigate(-1);
-        }
-      })
-      .catch((error) => {
-        alert('토큰이 만료되었습니다.');
-        localStorage.removeItem('user');
-        navigate('/login');
-      });
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      const request = await authAPI
+        .deleteDemoday(cookies.access_token, params['demodayId'])
+        .then((r) => {
+          // console.log('deletePost return data:', r.data);
+          if (r.status >= 200 && r.status < 300) {
+            alert('데모데이를 삭제했습니다!');
+            navigate(-1);
+          }
+        })
+        .catch((error) => {
+          alert('토큰이 만료되었습니다.');
+          localStorage.removeItem('user');
+          navigate('/login');
+        });
+    } else {
+      return;
+    }
   };
 
   return (

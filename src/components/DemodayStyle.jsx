@@ -9,7 +9,6 @@ export const DemodayContainer = styled.div`
   align-items: center;
   position: relative;
   line-height: 2;
-  border: 1px solid yellow;
 `;
 
 export const DemodayHeadText = styled.h1`

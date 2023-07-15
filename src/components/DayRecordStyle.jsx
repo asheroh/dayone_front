@@ -308,7 +308,6 @@ export const PostContainer = styled.div`
   width: 100vw;
   max-width: 100%;
   height: 100vh;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 `;
@@ -619,9 +618,12 @@ export const PostBookFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  position: -webkit-sticky;
   position: sticky;
+  top: calc(100% - 50px);
   bottom: 0;
   background-color: ${(props) => props.theme.bgColor};
+  border-top: ${(props) => `1px solid ${props.theme.secondaryColor}`};
   box-shadow: 0px -20px 25px -4px rgba(0, 0, 0, 0.75);
   transition: all 0.3s;
   z-index: 1;
@@ -631,7 +633,6 @@ export const PostBookFooter = styled.div`
   @media all and (max-width: 505px) {
     width: 350px;
   }
-  border-top: ${(props) => `1px solid ${props.theme.secondaryColor}`};
 `;
 
 export const FooterLeftBox = styled.section`
