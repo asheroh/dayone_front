@@ -19,12 +19,24 @@ import {
 } from '../MypageStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenClip } from '@fortawesome/free-solid-svg-icons';
+import { SignButton } from '../HomeStyle';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../modules/user';
 
 const MyInfoViewer = () => {
   const [info, setInfo] = useState(null);
   const [currentDay, setCurrentDay] = useState(new Date().getDay());
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    if (window.confirm('정말 로그아웃하시겠습니까?')) {
+      dispatch(logout());
+      navigate('/login', { replace: true });
+    } else {
+      return;
+    }
+  };
 
   useEffect(() => {
     fetchData();
@@ -70,6 +82,7 @@ const MyInfoViewer = () => {
             icon={faPenClip}
             onClick={() => navigate('/postform')}
           />
+          <SignButton onClick={onLogout}>로그아웃</SignButton>
         </ProfileRightBox>
       </MypageProfileBox>
       <MypageRecordBox>

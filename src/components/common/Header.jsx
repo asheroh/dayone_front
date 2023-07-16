@@ -23,8 +23,12 @@ const Header = ({ currentPage, setCurrentPage }) => {
   const navigate = useNavigate();
   const { themeMode } = useContext(Context);
   const onLogout = () => {
-    dispatch(logout());
-    navigate('/login', { replace: true });
+    if (window.confirm('정말 로그아웃하시겠습니까?')) {
+      dispatch(logout());
+      navigate('/login', { replace: true });
+    } else {
+      return;
+    }
   };
   return (
     <HeaderContainer>

@@ -34,7 +34,7 @@ export const MypageProfileBox = styled.section`
 `;
 
 export const ProfileLeftBox = styled.section`
-  width: 90%;
+  width: 70%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -68,11 +68,13 @@ export const ProfileState = styled.p`
 `;
 
 export const ProfileRightBox = styled.section`
-  width: 10%;
+  width: 30%;
   height: 100%;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
 `;
 
 export const MypageRecordBox = styled.section`
