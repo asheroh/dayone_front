@@ -28,11 +28,11 @@ export const DemodaySubText = styled.h2`
 export const DemoTrailerBox = styled.div`
   width: 700px;
   height: 500px;
-  display: flex;
+  /* display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 15px;
-  overflow-x: auto;
+  gap: 15px; */
+  overflow: hidden;
   transition: all 0.3s;
   border: 1px solid yellow;
   @media all and (max-width: 705px) {
@@ -46,11 +46,28 @@ export const DemoTrailerBox = styled.div`
 `;
 
 export const DemoTrailerItem = styled.section`
+  @keyframes moveBox {
+    0% {
+      left: 0%;
+    }
+    50% {
+      left: 50%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
   width: 240px;
   height: 300px;
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: moveBox 15s linear infinite;
+  animation-delay: ${(props) => `${props.idx * props.length}s`};
+  /* animation: moveBox 5s ease-in-out idx infinite; */
+  z-index: 1;
   @media all and (max-width: 705px) {
     width: 200px;
     height: 250px;

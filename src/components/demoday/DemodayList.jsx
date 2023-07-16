@@ -41,14 +41,18 @@ const DemodayList = () => {
       <DemodayHeadText>데이원 모임 번개 DAY</DemodayHeadText>
       <DemodaySubText>서로에 대해 더 알아가며 함께 성장하자!</DemodaySubText>
       <DemoTrailerBox>
-        {demodays.map((demoday) => {
+        {demodays.map((demoday, idx) => {
           return (
             <Link
               to={`/demoday/${demoday.demoday_id}`}
               key={demoday.demoday_id}
               state={{ demoday: demoday }}
             >
-              <DemodayItem demoday={demoday} />
+              <DemodayItem
+                demoday={demoday}
+                idx={idx}
+                length={demodays.length}
+              />
             </Link>
           );
         })}
@@ -59,7 +63,7 @@ const DemodayList = () => {
 
 export default DemodayList;
 
-const DemodayItem = ({ demoday }) => {
+const DemodayItem = ({ demoday, idx, length }) => {
   const isFull = demoday.current_capacity === demoday.total_capacity;
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -78,7 +82,7 @@ const DemodayItem = ({ demoday }) => {
     return `${formattedDate} (${weekDay})`;
   };
   return (
-    <DemoTrailerItem>
+    <DemoTrailerItem idx={idx} length={length}>
       <DemoTrailerThumbnail
         src={demoday.demoday_image_url}
         alt="demoday_image_url"
