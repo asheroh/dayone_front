@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../modules/user';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   HeaderContainer,
@@ -10,24 +9,23 @@ import {
   Navsection0,
   Navsection1,
   Navsection2,
-  SignButton,
   SmallLogoBox,
+  ThemeButton,
+  ThemeIcon,
 } from '../HomeStyle';
 import SmallWhiteLogo from '../../assets/images/dayone_small_logo_white.svg';
 import SmallBlackLogo from '../../assets/images/dayone_small_logo_black.svg';
 import { Context } from '../../context/Context';
+import { faSun } from '@fortawesome/free-solid-svg-icons';
 
 const Header = ({ currentPage, setCurrentPage }) => {
   const { user } = useSelector(({ user }) => ({ user: user.user }));
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { themeMode } = useContext(Context);
-  const onLogout = () => {
-    if (window.confirm('정말 로그아웃하시겠습니까?')) {
-      dispatch(logout());
-      navigate('/login', { replace: true });
-    } else {
-      return;
+  const { themeMode, setThemeMode } = useContext(Context);
+  const themeToggle = () => {
+    if (themeMode === 'black') {
+      setThemeMode('white');
+    } else if (themeMode === 'white') {
+      setThemeMode('black');
     }
   };
   return (
@@ -40,12 +38,15 @@ const Header = ({ currentPage, setCurrentPage }) => {
         />
         <InfoBox>
           {user?.username}
-          <SignButton onClick={onLogout}>로그아웃</SignButton>
+          <ThemeButton themeMode={themeMode} onClick={themeToggle}>
+            <ThemeIcon icon={faSun} thememode={themeMode} />
+          </ThemeButton>
         </InfoBox>
       </HeaderLogoSection>
       <HeaderNavSection>
         <Navsection0
           currentPage={currentPage}
+          themeMode={themeMode}
           onClick={() => {
             setCurrentPage(0);
           }}
@@ -54,6 +55,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
         </Navsection0>
         <Navsection1
           currentPage={currentPage}
+          themeMode={themeMode}
           onClick={() => {
             setCurrentPage(1);
           }}
@@ -62,6 +64,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
         </Navsection1>
         <Navsection2
           currentPage={currentPage}
+          themeMode={themeMode}
           onClick={() => {
             setCurrentPage(2);
           }}

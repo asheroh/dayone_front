@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authAPI from '../../lib/api/auth';
@@ -22,11 +22,13 @@ import { faPenClip } from '@fortawesome/free-solid-svg-icons';
 import { SignButton } from '../HomeStyle';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../modules/user';
+import { Context } from '../../context/Context';
 
 const MyInfoViewer = () => {
   const [info, setInfo] = useState(null);
   const [currentDay, setCurrentDay] = useState(new Date().getDay());
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
+  const { themeMode } = useContext(Context);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onLogout = () => {
@@ -72,7 +74,7 @@ const MyInfoViewer = () => {
           />
           <ProfileMiddleBox>
             <ProfileName>{info.username}</ProfileName>
-            <ProfileState>
+            <ProfileState themeMode={themeMode}>
               총 {info.total_count}번의 기록을 하셨어요!
             </ProfileState>
           </ProfileMiddleBox>
@@ -91,33 +93,61 @@ const MyInfoViewer = () => {
           기록
         </RecordText>
         <RecordBox>
-          <RecordDaily today={1 - currentDay}>
+          <RecordDaily today={1 - currentDay} themeMode={themeMode}>
             월
-            <RecordCheckBox check={info.week[0]} today={1 - currentDay} />
+            <RecordCheckBox
+              check={info.week[0]}
+              today={1 - currentDay}
+              themeMode={themeMode}
+            />
           </RecordDaily>
-          <RecordDaily today={2 - currentDay}>
+          <RecordDaily today={2 - currentDay} themeMode={themeMode}>
             화
-            <RecordCheckBox check={info.week[1]} today={2 - currentDay} />
+            <RecordCheckBox
+              check={info.week[1]}
+              today={2 - currentDay}
+              themeMode={themeMode}
+            />
           </RecordDaily>
-          <RecordDaily today={3 - currentDay}>
+          <RecordDaily today={3 - currentDay} themeMode={themeMode}>
             수
-            <RecordCheckBox check={info.week[2]} today={3 - currentDay} />
+            <RecordCheckBox
+              check={info.week[2]}
+              today={3 - currentDay}
+              themeMode={themeMode}
+            />
           </RecordDaily>
-          <RecordDaily today={4 - currentDay}>
+          <RecordDaily today={4 - currentDay} themeMode={themeMode}>
             목
-            <RecordCheckBox check={info.week[3]} today={4 - currentDay} />
+            <RecordCheckBox
+              check={info.week[3]}
+              today={4 - currentDay}
+              themeMode={themeMode}
+            />
           </RecordDaily>
-          <RecordDaily today={5 - currentDay}>
+          <RecordDaily today={5 - currentDay} themeMode={themeMode}>
             금
-            <RecordCheckBox check={info.week[4]} today={5 - currentDay} />
+            <RecordCheckBox
+              check={info.week[4]}
+              today={5 - currentDay}
+              themeMode={themeMode}
+            />
           </RecordDaily>
-          <RecordDaily today={6 - currentDay}>
+          <RecordDaily today={6 - currentDay} themeMode={themeMode}>
             토
-            <RecordCheckBox check={info.week[5]} today={6 - currentDay} />
+            <RecordCheckBox
+              check={info.week[5]}
+              today={6 - currentDay}
+              themeMode={themeMode}
+            />
           </RecordDaily>
-          <RecordDaily today={7 - currentDay}>
+          <RecordDaily today={7 - currentDay} themeMode={themeMode}>
             일
-            <RecordCheckBox check={info.week[6]} today={7 - currentDay} />
+            <RecordCheckBox
+              check={info.week[6]}
+              today={7 - currentDay}
+              themeMode={themeMode}
+            />
           </RecordDaily>
         </RecordBox>
       </MypageRecordBox>

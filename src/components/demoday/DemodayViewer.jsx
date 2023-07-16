@@ -137,27 +137,25 @@ const DemodayViewer = () => {
             {demoday.location}
           </DemoDetailValue>
         </DemoDetailValueBox>
-        {/* 
-        분기 기준
-        1. 내가 만든 데모데이일 경우 현재 모집현황을 볼 수 있게 함.
-        2. 타인의 데모데이일 경우 신청했는지 여부 판단, 신청시 신청완료 텍스트 가시화
-        3. 인원이 꽉 찼을 경우, 신청 마감 텍스트 가시화
-        4. 참여 가능할 경우 신청하기 버튼 활성화
-      */}
-        {demoday.user_id === user.userId ? (
-          <DemoSignUpButton>
-            모집 현황: {demoday.current_capacity} / {demoday.total_capacity}
-          </DemoSignUpButton>
-        ) : demoday.is_application === '1' ? (
-          <DemoSignUpButton>신청 완료</DemoSignUpButton>
-        ) : demoday.current_capacity === demoday.total_capacity ? (
-          <DemoSignUpButton>신청 마감</DemoSignUpButton>
-        ) : (
-          <DemoSignUpButton onClick={onClickApplyBtn}>
-            신청하기
-          </DemoSignUpButton>
-        )}
       </DemoDetailFooterSection>
+      {/* 
+          분기 기준
+          1. 내가 만든 데모데이일 경우 현재 모집현황을 볼 수 있게 함.
+          2. 타인의 데모데이일 경우 신청했는지 여부 판단, 신청시 신청완료 텍스트 가시화
+          3. 인원이 꽉 찼을 경우, 신청 마감 텍스트 가시화
+          4. 참여 가능할 경우 신청하기 버튼 활성화
+        */}
+      {demoday.user_id === user.userId ? (
+        <DemoSignUpButton>
+          모집 현황: {demoday.current_capacity} / {demoday.total_capacity}
+        </DemoSignUpButton>
+      ) : demoday.is_application === '1' ? (
+        <DemoSignUpButton>신청 완료</DemoSignUpButton>
+      ) : demoday.current_capacity === demoday.total_capacity ? (
+        <DemoSignUpButton>신청 마감</DemoSignUpButton>
+      ) : (
+        <DemoSignUpButton onClick={onClickApplyBtn}>신청하기</DemoSignUpButton>
+      )}
       <DayRecordButtonLine />
     </DemoDetailBody>
   ) : (

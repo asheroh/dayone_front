@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { SwiperSlide } from 'swiper/react';
 
 export const DemodayContainer = styled.div`
@@ -43,6 +43,27 @@ export const DemoTrailerBox = styled.div`
   }
 `;
 
+export const wiggle = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px) rotateZ(-5deg);
+  }
+  40% {
+    transform: translateX(5px) rotateZ(5deg);
+  }
+  60% {
+    transform: translateX(-5px) rotateZ(-5deg);
+  }
+  80% {
+    transform: translateX(5px) rotateZ(5deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
+`;
+
 export const DemoTrailerItem = styled.section`
   width: 100%;
   height: 100%;
@@ -55,6 +76,12 @@ export const DemoSwiperSlide = styled(SwiperSlide)`
   width: 320px !important;
   height: 400px !important;
   transition: all 0.3s;
+  animation: ${(props) =>
+    props.length === 1
+      ? css`
+          ${wiggle} 2s ease infinite alternate
+        `
+      : ''};
   @media all and (max-width: 705px) {
     width: 240px !important;
     height: 300px !important;
@@ -79,27 +106,7 @@ export const DemoEmptyBox = styled.section`
 `;
 
 export const BoxIcon = styled(FontAwesomeIcon)`
-  @keyframes wiggle {
-    0% {
-      transform: translateX(0);
-    }
-    20% {
-      transform: translateX(-5px) rotateZ(-5deg);
-    }
-    40% {
-      transform: translateX(5px) rotateZ(5deg);
-    }
-    60% {
-      transform: translateX(-5px) rotateZ(-5deg);
-    }
-    80% {
-      transform: translateX(5px) rotateZ(5deg);
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-  animation: wiggle 2s ease infinite alternate;
+  animation: ${wiggle} 2s ease infinite alternate;
 `;
 
 export const ShadowScreen = styled.section`
@@ -171,22 +178,24 @@ export const TrailerTitle = styled.h2`
 // Demo detail page----------------------------------------
 export const DemoDetailBody = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 20px;
 `;
 
 export const DemoDetailHeaderSection = styled.div`
   width: 700px;
-  height: 60%;
+  min-height: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 15px;
   transition: all 0.3s;
+  border-bottom: ${(props) => `1px dashed ${props.theme.secondaryColor}`};
+  padding: 20px 0;
   @media all and (max-width: 705px) {
     width: 500px;
   }
@@ -194,7 +203,6 @@ export const DemoDetailHeaderSection = styled.div`
     width: 350px;
     height: 50%;
   }
-  border-bottom: ${(props) => `1px solid ${props.theme.secondaryColor}`};
 `;
 
 export const DemoDetailHeadText = styled.h1`
@@ -202,14 +210,15 @@ export const DemoDetailHeadText = styled.h1`
   font-size: 18px;
   font-weight: 900;
   color: ${(props) => props.theme.primaryColor};
-  border-bottom: ${(props) => `2px solid ${props.theme.secondaryColor}`};
+  border-bottom: ${(props) => `2px solid ${props.theme.primaryColor}`};
+  padding-bottom: 10px;
 `;
 
 export const DemoDetailThumbnail = styled.img`
   width: 700px;
+  height: auto;
   object-fit: cover;
   object-position: center;
-  aspect-ratio: 16 / 9;
   transition: all 0.3s;
   @media all and (max-width: 705px) {
     width: 500px;
@@ -285,12 +294,10 @@ export const DemoSignUpButton = styled.button`
   width: 280px;
   height: 40px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  position: fixed;
-  left: 50%;
+  position: sticky;
   bottom: 3%;
-  transform: translate(-50%, 0);
   border: none;
   border-radius: 5px;
   background-color: ${(props) => props.theme.textColor};

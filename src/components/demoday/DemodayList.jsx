@@ -84,10 +84,14 @@ const DemodayList = () => {
             }}
             modules={[Autoplay, EffectCoverflow, Pagination, Navigation]}
             className="mySwiper"
+            style={{ overflow: demodays.length === 0 ? 'visible' : '' }}
           >
-            {demodays.map((demoday, idx) => {
+            {demodays.map((demoday) => {
               return (
-                <DemoSwiperSlide key={demoday.demoday_id}>
+                <DemoSwiperSlide
+                  key={demoday.demoday_id}
+                  length={demodays.length}
+                >
                   <Link
                     to={`/demoday/${demoday.demoday_id}`}
                     state={{ demoday: demoday }}
@@ -119,11 +123,10 @@ const DemodayItem = ({ demoday }) => {
       })
       .replace(/. /g, '.')
       .slice(0, -1);
-
     const weekDay = date.toLocaleDateString('ko-KR', { weekday: 'short' });
-
     return `${formattedDate} (${weekDay})`;
   };
+
   return (
     <DemoTrailerItem>
       <DemoTrailerThumbnail

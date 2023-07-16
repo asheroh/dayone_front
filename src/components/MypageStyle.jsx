@@ -64,7 +64,10 @@ export const ProfileName = styled.h2`
 
 export const ProfileState = styled.p`
   font-size: 13px;
-  color: ${(props) => props.theme.primaryColor};
+  color: ${(props) =>
+    props.themeMode === 'black'
+      ? props.theme.primaryColor
+      : props.theme.textColor};
 `;
 
 export const ProfileRightBox = styled.section`
@@ -118,18 +121,31 @@ export const RecordDaily = styled.section`
   align-items: center;
   gap: 15px;
   font-weight: ${(props) => (props.today === 0 ? '900' : '')};
-  color: ${(props) => (props.today === 0 ? props.theme.primaryColor : '')};
+  color: ${(props) =>
+    props.today === 0 && props.themeMode === 'black'
+      ? props.theme.primaryColor
+      : ''};
 `;
 
 export const RecordCheckBox = styled.section`
   width: 10px;
   height: 10px;
   border: ${(props) =>
-    props.today >= 0 ? `1px dashed ${props.theme.primaryColor}` : ''};
+    props.today >= 0 && props.check === 0
+      ? `1px dashed ${props.theme.primaryColor}`
+      : ''};
+  border-color: ${(props) =>
+    props.themeMode === 'black' && props.check === 0
+      ? props.theme.primaryColor
+      : props.themeMode === 'white' && props.check === 0
+      ? props.theme.textColor
+      : ''};
   border-radius: 50%;
   background-color: ${(props) =>
-    props.check !== 0 && props.today <= 0
+    props.check !== 0 && props.today <= 0 && props.themeMode === 'black'
       ? props.theme.primaryColor
+      : props.check !== 0 && props.today <= 0 && props.themeMode === 'white'
+      ? props.theme.textColor
       : props.check === 0 && props.today < 0
       ? props.theme.secondaryColor
       : 'transparent'};
@@ -189,7 +205,7 @@ export const MypageBookImage = styled.img`
 // Mypage Post detail------------------------------------------
 export const PostDetailContainer = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 `;
