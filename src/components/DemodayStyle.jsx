@@ -1,4 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
+import { SwiperSlide } from 'swiper/react';
 
 export const DemodayContainer = styled.div`
   width: 100%;
@@ -28,13 +30,9 @@ export const DemodaySubText = styled.h2`
 export const DemoTrailerBox = styled.div`
   width: 700px;
   height: 500px;
-  /* display: flex;
+  display: flex;
   align-items: center;
-  flex-wrap: nowrap;
-  gap: 15px; */
-  overflow: hidden;
   transition: all 0.3s;
-  border: 1px solid yellow;
   @media all and (max-width: 705px) {
     width: 500px;
     height: 400px;
@@ -46,36 +44,62 @@ export const DemoTrailerBox = styled.div`
 `;
 
 export const DemoTrailerItem = styled.section`
-  @keyframes moveBox {
-    0% {
-      left: 0%;
-    }
-    50% {
-      left: 50%;
-    }
-    100% {
-      left: 100%;
-    }
-  }
-  width: 240px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  animation: moveBox 15s linear infinite;
-  animation-delay: ${(props) => `${props.idx * props.length}s`};
-  /* animation: moveBox 5s ease-in-out idx infinite; */
-  z-index: 1;
+  position: relative;
+`;
+
+export const DemoSwiperSlide = styled(SwiperSlide)`
+  width: 320px !important;
+  height: 400px !important;
+  transition: all 0.3s;
   @media all and (max-width: 705px) {
-    width: 200px;
-    height: 250px;
+    width: 240px !important;
+    height: 300px !important;
   }
   @media all and (max-width: 505px) {
-    width: 160px;
-    height: 200px;
+    width: 160px !important;
+    height: 200px !important;
   }
+`;
+
+export const DemoEmptyBox = styled.section`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'DMSansBold';
+  font-weight: 900;
+  font-size: 100px;
+  color: ${(props) => props.theme.textColor};
+`;
+
+export const BoxIcon = styled(FontAwesomeIcon)`
+  @keyframes wiggle {
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-5px) rotateZ(-5deg);
+    }
+    40% {
+      transform: translateX(5px) rotateZ(5deg);
+    }
+    60% {
+      transform: translateX(-5px) rotateZ(-5deg);
+    }
+    80% {
+      transform: translateX(5px) rotateZ(5deg);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  animation: wiggle 2s ease infinite alternate;
 `;
 
 export const ShadowScreen = styled.section`

@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import * as authAPI from '../../lib/api/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import {
+  BoxIcon,
+  DemoEmptyBox,
+  DemoSwiperSlide,
   DemoTrailerBody,
   DemoTrailerBox,
   DemoTrailerItem,
@@ -13,6 +16,18 @@ import {
   TrailerPubDate,
   TrailerTitle,
 } from '../DemodayStyle';
+import { Swiper } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-coverflow';
+import {
+  EffectCoverflow,
+  Autoplay,
+  Pagination,
+  Navigation,
+} from 'swiper/modules';
+import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 
 const DemodayList = () => {
   const navigate = useNavigate();
@@ -41,21 +56,49 @@ const DemodayList = () => {
       <DemodayHeadText>데이원 모임 번개 DAY</DemodayHeadText>
       <DemodaySubText>서로에 대해 더 알아가며 함께 성장하자!</DemodaySubText>
       <DemoTrailerBox>
-        {demodays.map((demoday, idx) => {
-          return (
-            <Link
-              to={`/demoday/${demoday.demoday_id}`}
-              key={demoday.demoday_id}
-              state={{ demoday: demoday }}
-            >
-              <DemodayItem
-                demoday={demoday}
-                idx={idx}
-                length={demodays.length}
-              />
-            </Link>
-          );
-        })}
+        {demodays.length === 0 ? (
+          <DemoEmptyBox>
+            ...
+            <BoxIcon icon={faBoxOpen} />
+          </DemoEmptyBox>
+        ) : (
+          <Swiper
+            pagination={{
+              dynamicBullets: true,
+              clickable: true,
+            }}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            effect={'coverflow'}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={'auto'}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            modules={[Autoplay, EffectCoverflow, Pagination, Navigation]}
+            className="mySwiper"
+          >
+            {demodays.map((demoday, idx) => {
+              return (
+                <DemoSwiperSlide key={demoday.demoday_id}>
+                  <Link
+                    to={`/demoday/${demoday.demoday_id}`}
+                    state={{ demoday: demoday }}
+                  >
+                    <DemodayItem demoday={demoday} />
+                  </Link>
+                </DemoSwiperSlide>
+              );
+            })}
+          </Swiper>
+        )}
       </DemoTrailerBox>
     </>
   );
@@ -63,7 +106,7 @@ const DemodayList = () => {
 
 export default DemodayList;
 
-const DemodayItem = ({ demoday, idx, length }) => {
+const DemodayItem = ({ demoday }) => {
   const isFull = demoday.current_capacity === demoday.total_capacity;
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -82,7 +125,7 @@ const DemodayItem = ({ demoday, idx, length }) => {
     return `${formattedDate} (${weekDay})`;
   };
   return (
-    <DemoTrailerItem idx={idx} length={length}>
+    <DemoTrailerItem>
       <DemoTrailerThumbnail
         src={demoday.demoday_image_url}
         alt="demoday_image_url"
