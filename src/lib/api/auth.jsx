@@ -187,3 +187,21 @@ export const bookPost = (access_token, book_id) => {
     },
   });
 };
+
+// 유저 테마 가져오기
+export const getTheme = (access_token, user_id) => {
+  return client.get(`/v1/user/theme`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};
+
+// 유저 테마 가져오기
+export const postTheme = (access_token, user_id) => {
+  return client.get(`/v1/user/theme`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};

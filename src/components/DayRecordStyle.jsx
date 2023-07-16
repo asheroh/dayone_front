@@ -203,8 +203,7 @@ export const CommentButton = styled.button`
   font-size: 11px;
   background-color: ${(props) =>
     props.isCool ? 'transparent' : props.theme.secondaryColor};
-  color: ${(props) =>
-    props.isCool ? props.theme.textColor : props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
 `;
 
 export const LikeButton = styled.section`
