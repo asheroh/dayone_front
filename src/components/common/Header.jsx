@@ -16,7 +16,7 @@ import {
 import SmallWhiteLogo from '../../assets/images/dayone_small_logo_white.svg';
 import SmallBlackLogo from '../../assets/images/dayone_small_logo_black.svg';
 import { Context } from '../../context/Context';
-import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
 const Header = ({ currentPage, setCurrentPage }) => {
   const { user } = useSelector(({ user }) => ({ user: user.user }));
@@ -39,7 +39,10 @@ const Header = ({ currentPage, setCurrentPage }) => {
         <InfoBox>
           {user?.username}
           <ThemeButton themeMode={themeMode} onClick={themeToggle}>
-            <ThemeIcon icon={faSun} thememode={themeMode} />
+            <ThemeIcon
+              icon={themeMode === 'black' ? faSun : faMoon}
+              thememode={themeMode}
+            />
           </ThemeButton>
         </InfoBox>
       </HeaderLogoSection>
