@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -16,20 +16,20 @@ import {
   DemoSignUpButton,
 } from '../DemodayStyle';
 import { DayRecordButtonLine } from '../DayRecordStyle';
+import { Context } from '../../context/Context';
 
 const DemodayViewer = () => {
   const [demoday, setdemoday] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
+  const { themeMode } = useContext(Context);
   const params = useParams();
   const jsonUser = localStorage.getItem('user');
   const user = JSON.parse(jsonUser);
-  // console.log('viewer localstorage user:', user);
 
   // Path Variable 값 가져오기
   useEffect(() => {
     fetchData();
-    // console.log('fklsjdaf', cookies.access_token);
   }, []);
 
   const fetchData = async () => {
@@ -101,7 +101,9 @@ const DemodayViewer = () => {
   return demoday ? (
     <DemoDetailBody>
       <DemoDetailHeaderSection>
-        <DemoDetailHeadText>{demoday.title}</DemoDetailHeadText>
+        <DemoDetailHeadText themeMode={themeMode}>
+          {demoday.title}
+        </DemoDetailHeadText>
         <DemoDetailThumbnail
           src={demoday.demoday_image_url}
           alt="demoday_image_thumbnail"

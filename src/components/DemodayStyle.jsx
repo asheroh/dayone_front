@@ -209,8 +209,14 @@ export const DemoDetailHeadText = styled.h1`
   font-family: 'DMSansBold';
   font-size: 18px;
   font-weight: 900;
-  color: ${(props) => props.theme.primaryColor};
-  border-bottom: ${(props) => `2px solid ${props.theme.primaryColor}`};
+  color: ${(props) =>
+    props.themeMode === 'black'
+      ? props.theme.primaryColor
+      : props.theme.textColor};
+  border-bottom: ${(props) =>
+    props.themeMode === 'black'
+      ? `2px solid ${props.theme.primaryColor}`
+      : `2px solid ${props.theme.textColor}`};
   padding-bottom: 10px;
 `;
 
@@ -398,4 +404,5 @@ export const CreateBoxInput = styled.input`
   border: none;
   border-bottom: ${(props) => `1px dashed ${props.theme.secondaryColor}`};
   background-color: transparent;
+  color: ${(props) => props.theme.bgColor};
 `;

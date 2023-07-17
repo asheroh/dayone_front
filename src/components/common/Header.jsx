@@ -40,7 +40,7 @@ const Header = ({ currentPage, setCurrentPage }) => {
           {user?.username}
           <ThemeButton themeMode={themeMode} onClick={themeToggle}>
             <ThemeIcon
-              icon={themeMode === 'black' ? faSun : faMoon}
+              icon={themeMode === 'black' ? faMoon : faSun}
               thememode={themeMode}
             />
           </ThemeButton>

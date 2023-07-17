@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const DayRecordContainer = styled.div`
@@ -46,7 +47,7 @@ export const DayRecordButtonLine = styled.section`
 
 export const HotCommentSection = styled.section`
   width: 100%;
-  height: 65%;
+  height: 360px;
   padding: 15px;
   margin-bottom: 30px;
 `;
@@ -68,7 +69,7 @@ export const HotCommentScrollBox = styled.section`
   border-radius: 5px;
   background-color: transparent;
   transition: all 0.3s;
-  padding: 15px;
+  padding: 15px 0;
   margin: 10px;
 `;
 
@@ -89,8 +90,23 @@ export const HotCommentEmptyText = styled.p`
   color: ${(props) => props.theme.textColor};
 `;
 
+export const HotCommentLink = styled(Link)`
+  height: 245px;
+  border-radius: 10px;
+  transition: all 0.3s;
+  @media all and (min-width: 1028px) {
+    width: 500px;
+  }
+  @media all and (min-width: 768px) and (max-width: 1028px) {
+    width: 400px;
+  }
+  @media all and (max-width: 400px) {
+    width: 300px;
+  }
+`;
+
 export const HotCommentContainer = styled.div`
-  width: 350px;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -101,15 +117,6 @@ export const HotCommentContainer = styled.div`
   color: ${(props) => props.theme.bgColor};
   padding: 15px;
   transition: all 0.3s;
-  @media all and (min-width: 1028px) {
-    width: 500px;
-  }
-  @media all and (min-width: 768px) and (max-width: 1028px) {
-    width: 400px;
-  }
-  @media all and (max-width: 400px) {
-    width: 270px;
-  }
 `;
 
 export const HotCommentBoxHeader = styled.section`

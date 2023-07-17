@@ -138,7 +138,11 @@ const DemodayItem = ({ demoday }) => {
       {isFull && <ShadowScreen>마감</ShadowScreen>}
       <DemoTrailerBody>
         <TrailerPubDate>{formatDate(demoday.event_date)}</TrailerPubDate>
-        <TrailerTitle>{demoday.title}</TrailerTitle>
+        <TrailerTitle>
+          {demoday.title.length > 18
+            ? demoday.title.slice(0, 18) + '...'
+            : demoday.title}
+        </TrailerTitle>
       </DemoTrailerBody>
     </DemoTrailerItem>
   );
