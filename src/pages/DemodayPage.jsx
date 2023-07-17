@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import DemodayHeader from '../components/Demoday/DemodayHeader';
-import DemodayViewer from '../components/Demoday/DemodayViewer';
+import DemodayHeader from '../components/demoday/DemodayHeader';
+import DemodayViewer from '../components/demoday/DemodayViewer';
 import { PostDetailContainer } from '../components/MypageStyle';
 
 const DemoDayPage = () => {
