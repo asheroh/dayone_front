@@ -1,12 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
-import BestPostList from '../post/BestPostList';
-import DatePostList from '../post/DatePostList';
+import BestPostList from '../components/post/BestPostList';
+import DatePostList from '../components/post/DatePostList';
 import {
   DayRecordBorder,
   DayRecordButton,
   DayRecordButtonLine,
   DayRecordContainer,
-} from '../DayRecordStyle';
+} from '../components/DayRecordStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenFancy } from '@fortawesome/free-solid-svg-icons';
 

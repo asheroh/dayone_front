@@ -15,12 +15,12 @@ import createSagaMiddleware from 'redux-saga';
 import { tempSetUser, check } from './modules/user';
 import MainPage from './pages/MainPage';
 import MyBookPostListPage from './pages/MyBookPostListPage';
-import DemodayPage from './pages/DemodayPage';
 import CreateDemodayPage from './pages/CreateDemodayPage';
 import DemodayListPage from './pages/DemodayListPage';
 import NotFoundPage from './pages/NotFoundPage';
-import MyPage from './pages/MyPage';
 import PostPage from './pages/PostPage';
+import DemodayPage from './pages/DemodayPage';
+import MyPage from './pages/MyPage';
 
 const ProtectedRoute = ({ redirectPath = '/login', currentPath, children }) => {
   // console.log('ProtectedRoute request path:', currentPath);

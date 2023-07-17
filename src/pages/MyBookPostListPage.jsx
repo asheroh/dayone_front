@@ -2,6 +2,11 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import MyBookPostList from '../components/mypage/MyBookPostList';
 import MyPageHeader from '../components/mypage/MyPageHeader';
+import {
+  MypageBookImage,
+  PostDetailBody,
+  PostDetailContainer,
+} from '../components/MypageStyle';
 
 const MyBookPostListPage = () => {
   const location = useLocation();
@@ -10,23 +15,20 @@ const MyBookPostListPage = () => {
   const thumbnailImage = location.state.thumbnailImage;
 
   return (
-    <div>
+    <PostDetailContainer>
       <MyPageHeader title={title} />
-      <br /> <br /> <br /> <br /> <br />
-      <img
-        src={thumbnailImage}
-        alt="thumbnail_image"
-        className="thumbnail_image"
-        style={{
-          width: '200px',
-          height: 'auto',
-          objectFit: 'cover',
-          aspectRatio: '11/16',
-        }}
-      ></img>
-      <br />
-      <MyBookPostList />
-    </div>
+      <PostDetailBody>
+        <MypageBookImage
+          src={thumbnailImage}
+          alt="book_thumbnail_image"
+          style={{
+            objectFit: 'cover',
+            aspectRatio: '11/16',
+          }}
+        />
+        <MyBookPostList />
+      </PostDetailBody>
+    </PostDetailContainer>
   );
 };
 

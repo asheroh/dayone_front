@@ -2,6 +2,33 @@ import React, { useEffect, useState } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+  CommentButton,
+  FooterLeftBox,
+  FooterRightBox,
+  HeartButton,
+  NiceButton,
+  PostBody,
+  PostBookComment,
+  PostBookContentBox,
+  PostBookFooter,
+  PostBookName,
+  PostBookPassage,
+  PostBookThumbnail,
+  PostDetailDate,
+  PostDetailName,
+  PostDetailOwnerBox,
+  PostDetailThumbnail,
+  PostDetailThumbnailBox,
+  PostDetailThumbnailLeft,
+  PostDetailThumbnailRight,
+} from '../DayRecordStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faHeart,
+  faShareAlt,
+  faThumbsUp,
+} from '@fortawesome/free-solid-svg-icons';
 
 const PostViewer = () => {
   const [post, setPost] = useState({});
@@ -19,7 +46,7 @@ const PostViewer = () => {
     await authAPI
       .postOne(cookies.access_token, params['postId'])
       .then((r) => {
-        console.log('기록 단건 조회 res data:', r.data.data[0]);
+        // console.log('기록 단건 조회 res data:', r.data.data[0]);
         setPost(r.data.data[0]);
         setIsSympathy(r.data.data[0].is_sympathy);
       })
@@ -57,50 +84,60 @@ const PostViewer = () => {
   };
 
   return (
-    <div>
-      {post ? (
-        <div>
-          <div style={{ display: 'flex' }}>
-            <img
-              src={post.user_profile_img}
-              alt="user image_url"
-              className="profile_image"
-            ></img>
-            <span>
-              {post.username} / {post.count_day}일차 기록
-            </span>
-          </div>
-          <p>{post.created_at}</p>
-
-          <img
-            src={post.book_image}
-            alt="book_image_url"
-            className="book_image"
-            style={{
-              width: '200px',
-              height: 'auto',
-              objectFit: 'cover',
-              aspectRatio: '11/16',
-            }}
-          ></img>
-          <p>bookname: {post.bookname}</p>
-          <br />
-          <p>passage: {post.passage}</p>
-          <br />
-          <p>comment: {post.comment}</p>
-          <br />
-          <button
+    <PostBody>
+      <PostDetailThumbnailBox>
+        <PostDetailThumbnailLeft>
+          <PostDetailThumbnail
+            src={post.user_profile_img}
+            alt="user_image"
+            loading="lazy"
+          />
+          <PostDetailOwnerBox>
+            <PostDetailName>{post.username}</PostDetailName>
+            <PostDetailDate>{post.count_day}일차 기록</PostDetailDate>
+          </PostDetailOwnerBox>
+        </PostDetailThumbnailLeft>
+        <PostDetailThumbnailRight>{post.created_at}</PostDetailThumbnailRight>
+      </PostDetailThumbnailBox>
+      <br />
+      <PostBookThumbnail
+        src={post.book_image}
+        alt="book_image"
+        loading="lazy"
+        style={{
+          objectFit: 'cover',
+          aspectRatio: '11/16',
+        }}
+      />
+      <br />
+      <PostBookName>{post.bookname}</PostBookName>
+      <br /> <br /> <br />
+      <PostBookContentBox>
+        <PostBookPassage>{post.passage}</PostBookPassage>
+        <br /> <br />
+        <CommentButton>Comment</CommentButton>
+        <br />
+        <PostBookComment>{post.comment}</PostBookComment>
+      </PostBookContentBox>
+      <PostBookFooter>
+        <FooterLeftBox>
+          <NiceButton
+            isSympathy={isSympathy}
             onClick={() => {
               onClickSympathyBtn();
             }}
           >
-            {isSympathy === '1' ? '❤️공감해요' : '🖤공감해요'}
-          </button>
-        </div>
-      ) : (
-        <div>fsd</div>
-      )}
-    </div>
+            <FontAwesomeIcon icon={faThumbsUp} /> 멋져요
+          </NiceButton>
+          <HeartButton>
+            <FontAwesomeIcon icon={faHeart} /> 공감해요
+          </HeartButton>
+        </FooterLeftBox>
+        <FooterRightBox>
+          <FontAwesomeIcon icon={faShareAlt} />
+        </FooterRightBox>
+      </PostBookFooter>
+    </PostBody>
   );
 };
 

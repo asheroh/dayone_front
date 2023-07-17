@@ -2,17 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authAPI from '../../lib/api/auth';
+import {
+  MypageBodySection,
+  MypageBookImage,
+  MypageBox,
+  MypageGridBox,
+  MypageRecordText,
+} from '../MypageStyle';
 
 const MyBookcase = () => {
   const [myBooks, setMyBooks] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
 
-  const handleClick = () => {};
-
   useEffect(() => {
     fetchData();
-    console.log('fklsjdaf', cookies.access_token);
+    // console.log('access token', cookies.access_token);
   }, []);
 
   const fetchData = async () => {
@@ -20,7 +25,7 @@ const MyBookcase = () => {
       .bookcase(cookies.access_token)
       .then((r) => {
         setMyBooks(r.data.data);
-        console.log(r.data.data);
+        // console.log(r.data.data);
       })
       .catch((error) => {
         alert('토큰이 만료되었습니다.');
@@ -28,44 +33,39 @@ const MyBookcase = () => {
         navigate('/login');
       });
   };
+
   return (
-    <div>
-      내 책장과 기록
-      <br />
-      {myBooks.map((mybookItem) => {
-        return (
-          <div key={mybookItem.id} onClick={() => handleClick(mybookItem)}>
-            <MyBookItem mybookItem={mybookItem} />
-          </div>
-        );
-      })}
-    </div>
+    <MypageBodySection>
+      <MypageBox>
+        <br />
+        <MypageRecordText>내 책장과 기록</MypageRecordText>
+        <br />
+        <MypageGridBox>
+          {myBooks.map((mybookItem) => {
+            return (
+              <Link
+                key={mybookItem.id}
+                to={`/mypage/mybooks/${mybookItem.id}/records`}
+                state={{
+                  title: mybookItem.title,
+                  thumbnailImage: mybookItem.thumbnail_image,
+                }}
+              >
+                <MypageBookImage
+                  src={mybookItem.thumbnail_image}
+                  alt="thumbnail_image"
+                  style={{
+                    objectFit: 'cover',
+                    aspectRatio: '11/16',
+                  }}
+                />
+              </Link>
+            );
+          })}
+        </MypageGridBox>
+      </MypageBox>
+    </MypageBodySection>
   );
 };
 
 export default MyBookcase;
-
-const MyBookItem = ({ mybookItem }) => {
-  return (
-    <Link
-      to={`/mypage/mybooks/${mybookItem.id}/records`}
-      state={{
-        title: mybookItem.title,
-        thumbnailImage: mybookItem.thumbnail_image,
-      }}
-    >
-      <img
-        src={mybookItem.thumbnail_image}
-        alt="thumbnail_image"
-        className="thumbnail_image"
-        style={{
-          width: '200px',
-          height: 'auto',
-          objectFit: 'cover',
-          aspectRatio: '11/16',
-        }}
-      ></img>
-      <br />
-    </Link>
-  );
-};

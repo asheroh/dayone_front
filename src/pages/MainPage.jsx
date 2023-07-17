@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Body, Container } from '../components/HomeStyle';
 import Header from '../components/common/Header';
-import DayRecord from '../components/DayRecord/DayRecord';
-import DemoDay from '../components/Demoday/DemoDay';
+import DayRecord from './DayRecord';
+import MyPage from './MyPage';
+import DemodayListPage from './DemodayListPage';
 
 const MainPage = () => {
   // Nav Pagination-------------------------------------
@@ -15,9 +16,9 @@ const MainPage = () => {
         {currentPage === 0 ? (
           <DayRecord />
         ) : currentPage === 1 ? (
-          <DemoDay />
+          <DemodayListPage />
         ) : currentPage === 2 ? (
-          '나의 기록 페이지'
+          <MyPage />
         ) : (
           ''
         )}

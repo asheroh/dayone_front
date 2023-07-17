@@ -22,6 +22,9 @@ import {
   PostCommentInput,
   CommentButton,
   PostCommentBox,
+  BookSelectRightBox,
+  BookSelectLeftBox,
+  PostSmallImage,
 } from '../DayRecordStyle';
 import { Context } from '../../context/Context';
 
@@ -111,7 +114,7 @@ const PostForm = () => {
         console.error(error);
       });
   };
-  console.log(isSelected);
+
   return (
     <PostContainer>
       <PostHeader>
@@ -122,7 +125,7 @@ const PostForm = () => {
             alt="dayone"
             loading="lazy"
           />
-          n일차 기록
+          기록
         </PostLogoBox>
         <PostHandleButton onClick={handleSubmit}>등록</PostHandleButton>
       </PostHeader>
@@ -138,16 +141,25 @@ const PostForm = () => {
             {searchResults.length === 0 ? (
               <PostBookSelectBox>일치하는 도서가 없습니다.</PostBookSelectBox>
             ) : (
-              searchResults?.map((item) => (
-                <PostBookSelectBox
-                  key={item.isbn}
-                  onClick={() => handleBookSelect(item)}
-                  onMouseOver={() => handleBookHover(item.image)}
-                >
-                  {item.title}
-                </PostBookSelectBox>
-              ))
+              <BookSelectLeftBox>
+                {searchResults?.map((item) => (
+                  <PostBookSelectBox
+                    key={item.isbn}
+                    onClick={() => handleBookSelect(item)}
+                    onMouseOver={() => handleBookHover(item.image)}
+                  >
+                    {item.title}
+                  </PostBookSelectBox>
+                ))}
+              </BookSelectLeftBox>
             )}
+            <BookSelectRightBox>
+              <PostSmallImage
+                src={bookImageUrl}
+                alt="booklogo"
+                loading="lazy"
+              />
+            </BookSelectRightBox>
           </PostBookSelectSection>
           <PostImageSection>
             <PostImage src={bookImageUrl} alt="booklogo" loading="lazy" />

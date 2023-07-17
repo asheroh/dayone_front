@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PostHotList from './PostHotList';
 import {
   HotCommentEmptyIcon,
   HotCommentEmptyText,
   HotCommentHeader,
+  HotCommentLink,
   HotCommentScrollBox,
   HotCommentSection,
 } from '../DayRecordStyle';
@@ -51,13 +52,13 @@ const BestPostList = () => {
           <>
             {posts?.map((post) => {
               return (
-                <Link
+                <HotCommentLink
                   to={`/posts/${post.post_id}`}
                   state={{ post: post }}
                   key={post.post_id}
                 >
                   <PostHotList post={post} />
-                </Link>
+                </HotCommentLink>
               );
             })}
           </>

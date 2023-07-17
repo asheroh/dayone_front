@@ -67,8 +67,8 @@ const PostHotList = ({ post }) => {
       </CommentBorder>
       <HotCommentBoxFooter>
         <BookContent>
-          {post.comment.length > 55
-            ? post.comment.substring(0, 55) + '...'
+          {post.comment.length > 25
+            ? post.comment.substring(0, 25) + '...'
             : post.comment}
         </BookContent>
       </HotCommentBoxFooter>
