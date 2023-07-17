@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -33,6 +34,10 @@ export const DayRecordButton = styled.button`
   cursor: pointer;
 `;
 
+export const PlusIcon = styled(FontAwesomeIcon)`
+  font-size: 16px;
+`;
+
 export const DayRecordButtonLine = styled.section`
   width: 125px;
   position: fixed;
@@ -53,9 +58,11 @@ export const HotCommentSection = styled.section`
 `;
 
 export const HotCommentHeader = styled.h1`
+  font-size: 17px;
   font-family: 'DMSansBold';
   font-weight: 900;
   color: ${(props) => props.theme.textColor};
+  padding-left: 10px;
 `;
 
 export const HotCommentScrollBox = styled.section`
@@ -144,7 +151,7 @@ export const HotCommentBoxFooter = styled.section`
 
 // HotCommentBoxHeader------------------------------------------
 export const UserBox = styled.section`
-  width: 150px;
+  width: 180px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -164,7 +171,7 @@ export const UserProfile = styled.section`
 `;
 
 export const UserName = styled.span`
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'DMSansBold';
   font-weight: 900;
 `;
@@ -174,12 +181,12 @@ export const DateBox = styled.section`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px;
   color: ${(props) => props.theme.secondaryColor};
 `;
 
 export const BookTitle = styled.h1`
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'DMSansBold';
   font-weight: 900;
   color: ${(props) =>
@@ -187,7 +194,7 @@ export const BookTitle = styled.h1`
 `;
 
 export const BookContent = styled.p`
-  font-size: 11px;
+  font-size: 14px;
   font-family: 'DMSansRegular';
   color: ${(props) =>
     props.isCool ? props.theme.textColor : props.theme.bgColor};
@@ -242,9 +249,13 @@ export const DayPickerBox = styled.section`
 `;
 
 export const DayTodate = styled.h1`
+  width: 100%;
+  font-size: 17px;
   font-family: 'DMSansBold';
   font-weight: 900;
+  text-align: left;
   position: relative;
+  padding-left: 25px;
 `;
 
 export const DayEmptySection = styled.section`
@@ -320,28 +331,32 @@ export const PostContainer = styled.div`
 
 export const PostHeader = styled.section`
   width: 100%;
-  height: 120px;
+  height: 80px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: relative;
-  border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
+  border-bottom: ${(props) => `1px solid ${props.theme.secondaryColor}`};
   padding: 15px 0;
 `;
 
 export const PostLogoBox = styled.section`
+  height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
+`;
+
+export const PostLogoText = styled.span`
+  font-size: 18px;
   font-family: 'DMSansBold';
   font-weight: 900;
   color: ${(props) => props.theme.textColor};
 `;
 
 export const PostLogo = styled.img`
-  width: 150px;
+  width: 100px;
   transition: all 0.3s;
 `;
 
@@ -374,7 +389,7 @@ export const PostFormBox = styled.form`
   align-items: center;
   gap: 15px;
   position: relative;
-  padding: 15px;
+  padding: 20px;
   transition: all 0.3s;
 `;
 
@@ -385,7 +400,7 @@ export const PostTitleInput = styled.input`
   color: ${(props) => props.theme.textColor};
   padding: 10px;
   border: none;
-  border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
+  border-bottom: ${(props) => `1px solid ${props.theme.secondaryColor}`};
 `;
 
 export const PostContentInput = styled.textarea`
@@ -395,7 +410,7 @@ export const PostContentInput = styled.textarea`
   color: ${(props) => props.theme.textColor};
   padding: 10px;
   border: none;
-  border-bottom: ${(props) => `1px dashed ${props.theme.textColor}`};
+  border-bottom: ${(props) => `1px dashed ${props.theme.secondaryColor}`};
   resize: none;
 `;
 
@@ -413,7 +428,7 @@ export const PostCommentInput = styled.textarea`
   color: ${(props) => props.theme.textColor};
   padding: 10px;
   border: none;
-  border-bottom: ${(props) => `1px solid ${props.theme.textColor}`};
+  border-bottom: ${(props) => `1px solid ${props.theme.secondaryColor}`};
   resize: none;
 `;
 
@@ -545,14 +560,14 @@ export const PostDetailThumbnailBox = styled.div`
 export const PostDetailThumbnailLeft = styled.section`
   height: 45px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 10px;
 `;
 
 export const PostDetailThumbnailRight = styled.h4`
   color: ${(props) => props.theme.secondaryColor};
   font-family: 'DMSansRegular';
-  font-size: 12px;
+  font-size: 14px;
 `;
 
 export const PostDetailThumbnail = styled.img`
@@ -575,7 +590,7 @@ export const PostDetailName = styled.h2`
 `;
 export const PostDetailDate = styled.h3`
   color: ${(props) => props.theme.secondaryColor};
-  font-size: 12px;
+  font-size: 14px;
 `;
 
 export const PostBookThumbnail = styled.img`
@@ -599,6 +614,7 @@ export const PostBookContentBox = styled.section`
   display: flex;
   flex-direction: column;
   transition: all 0.3s;
+  margin-bottom: 70px;
   @media all and (max-width: 705px) {
     width: 500px;
   }
@@ -646,22 +662,26 @@ export const FooterLeftBox = styled.section`
 `;
 
 export const NiceButton = styled.button`
-  width: 100px;
+  width: 90px;
   height: 50px;
   background-color: transparent;
+  text-align: left;
   color: ${(props) =>
-    props.isSympathy === '1' ? '#73a8f1' : props.theme.secondaryColor};
+    props.isSympathy === '1' ? '#ff4b4b' : props.theme.secondaryColor};
   border: none;
+  padding: 0;
   cursor: pointer;
 `;
 
 export const HeartButton = styled.button`
-  width: 100px;
+  width: 90px;
   height: 50px;
   background-color: transparent;
+  text-align: left;
   color: ${(props) =>
     props.isSympathy === '1' ? '#f1738c' : props.theme.secondaryColor};
   border: none;
+  padding: 0;
   cursor: pointer;
 `;
 

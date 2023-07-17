@@ -22,7 +22,7 @@ export const DemodayHeadText = styled.h1`
 `;
 
 export const DemodaySubText = styled.h2`
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
   color: ${(props) => props.theme.textColor};
 `;
@@ -112,15 +112,19 @@ export const BoxIcon = styled(FontAwesomeIcon)`
 export const ShadowScreen = styled.section`
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
   border-radius: 15px;
   transform: translate(-50%, -50%);
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.primaryColor};
   font-family: 'DMSansBold';
   font-weight: 900;
   font-size: 18px;
+  padding-bottom: 50%;
 `;
 
 export const DemoTrailerThumbnail = styled.img`
@@ -155,7 +159,8 @@ export const TrailerPubDate = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: ${(props) => `2px solid ${props.theme.secondaryColor}`};
+  border: ${(props) => `1.5px solid ${props.theme.secondaryColor}`};
+  border-radius: 25px;
   background-color: transparent;
   color: ${(props) => props.theme.secondaryColor};
   font-family: 'DMSansBold';

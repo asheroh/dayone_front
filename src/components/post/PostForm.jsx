@@ -25,6 +25,7 @@ import {
   BookSelectRightBox,
   BookSelectLeftBox,
   PostSmallImage,
+  PostLogoText,
 } from '../DayRecordStyle';
 import { Context } from '../../context/Context';
 
@@ -125,7 +126,7 @@ const PostForm = () => {
             alt="dayone"
             loading="lazy"
           />
-          기록
+          <PostLogoText>기록</PostLogoText>
         </PostLogoBox>
         <PostHandleButton onClick={handleSubmit}>등록</PostHandleButton>
       </PostHeader>
@@ -133,7 +134,7 @@ const PostForm = () => {
         <PostFormBox>
           <PostTitleInput
             type="text"
-            placeholder="책 제목"
+            placeholder="책 제목을 입력해주세요"
             value={bookname}
             onChange={(e) => setBookname(e.target.value)}
           />
@@ -166,7 +167,7 @@ const PostForm = () => {
           </PostImageSection>
           <PostContentInput
             type="text"
-            placeholder="인상에 남는 구절을 적어주세요!"
+            placeholder="인상 깊은 구절을 적어주세요"
             value={passage}
             onChange={(e) => setPassage(e.target.value)}
           />
@@ -175,7 +176,7 @@ const PostForm = () => {
           </PostCommentBox>
           <PostCommentInput
             type="text"
-            placeholder="덧붙임"
+            placeholder="덧붙임을 작성해주세요"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />

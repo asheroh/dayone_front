@@ -4,10 +4,11 @@ import styled from 'styled-components';
 
 const KakaoButton = styled.button`
   width: 300px;
-  height: 40px;
+  height: 48px;
   border: none;
   border-radius: 5px;
   font-weight: 800;
+  font-size: 16px;
   background-color: ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.bgColor};
   cursor: pointer;

@@ -15,6 +15,7 @@ export const BodySection = styled.section`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  line-height: 1.5;
 `;
 
 export const LogoSection = styled.img`
@@ -25,14 +26,14 @@ export const LogoSection = styled.img`
 export const LogoText = styled.span`
   font-family: 'DMSansBold';
   font-weight: 700;
-  font-size: 20px;
+  font-size: 23px;
 `;
 
 export const LogoBoldText = styled.span`
   color: ${(props) => props.theme.primaryColor};
   font-family: 'DMSansBold';
   font-weight: 700;
-  font-size: 20px;
+  font-size: 23px;
 `;
 
 export const FooterSection = styled.section`

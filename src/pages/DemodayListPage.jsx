@@ -5,8 +5,8 @@ import { DemodayContainer } from '../components/DemodayStyle';
 import {
   DayRecordButton,
   DayRecordButtonLine,
+  PlusIcon,
 } from '../components/DayRecordStyle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 const DemodayListPage = () => {
@@ -16,7 +16,7 @@ const DemodayListPage = () => {
     <DemodayContainer>
       <DemodayList />
       <DayRecordButton onClick={() => navigate('/demodayform')}>
-        <FontAwesomeIcon icon={faPlusCircle} />
+        <PlusIcon icon={faPlusCircle} />
         데모 만들기
       </DayRecordButton>
       <DayRecordButtonLine />
