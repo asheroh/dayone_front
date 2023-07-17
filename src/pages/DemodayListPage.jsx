@@ -1,5 +1,5 @@
 import React from 'react';
-import DemodayList from '../components/Demoday/DemodayList';
+import DemodayList from '../components/demoday/DemodayList';
 import { useNavigate } from 'react-router-dom';
 import { DemodayContainer } from '../components/DemodayStyle';
 import {
