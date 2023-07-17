@@ -127,10 +127,10 @@ const PostViewer = () => {
               onClickSympathyBtn();
             }}
           >
-            <FontAwesomeIcon icon={faThumbsUp} /> 멋져요
+            <FontAwesomeIcon icon={faHeart} /> 공감해요
           </NiceButton>
           <HeartButton>
-            <FontAwesomeIcon icon={faHeart} /> 공감해요
+            <FontAwesomeIcon icon={faThumbsUp} /> 멋져요
           </HeartButton>
         </FooterLeftBox>
         <FooterRightBox>

@@ -63,7 +63,7 @@ export const ProfileName = styled.h2`
 `;
 
 export const ProfileState = styled.p`
-  font-size: 13px;
+  font-size: 14px;
   color: ${(props) =>
     props.themeMode === 'black'
       ? props.theme.primaryColor
@@ -97,12 +97,11 @@ export const MypageRecordBox = styled.section`
 `;
 
 export const RecordText = styled.span`
-  text-align: center;
   font-family: 'DMSansBold';
   font-weight: 900;
   font-size: 14px;
   color: ${(props) => props.theme.textColor};
-  line-height: 2;
+  line-height: 1.5;
 `;
 
 export const RecordBox = styled.section`
@@ -128,8 +127,8 @@ export const RecordDaily = styled.section`
 `;
 
 export const RecordCheckBox = styled.section`
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   border: ${(props) =>
     props.today >= 0 && props.check === 0
       ? `1px dashed ${props.theme.primaryColor}`
@@ -184,7 +183,9 @@ export const MypageGridBox = styled.section`
   height: auto;
   display: grid;
   justify-items: center;
-  gap: 5px;
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 7px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(auto-fit, 1fr);
   transition: all 0.3s;
@@ -197,7 +198,7 @@ export const MypageGridBox = styled.section`
 `;
 
 export const MypageBookImage = styled.img`
-  width: 150px;
+  width: 100%;
   height: auto;
   transition: all 0.3s;
 `;

@@ -18,7 +18,6 @@ const AuthTemplete = ({ children }) => {
         <LogoSection src={Logo} alt="dayone" loading="lazy" />
         <br />
         <LogoText>인생을 바꾸는</LogoText>
-        <br />
         <LogoBoldText>하루 한 줄</LogoBoldText>
       </BodySection>
       <FooterSection>

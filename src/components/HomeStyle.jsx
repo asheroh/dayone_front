@@ -24,7 +24,7 @@ export const HeaderLogoSection = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
+  padding: 25px;
 `;
 
 export const SmallLogoBox = styled.img`
@@ -45,7 +45,7 @@ export const InfoBox = styled.section`
 
 export const ThemeButton = styled.button`
   width: 50px;
-  height: 20px;
+  height: 24px;
   position: relative;
   border: none;
   border-radius: 25px;
@@ -71,10 +71,13 @@ export const SignButton = styled.button`
   height: 30px;
   border: none;
   background-color: transparent;
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.secondaryColor};
   font-size: 12px;
+  text-align: right;
   cursor: pointer;
   transition: all 0.3s;
+  opacity: 0.8;
+  padding: 0;
   &:hover {
     text-decoration: underline;
   }
@@ -96,6 +99,7 @@ export const Navsection0 = styled.section`
   align-items: center;
   font-family: 'DMSansBold';
   font-weight: 900;
+  font-size: 17px;
   border-bottom: ${(props) =>
     props.currentPage === 0 ? `2.5px solid ${props.theme.primaryColor}` : ``};
   border-color: ${(props) =>
@@ -112,6 +116,7 @@ export const Navsection1 = styled.section`
   justify-content: center;
   align-items: center;
   font-family: 'DMSansBold';
+  font-size: 17px;
   font-weight: 900;
   border-bottom: ${(props) =>
     props.currentPage === 1 ? `2.5px solid ${props.theme.primaryColor}` : ``};
@@ -129,6 +134,7 @@ export const Navsection2 = styled.section`
   justify-content: center;
   align-items: center;
   font-family: 'DMSansBold';
+  font-size: 17px;
   font-weight: 900;
   border-bottom: ${(props) =>
     props.currentPage === 2 ? `2.5px solid ${props.theme.primaryColor}` : ``};

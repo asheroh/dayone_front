@@ -45,20 +45,16 @@ const KaKaoLoginCallBackPage = () => {
      * code: 카카오 서버로 부터 받은 인가코드
      */
 
-    console.log(code);
     dispatch(login({ code }));
   }, [dispatch]);
 
   useEffect(() => {
     if (authError) {
-      console.log('오류발생');
-      console.log(authError);
       alert('인증 오류! 다시 로그인 해주세요.');
       navigate('/login');
       return;
     }
     if (auth) {
-      console.log('로그인 성공');
       handleCookie(auth.accessToken);
       console.log(auth.accessToken);
       dispatch(check({ access_token: auth.accessToken }));
@@ -70,11 +66,10 @@ const KaKaoLoginCallBackPage = () => {
       try {
         localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {
-        console.log('로컬 스토리지가 작동하지 않습니다.');
+        console.log(e);
       }
-      console.log('kakao call back user ok3');
+
       navigate('/');
-      console.log('kakao call back user ok4');
     }
   }, [navigate, user]);
 
