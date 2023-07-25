@@ -138,6 +138,11 @@ const Router = () => {
             path="/auth/kakao/callback"
             element={<KaKaoLoginCallBackPage />}
           />
+
+          <Route
+            path="/auth/fe/kakao/callback"
+            element={<KaKaoLoginCallBackPage />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
