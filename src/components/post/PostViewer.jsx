@@ -57,10 +57,10 @@ const PostViewer = () => {
       });
   };
 
-  const onClickSympathyBtn = async () => {
+  const onClickSympathyBtn = async ({ likeType }) => {
     if (isSympathy == '1') {
       const request = await authAPI
-        .noSympathize(cookies.access_token, params['postId'])
+        .noSympathize(cookies.access_token, params['postId'], likeType)
         .then((r) => {
           setIsSympathy('0');
         })
@@ -71,7 +71,7 @@ const PostViewer = () => {
         });
     } else {
       const request = await authAPI
-        .sympathize(cookies.access_token, params['postId'])
+        .sympathize(cookies.access_token, params['postId'], likeType)
         .then((r) => {
           setIsSympathy('1');
         })
@@ -124,12 +124,17 @@ const PostViewer = () => {
           <NiceButton
             isSympathy={isSympathy}
             onClick={() => {
-              onClickSympathyBtn();
+              onClickSympathyBtn('SYMPATHY');
             }}
           >
             <FontAwesomeIcon icon={faHeart} /> 공감해요
           </NiceButton>
           <HeartButton>
+            isSympathy={isSympathy}
+            onClick=
+            {() => {
+              onClickSympathyBtn('LIKE');
+            }}
             <FontAwesomeIcon icon={faThumbsUp} /> 멋져요
           </HeartButton>
         </FooterLeftBox>
