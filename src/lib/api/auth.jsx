@@ -6,7 +6,7 @@ export const healthCheck = () => client.get(`/ping`);
 
 // 로그인
 export const login = ({ code }) =>
-  client.get(`/v1/auth/fe/kakao/login?code=${code}`);
+  client.get(`/v1/auth/kakao/login?code=${code}`);
 
 // login
 // export const login = ({ code, redirectUri }) => {
