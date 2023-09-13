@@ -7,9 +7,7 @@ export const healthCheck = () => client.get(`/ping`);
 // 로그인
 export const login = ({ code }) =>
   client.get(
-    `/v1/auth/kakao/login?code=${code}&redirectURI=${
-      process.env.REACT_APP_BACKEND_BASE_URL + '/auth/kakao/callback'
-    }`
+    `/v1/auth/kakao/login?code=${code}&redirectURI=${process.env.REACT_APP_KAKAO_LOGIN_REDIRECT_URI}`
   );
 
 // login
