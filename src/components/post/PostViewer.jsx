@@ -57,7 +57,7 @@ const PostViewer = () => {
       });
   };
 
-  const onClickSympathyBtn = async ({ likeType }) => {
+  const onClickSympathyBtn = async (likeType) => {
     if (isSympathy == '1') {
       const request = await authAPI
         .noSympathize(cookies.access_token, params['postId'], likeType)
