@@ -124,7 +124,7 @@ const PostViewer = () => {
           <NiceButton
             isSympathy={isSympathy}
             onClick={() => {
-              onClickSympathyBtn('SYMPATHY');
+              onClickSympathyBtn('like');
             }}
           >
             <FontAwesomeIcon icon={faHeart} /> 공감해요
@@ -132,7 +132,7 @@ const PostViewer = () => {
           <HeartButton
             isSympathy={isSympathy}
             onClick={() => {
-              onClickSympathyBtn('LIKE');
+              onClickSympathyBtn('cool');
             }}
           >
             <FontAwesomeIcon icon={faThumbsUp} /> 멋져요

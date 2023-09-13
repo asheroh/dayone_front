@@ -100,7 +100,7 @@ export const searchBook = (search, access_token) => {
 // 기록 공감 하기
 export const sympathize = (access_token, post_id, like_type) => {
   // console.log('auth api', access_token);
-  return client.post(`/v1/posts/${post_id}?type=${like_type}`, null, {
+  return client.post(`/v1/posts/${post_id}/sympathy?type=${like_type}`, null, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
@@ -110,7 +110,7 @@ export const sympathize = (access_token, post_id, like_type) => {
 // 기록 공감 취소하기
 export const noSympathize = (access_token, post_id, like_type) => {
   // console.log('auth api', access_token);
-  return client.delete(`/v1/posts/${post_id}?type=${like_type}`, {
+  return client.delete(`/v1/posts/${post_id}/sympathy?type=${like_type}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
