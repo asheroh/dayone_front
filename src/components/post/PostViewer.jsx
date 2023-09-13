@@ -129,12 +129,12 @@ const PostViewer = () => {
           >
             <FontAwesomeIcon icon={faHeart} /> 공감해요
           </NiceButton>
-          <HeartButton>
+          <HeartButton
             isSympathy={isSympathy}
-            onClick=
-            {() => {
+            onClick={() => {
               onClickSympathyBtn('LIKE');
             }}
+          >
             <FontAwesomeIcon icon={faThumbsUp} /> 멋져요
           </HeartButton>
         </FooterLeftBox>
