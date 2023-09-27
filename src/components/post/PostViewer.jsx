@@ -2,27 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  CommentButton,
-  FooterLeftBox,
-  FooterRightBox,
-  HeartButton,
-  NiceButton,
-  PostBody,
-  PostBookComment,
-  PostBookContentBox,
-  PostBookFooter,
-  PostBookName,
-  PostBookPassage,
-  PostBookThumbnail,
-  PostDetailDate,
-  PostDetailName,
-  PostDetailOwnerBox,
-  PostDetailThumbnail,
-  PostDetailThumbnailBox,
-  PostDetailThumbnailLeft,
-  PostDetailThumbnailRight,
-} from '../DayRecordStyle';
+import * as D from '../DayRecordStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHeart,
@@ -84,23 +64,25 @@ const PostViewer = () => {
   };
 
   return (
-    <PostBody>
-      <PostDetailThumbnailBox>
-        <PostDetailThumbnailLeft>
-          <PostDetailThumbnail
+    <D.PostBody>
+      <D.PostDetailThumbnailBox>
+        <D.PostDetailThumbnailLeft>
+          <D.PostDetailThumbnail
             src={post.user_profile_img}
             alt="user_image"
             loading="lazy"
           />
-          <PostDetailOwnerBox>
-            <PostDetailName>{post.username}</PostDetailName>
-            <PostDetailDate>{post.count_day}일차 기록</PostDetailDate>
-          </PostDetailOwnerBox>
-        </PostDetailThumbnailLeft>
-        <PostDetailThumbnailRight>{post.created_at}</PostDetailThumbnailRight>
-      </PostDetailThumbnailBox>
+          <D.PostDetailOwnerBox>
+            <D.PostDetailName>{post.username}</D.PostDetailName>
+            <D.PostDetailDate>{post.count_day}일차 기록</D.PostDetailDate>
+          </D.PostDetailOwnerBox>
+        </D.PostDetailThumbnailLeft>
+        <D.PostDetailThumbnailRight>
+          {post.created_at.slice(0, 19)}
+        </D.PostDetailThumbnailRight>
+      </D.PostDetailThumbnailBox>
       <br />
-      <PostBookThumbnail
+      <D.PostBookThumbnail
         src={post.book_image}
         alt="book_image"
         loading="lazy"
@@ -110,39 +92,39 @@ const PostViewer = () => {
         }}
       />
       <br />
-      <PostBookName>{post.bookname}</PostBookName>
+      <D.PostBookName>{post.bookname}</D.PostBookName>
       <br /> <br /> <br />
-      <PostBookContentBox>
-        <PostBookPassage>{post.passage}</PostBookPassage>
+      <D.PostBookContentBox>
+        <D.PostBookPassage>{post.passage}</D.PostBookPassage>
         <br /> <br />
-        <CommentButton>Comment</CommentButton>
+        <D.CommentButton>Comment</D.CommentButton>
         <br />
-        <PostBookComment>{post.comment}</PostBookComment>
-      </PostBookContentBox>
-      <PostBookFooter>
-        <FooterLeftBox>
-          <NiceButton
+        <D.PostBookComment>{post.comment}</D.PostBookComment>
+      </D.PostBookContentBox>
+      <D.PostBookFooter>
+        <D.FooterLeftBox>
+          <D.NiceButton
             isSympathy={isSympathy}
             onClick={() => {
               onClickSympathyBtn('like');
             }}
           >
             <FontAwesomeIcon icon={faHeart} /> 공감해요
-          </NiceButton>
-          <HeartButton
+          </D.NiceButton>
+          <D.HeartButton
             isSympathy={isSympathy}
             onClick={() => {
               onClickSympathyBtn('cool');
             }}
           >
             <FontAwesomeIcon icon={faThumbsUp} /> 멋져요
-          </HeartButton>
-        </FooterLeftBox>
-        <FooterRightBox>
+          </D.HeartButton>
+        </D.FooterLeftBox>
+        <D.FooterRightBox>
           <FontAwesomeIcon icon={faShareAlt} />
-        </FooterRightBox>
-      </PostBookFooter>
-    </PostBody>
+        </D.FooterRightBox>
+      </D.PostBookFooter>
+    </D.PostBody>
   );
 };
 
