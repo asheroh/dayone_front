@@ -149,6 +149,32 @@ export const HotCommentBoxFooter = styled.section`
   line-height: 1.8;
 `;
 
+export const SympathySection = styled.section`
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`;
+
+export const SympathyButton = styled.button`
+  width: 50px;
+  height: 100%;
+  display: ${(props) =>
+    props.isLike === 0 || props.isCool === 0 ? 'none' : 'flex'};
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  border: none;
+  border-radius: 25px;
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
+  cursor: pointer;
+`;
+
 // HotCommentBoxHeader------------------------------------------
 export const UserBox = styled.section`
   width: 180px;
@@ -194,6 +220,7 @@ export const BookTitle = styled.h1`
 `;
 
 export const BookContent = styled.p`
+  max-height: 80%;
   font-size: 14px;
   font-family: 'DMSansRegular';
   color: ${(props) =>
@@ -314,6 +341,7 @@ export const CommentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   border-bottom: ${(props) => `1px solid ${props.theme.secondaryColor}`};
   background-color: transparent;
   color: ${(props) => props.theme.textColor};
