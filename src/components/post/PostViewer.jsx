@@ -12,7 +12,8 @@ import {
 
 const PostViewer = () => {
   const [post, setPost] = useState({});
-  const [isSympathy, setIsSympathy] = useState('0');
+  const [isLike, setIsLike] = useState(false);
+  const [isCool, setIsCool] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
   const params = useParams();
@@ -28,7 +29,8 @@ const PostViewer = () => {
       .then((r) => {
         // console.log('기록 단건 조회 res data:', r.data.data[0]);
         setPost(r.data.data[0]);
-        setIsSympathy(r.data.data[0].is_sympathy);
+        setIsLike(r.data.data[0].is_like);
+        setIsCool(r.data.data[0].is_cool);
       })
       .catch((error) => {
         alert('토큰이 만료되었습니다.');
@@ -38,27 +40,46 @@ const PostViewer = () => {
   };
 
   const onClickSympathyBtn = async (likeType) => {
-    if (isSympathy == '1') {
-      const request = await authAPI
+    const catchFunc = (err) => {
+      alert('토큰이 만료되었습니다.');
+      localStorage.removeItem('user');
+      navigate('/login');
+    };
+    if (isCool === '1' && likeType === 'cool') {
+      await authAPI
         .noSympathize(cookies.access_token, params['postId'], likeType)
         .then((r) => {
-          setIsSympathy('0');
+          setIsCool('0');
         })
-        .catch((error) => {
-          alert('토큰이 만료되었습니다.');
-          localStorage.removeItem('user');
-          navigate('/login');
+        .catch((err) => {
+          catchFunc(err);
         });
-    } else {
-      const request = await authAPI
+    } else if (isCool === '0' && likeType === 'cool') {
+      await authAPI
         .sympathize(cookies.access_token, params['postId'], likeType)
         .then((r) => {
-          setIsSympathy('1');
+          setIsCool('1');
         })
-        .catch((error) => {
-          alert('토큰이 만료되었습니다.');
-          localStorage.removeItem('user');
-          navigate('/login');
+        .catch((err) => {
+          catchFunc(err);
+        });
+    } else if (isLike === '1' && likeType === 'like') {
+      await authAPI
+        .noSympathize(cookies.access_token, params['postId'], likeType)
+        .then((r) => {
+          setIsLike('0');
+        })
+        .catch((err) => {
+          catchFunc(err);
+        });
+    } else if (isLike === '0' && likeType === 'like') {
+      await authAPI
+        .sympathize(cookies.access_token, params['postId'], likeType)
+        .then((r) => {
+          setIsLike('1');
+        })
+        .catch((err) => {
+          catchFunc(err);
         });
     }
   };
@@ -78,7 +99,7 @@ const PostViewer = () => {
           </D.PostDetailOwnerBox>
         </D.PostDetailThumbnailLeft>
         <D.PostDetailThumbnailRight>
-          {post.created_at.slice(0, 19)}
+          {post.created_at?.slice(0, 19)}
         </D.PostDetailThumbnailRight>
       </D.PostDetailThumbnailBox>
       <br />
@@ -103,22 +124,22 @@ const PostViewer = () => {
       </D.PostBookContentBox>
       <D.PostBookFooter>
         <D.FooterLeftBox>
-          <D.NiceButton
-            isSympathy={isSympathy}
+          <D.HeartButton
+            is_like={isLike}
             onClick={() => {
               onClickSympathyBtn('like');
             }}
           >
             <FontAwesomeIcon icon={faHeart} /> 공감해요
-          </D.NiceButton>
-          <D.HeartButton
-            isSympathy={isSympathy}
+          </D.HeartButton>
+          <D.CoolButton
+            is_cool={isCool}
             onClick={() => {
               onClickSympathyBtn('cool');
             }}
           >
             <FontAwesomeIcon icon={faThumbsUp} /> 멋져요
-          </D.HeartButton>
+          </D.CoolButton>
         </D.FooterLeftBox>
         <D.FooterRightBox>
           <FontAwesomeIcon icon={faShareAlt} />

@@ -661,13 +661,13 @@ export const FooterLeftBox = styled.section`
   width: auto;
 `;
 
-export const NiceButton = styled.button`
+export const CoolButton = styled.button`
   width: 90px;
   height: 50px;
   background-color: transparent;
   text-align: left;
   color: ${(props) =>
-    props.isSympathy === '1' ? '#ff4b4b' : props.theme.secondaryColor};
+    props.is_cool === '1' ? '#73a5f1' : props.theme.secondaryColor};
   border: none;
   padding: 0;
   cursor: pointer;
@@ -679,7 +679,7 @@ export const HeartButton = styled.button`
   background-color: transparent;
   text-align: left;
   color: ${(props) =>
-    props.isSympathy === '1' ? '#f1738c' : props.theme.secondaryColor};
+    props.is_like === '1' ? '#ff4b4b' : props.theme.secondaryColor};
   border: none;
   padding: 0;
   cursor: pointer;

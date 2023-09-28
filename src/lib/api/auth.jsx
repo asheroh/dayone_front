@@ -116,6 +116,7 @@ export const noSympathize = (access_token, post_id, like_type) => {
     },
   });
 };
+
 // 현재 모집중인 데모데이 전체 조회
 export const demoday = (access_token) => {
   return client.get('/v1/demodays/current', {
