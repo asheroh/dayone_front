@@ -208,9 +208,12 @@ export const CommentBorder = styled.section`
   margin: 10px 0;
 `;
 
-export const CommentButton = styled.button`
+export const CommentButton = styled.section`
   width: 85px;
   height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: ${(props) =>
     props.isCool ? `1.5px solid ${props.theme.textColor}` : 'none'};
   border-radius: 25px;
