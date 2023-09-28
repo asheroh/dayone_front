@@ -5,7 +5,10 @@ import AuthForm from '../../components/auth/AuthKakaoLoginForm';
 export const healthCheck = () => client.get(`/ping`);
 
 // 로그인
-export const login = ({ code }) => client.get(`/v1/auth/login?code=${code}`);
+export const login = ({ code }) =>
+  client.get(
+    `/v1/auth/kakao/login?code=${code}&redirectURI=${process.env.REACT_APP_KAKAO_LOGIN_REDIRECT_URI}`
+  );
 
 // login
 // export const login = ({ code, redirectUri }) => {
@@ -95,9 +98,9 @@ export const searchBook = (search, access_token) => {
 };
 
 // 기록 공감 하기
-export const sympathize = (access_token, post_id) => {
+export const sympathize = (access_token, post_id, like_type) => {
   // console.log('auth api', access_token);
-  return client.post(`/v1/posts/${post_id}/like`, null, {
+  return client.post(`/v1/posts/${post_id}/sympathy?type=${like_type}`, null, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
@@ -105,14 +108,15 @@ export const sympathize = (access_token, post_id) => {
 };
 
 // 기록 공감 취소하기
-export const noSympathize = (access_token, post_id) => {
+export const noSympathize = (access_token, post_id, like_type) => {
   // console.log('auth api', access_token);
-  return client.delete(`/v1/posts/${post_id}/like`, {
+  return client.delete(`/v1/posts/${post_id}/sympathy?type=${like_type}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
   });
 };
+
 // 현재 모집중인 데모데이 전체 조회
 export const demoday = (access_token) => {
   return client.get('/v1/demodays/current', {

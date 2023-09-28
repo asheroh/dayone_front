@@ -1,22 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {
-  BookContent,
-  BookTitle,
-  CommentBorder,
-  CommentButton,
-  CommentContainer,
-  DateBox,
-  HotCommentBoxBody,
-  HotCommentBoxFooter,
-  HotCommentBoxHeader,
-  HotCommentContainer,
-  LikeButton,
-  UserBox,
-  UserName,
-  UserProfile,
-} from '../DayRecordStyle';
+import * as D from '../DayRecordStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 const PostListItem = ({ post }) => {
   const [isCool, setIsCool] = useState(Boolean);
@@ -40,48 +25,58 @@ const PostListItem = ({ post }) => {
     const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
     return `${formattedDate} ${formattedTime}`;
   };
-
+  console.log(post);
   return (
-    <CommentContainer>
-      <HotCommentBoxHeader>
-        <UserBox>
-          <UserProfile postUserProfile={post.user_profile_img}></UserProfile>
-          <UserName>
+    <D.CommentContainer>
+      <D.HotCommentBoxHeader>
+        <D.UserBox>
+          <D.UserProfile
+            postUserProfile={post.user_profile_img}
+          ></D.UserProfile>
+          <D.UserName>
             {post.username} | {post.count_day}일차 기록
-          </UserName>
-        </UserBox>
-        <DateBox>{formatDateAndTime(post.created_at)}</DateBox>
-      </HotCommentBoxHeader>
-      <HotCommentBoxBody>
-        <BookTitle isCool={isCool}>
+          </D.UserName>
+        </D.UserBox>
+        <D.DateBox>{formatDateAndTime(post.created_at)}</D.DateBox>
+      </D.HotCommentBoxHeader>
+      <D.HotCommentBoxBody>
+        <D.BookTitle isCool={isCool}>
           {post.bookname.length > 25
             ? post.bookname.substring(0, 25) + '...'
             : post.bookname}
-        </BookTitle>
-        <BookContent isCool={isCool}>
+        </D.BookTitle>
+        <D.BookContent isCool={isCool}>
           {post.passage.length > 118
             ? post.passage.substring(0, 118) + '...'
             : post.passage}
-        </BookContent>
-      </HotCommentBoxBody>
-      <CommentBorder>
-        <CommentButton isCool={isCool}>Comment</CommentButton>
+        </D.BookContent>
+      </D.HotCommentBoxBody>
+      <D.CommentBorder>
+        <D.CommentButton isCool={isCool}>Comment</D.CommentButton>
         {post.is_sympathy === '1' ? (
-          <LikeButton>
+          <D.LikeButton>
             <FontAwesomeIcon icon={faHeart} /> {post.sympathy_count}
-          </LikeButton>
+          </D.LikeButton>
         ) : (
           ''
         )}
-      </CommentBorder>
-      <HotCommentBoxFooter>
-        <BookContent isCool={isCool}>
+      </D.CommentBorder>
+      <D.HotCommentBoxFooter>
+        <D.BookContent isCool={isCool}>
           {post.comment.length > 55
             ? post.comment.substring(0, 55) + '...'
             : post.comment}
-        </BookContent>
-      </HotCommentBoxFooter>
-    </CommentContainer>
+        </D.BookContent>
+      </D.HotCommentBoxFooter>
+      <D.SympathySection>
+        <D.SympathyButton isLike={post.is_like}>
+          <FontAwesomeIcon icon={faHeart} /> {post.is_like}
+        </D.SympathyButton>
+        <D.SympathyButton isCool={post.is_cool}>
+          <FontAwesomeIcon icon={faThumbsUp} /> {post.is_cool}
+        </D.SympathyButton>
+      </D.SympathySection>
+    </D.CommentContainer>
   );
 };
 

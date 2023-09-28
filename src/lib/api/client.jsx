@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const client = axios.create({
-  baseURL: 'https://api.dayone.kr',
-  // baseURL: 'http://localhost:3000',
+  baseURL: process.env.REACT_APP_BACKEND_BASE_URL,
   headers: { withCredentials: true },
 });
 

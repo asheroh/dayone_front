@@ -2,27 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as authAPI from '../../lib/api/auth';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  CommentButton,
-  FooterLeftBox,
-  FooterRightBox,
-  HeartButton,
-  NiceButton,
-  PostBody,
-  PostBookComment,
-  PostBookContentBox,
-  PostBookFooter,
-  PostBookName,
-  PostBookPassage,
-  PostBookThumbnail,
-  PostDetailDate,
-  PostDetailName,
-  PostDetailOwnerBox,
-  PostDetailThumbnail,
-  PostDetailThumbnailBox,
-  PostDetailThumbnailLeft,
-  PostDetailThumbnailRight,
-} from '../DayRecordStyle';
+import * as D from '../DayRecordStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHeart,
@@ -32,7 +12,8 @@ import {
 
 const PostViewer = () => {
   const [post, setPost] = useState({});
-  const [isSympathy, setIsSympathy] = useState('0');
+  const [isLike, setIsLike] = useState(false);
+  const [isCool, setIsCool] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
   const navigate = useNavigate();
   const params = useParams();
@@ -48,7 +29,8 @@ const PostViewer = () => {
       .then((r) => {
         // console.log('기록 단건 조회 res data:', r.data.data[0]);
         setPost(r.data.data[0]);
-        setIsSympathy(r.data.data[0].is_sympathy);
+        setIsLike(r.data.data[0].is_like);
+        setIsCool(r.data.data[0].is_cool);
       })
       .catch((error) => {
         alert('토큰이 만료되었습니다.');
@@ -57,50 +39,71 @@ const PostViewer = () => {
       });
   };
 
-  const onClickSympathyBtn = async () => {
-    if (isSympathy == '1') {
-      const request = await authAPI
-        .noSympathize(cookies.access_token, params['postId'])
+  const onClickSympathyBtn = async (likeType) => {
+    const catchFunc = (err) => {
+      alert('토큰이 만료되었습니다.');
+      localStorage.removeItem('user');
+      navigate('/login');
+    };
+    if (isCool === '1' && likeType === 'cool') {
+      await authAPI
+        .noSympathize(cookies.access_token, params['postId'], likeType)
         .then((r) => {
-          setIsSympathy('0');
+          setIsCool('0');
         })
-        .catch((error) => {
-          alert('토큰이 만료되었습니다.');
-          localStorage.removeItem('user');
-          navigate('/login');
+        .catch((err) => {
+          catchFunc(err);
         });
-    } else {
-      const request = await authAPI
-        .sympathize(cookies.access_token, params['postId'])
+    } else if (isCool === '0' && likeType === 'cool') {
+      await authAPI
+        .sympathize(cookies.access_token, params['postId'], likeType)
         .then((r) => {
-          setIsSympathy('1');
+          setIsCool('1');
         })
-        .catch((error) => {
-          alert('토큰이 만료되었습니다.');
-          localStorage.removeItem('user');
-          navigate('/login');
+        .catch((err) => {
+          catchFunc(err);
+        });
+    } else if (isLike === '1' && likeType === 'like') {
+      await authAPI
+        .noSympathize(cookies.access_token, params['postId'], likeType)
+        .then((r) => {
+          setIsLike('0');
+        })
+        .catch((err) => {
+          catchFunc(err);
+        });
+    } else if (isLike === '0' && likeType === 'like') {
+      await authAPI
+        .sympathize(cookies.access_token, params['postId'], likeType)
+        .then((r) => {
+          setIsLike('1');
+        })
+        .catch((err) => {
+          catchFunc(err);
         });
     }
   };
 
   return (
-    <PostBody>
-      <PostDetailThumbnailBox>
-        <PostDetailThumbnailLeft>
-          <PostDetailThumbnail
+    <D.PostBody>
+      <D.PostDetailThumbnailBox>
+        <D.PostDetailThumbnailLeft>
+          <D.PostDetailThumbnail
             src={post.user_profile_img}
             alt="user_image"
             loading="lazy"
           />
-          <PostDetailOwnerBox>
-            <PostDetailName>{post.username}</PostDetailName>
-            <PostDetailDate>{post.count_day}일차 기록</PostDetailDate>
-          </PostDetailOwnerBox>
-        </PostDetailThumbnailLeft>
-        <PostDetailThumbnailRight>{post.created_at}</PostDetailThumbnailRight>
-      </PostDetailThumbnailBox>
+          <D.PostDetailOwnerBox>
+            <D.PostDetailName>{post.username}</D.PostDetailName>
+            <D.PostDetailDate>{post.count_day}일차 기록</D.PostDetailDate>
+          </D.PostDetailOwnerBox>
+        </D.PostDetailThumbnailLeft>
+        <D.PostDetailThumbnailRight>
+          {post.created_at?.slice(0, 19)}
+        </D.PostDetailThumbnailRight>
+      </D.PostDetailThumbnailBox>
       <br />
-      <PostBookThumbnail
+      <D.PostBookThumbnail
         src={post.book_image}
         alt="book_image"
         loading="lazy"
@@ -110,34 +113,39 @@ const PostViewer = () => {
         }}
       />
       <br />
-      <PostBookName>{post.bookname}</PostBookName>
+      <D.PostBookName>{post.bookname}</D.PostBookName>
       <br /> <br /> <br />
-      <PostBookContentBox>
-        <PostBookPassage>{post.passage}</PostBookPassage>
+      <D.PostBookContentBox>
+        <D.PostBookPassage>{post.passage}</D.PostBookPassage>
         <br /> <br />
-        <CommentButton>Comment</CommentButton>
+        <D.CommentButton>Comment</D.CommentButton>
         <br />
-        <PostBookComment>{post.comment}</PostBookComment>
-      </PostBookContentBox>
-      <PostBookFooter>
-        <FooterLeftBox>
-          <NiceButton
-            isSympathy={isSympathy}
+        <D.PostBookComment>{post.comment}</D.PostBookComment>
+      </D.PostBookContentBox>
+      <D.PostBookFooter>
+        <D.FooterLeftBox>
+          <D.HeartButton
+            is_like={isLike}
             onClick={() => {
-              onClickSympathyBtn();
+              onClickSympathyBtn('like');
             }}
           >
             <FontAwesomeIcon icon={faHeart} /> 공감해요
-          </NiceButton>
-          <HeartButton>
+          </D.HeartButton>
+          <D.CoolButton
+            is_cool={isCool}
+            onClick={() => {
+              onClickSympathyBtn('cool');
+            }}
+          >
             <FontAwesomeIcon icon={faThumbsUp} /> 멋져요
-          </HeartButton>
-        </FooterLeftBox>
-        <FooterRightBox>
+          </D.CoolButton>
+        </D.FooterLeftBox>
+        <D.FooterRightBox>
           <FontAwesomeIcon icon={faShareAlt} />
-        </FooterRightBox>
-      </PostBookFooter>
-    </PostBody>
+        </D.FooterRightBox>
+      </D.PostBookFooter>
+    </D.PostBody>
   );
 };
 
